@@ -5,20 +5,26 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
-import { useToast } from "@/hooks/use-toast"; // Assuming useToast hook exists
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Send } from 'lucide-react'; // Added Send icon
+import { useToast } from "@/hooks/use-toast";
+import Link from 'next/link';
 
-// Placeholder for Map Component - Replace with actual map later
+// Placeholder for Map Component
 const MapPlaceholder = () => (
-  <div className="aspect-video w-full bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
-    Map Placeholder (Integrate @vis.gl/react-google-maps later)
+  <div className="aspect-video w-full bg-muted/50 rounded-lg flex items-center justify-center text-muted-foreground border border-border/50 shadow-inner">
+    {/* Enhance Placeholder */}
+    <div className="text-center">
+        <MapPin className="mx-auto h-12 w-12 text-muted-foreground/50 mb-2" />
+        <p>Map Loading...</p>
+        <p className="text-xs">(Google Maps Integration Pending)</p>
+    </div>
   </div>
 );
 
 export default function ContactPage() {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '', phone: '' }); // Added phone field state
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -30,119 +36,167 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // TODO: Implement actual form submission logic (e.g., send to backend, email service)
     console.log('Form submitted:', formData);
-
-     // Simulate API call
+    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-     // Reset form and show success toast
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({ name: '', email: '', message: '', phone: '' }); // Reset form including phone
     setIsSubmitting(false);
     toast({
       title: "Message Sent!",
-      description: "Thank you for reaching out. We'll get back to you soon.",
-      variant: "default", // or "success" if you have that variant
+      description: "Thank you for reaching out (ధన్యవాదాలు!). We'll connect with you shortly.",
+      variant: "default",
     });
   };
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
-      <h1 className="text-4xl md:text-5xl font-serif font-bold text-center mb-12 text-foreground">
-        Get In Touch
-      </h1>
-       <p className="text-center text-lg text-muted-foreground mb-16 max-w-2xl mx-auto">
-        Have questions, want to book a session, or just say hello? Fill out the form below or use the contact details provided.
-      </p>
+      <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-foreground">
+            Get In Touch
+          </h1>
+           <p className="font-telugu text-muted-foreground text-lg mb-2">మమ్మల్ని సంప్రదించండి</p>
+           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Have questions about our Telugu wedding photography packages, want to check availability, or just say hello? We'd love to hear from you!
+          </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Contact Form */}
-        <Card className="border border-border shadow-sm">
-          <CardHeader>
-            <CardTitle className="font-serif text-2xl">Send Us a Message</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="bg-background"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="your.email@example.com"
-                   value={formData.email}
-                  onChange={handleChange}
-                  required
-                   className="bg-background"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Your message..."
-                  rows={5}
-                   value={formData.message}
-                  onChange={handleChange}
-                  required
-                   className="bg-background"
-                />
-              </div>
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        {/* Contact Form - Spanning 2 columns on large screens */}
+        <div className="lg:col-span-2">
+            <Card className="border border-border/50 shadow-lg rounded-xl overflow-hidden">
+            <CardHeader className="bg-muted/30 p-6">
+                <CardTitle className="font-serif text-2xl">Send Us a Message</CardTitle>
+                <CardDescription className="font-telugu">మీ సందేశం పంపండి</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6 md:p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                     <div className="space-y-2">
+                        <Label htmlFor="name" className="font-medium">Name (పేరు)</Label>
+                        <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Your Name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="bg-background focus:border-secondary"
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="email" className="font-medium">Email (ఇమెయిల్)</Label>
+                        <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="your.email@example.com"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="bg-background focus:border-secondary"
+                        />
+                    </div>
+                 </div>
+                 <div className="space-y-2">
+                     <Label htmlFor="phone" className="font-medium">Phone (ఫోన్ నంబర్) <span className="text-muted-foreground text-xs">(Optional)</span></Label>
+                     <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        placeholder="Your Phone Number"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="bg-background focus:border-secondary"
+                     />
+                  </div>
+                <div className="space-y-2">
+                    <Label htmlFor="message" className="font-medium">Message (సందేశం)</Label>
+                    <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tell us about your event, dates, and vision..."
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    className="bg-background focus:border-secondary"
+                    />
+                </div>
+                <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-base py-3 rounded-lg shadow-md" disabled={isSubmitting}>
+                    <Send size={18} className="mr-2"/>
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                </Button>
+                </form>
+            </CardContent>
+            </Card>
+        </div>
 
-        {/* Contact Info & Map */}
-        <div className="space-y-8">
-           <Card className="border border-border shadow-sm">
-             <CardHeader>
+        {/* Contact Info & Map - Spanning 1 column */}
+        <div className="lg:col-span-1 space-y-8">
+           <Card className="border border-border/50 shadow-lg rounded-xl overflow-hidden">
+             <CardHeader className="bg-muted/30 p-6">
                 <CardTitle className="font-serif text-2xl">Contact Information</CardTitle>
+                <CardDescription className="font-telugu">సంప్రదింపు వివరాలు</CardDescription>
              </CardHeader>
-             <CardContent className="space-y-4 text-muted-foreground">
-                 <div className="flex items-center">
-                    <MapPin size={18} className="mr-3 text-primary flex-shrink-0" />
-                    <span>[Your Studio Address], [City], [State], [Zip Code]</span>
+             <CardContent className="p-6 space-y-5 text-muted-foreground">
+                 <div className="flex items-start">
+                    <MapPin size={20} className="mr-4 mt-1 text-primary flex-shrink-0" />
+                    <div>
+                        <span className="font-medium text-foreground block">Our Studio</span>
+                        <span>[Your Studio Address], [City], Andhra Pradesh, [Zip Code]</span>
+                        <span className="block text-xs">(By Appointment Only)</span>
+                    </div>
                   </div>
                   <div className="flex items-center">
-                    <Phone size={18} className="mr-3 text-primary flex-shrink-0" />
-                    <a href="tel:+1234567890" className="hover:text-primary">[Your Phone Number]</a>
+                    <Phone size={18} className="mr-4 text-primary flex-shrink-0" />
+                     <div>
+                        <span className="font-medium text-foreground block">Call Us</span>
+                        <a href="tel:+91xxxxxxxxxx" className="hover:text-secondary transition-colors">[+91 Your Phone Number]</a>
+                    </div>
                   </div>
                   <div className="flex items-center">
-                    <Mail size={18} className="mr-3 text-primary flex-shrink-0" />
-                     <a href="mailto:hello@dreamcaptures.com" className="hover:text-primary">hello@dreamcaptures.com</a>
+                    <Mail size={18} className="mr-4 text-primary flex-shrink-0" />
+                     <div>
+                        <span className="font-medium text-foreground block">Email Us</span>
+                        <a href="mailto:hello@dreamcaptures.com" className="hover:text-secondary transition-colors">hello@dreamcaptures.com</a>
+                     </div>
                    </div>
-                  <div className="flex space-x-4 pt-4">
-                    <a href="#" aria-label="Facebook" className="hover:text-primary transition-colors"><Facebook /></a>
-                    <a href="#" aria-label="Instagram" className="hover:text-primary transition-colors"><Instagram /></a>
-                    <a href="#" aria-label="Twitter" className="hover:text-primary transition-colors"><Twitter /></a>
+                  {/* Social Links within the card */}
+                  <div className="pt-4 border-t border-border/30">
+                     <h5 className="font-semibold text-foreground mb-3 text-sm">Connect With Us</h5>
+                     <div className="flex space-x-5">
+                        <Link href="#" aria-label="Facebook" className="text-muted-foreground hover:text-secondary transition-colors">
+                            <Facebook size={22}/>
+                        </Link>
+                        <Link href="#" aria-label="Instagram" className="text-muted-foreground hover:text-secondary transition-colors">
+                            <Instagram size={22}/>
+                        </Link>
+                        <Link href="#" aria-label="YouTube" className="text-muted-foreground hover:text-secondary transition-colors">
+                             <Youtube size={22}/>
+                        </Link>
+                     </div>
                   </div>
              </CardContent>
            </Card>
 
           {/* Map */}
-          <div>
-            <h3 className="text-2xl font-serif font-semibold mb-4 text-foreground">Find Us</h3>
+          <div className="rounded-xl overflow-hidden shadow-lg border border-border/50">
+             {/* <h3 className="text-xl font-serif font-semibold mb-4 text-foreground px-6 pt-4">Find Our Studio</h3> */}
             <MapPlaceholder />
           </div>
         </div>
       </div>
+
+       {/* Optional: Add a section about consultation */}
+        <div className="mt-24 text-center bg-gradient-to-r from-primary/5 via-accent/5 to-secondary/5 py-12 rounded-lg border border-border/30">
+            <h3 className="text-2xl font-serif font-semibold mb-3">Ready for a Consultation?</h3>
+            <p className="text-muted-foreground mb-6 max-w-lg mx-auto">Schedule a free call to discuss your dream wedding photography experience.</p>
+            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-md">
+                <Link href="/booking">Book Now</Link>
+            </Button>
+        </div>
     </div>
   );
 }

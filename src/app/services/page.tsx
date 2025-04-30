@@ -1,129 +1,156 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { CheckCircle, Package, PlusCircle } from 'lucide-react';
+import { CheckCircle, Package, Sparkles, Film, Users } from 'lucide-react'; // Added Sparkles, Film, Users
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
+// Culturally themed package names and icons
 const servicePackages = [
   {
-    title: 'Essential Wedding',
-    price: '$2,500+',
-    features: ['6 Hours Coverage', 'One Photographer', 'Online Gallery', 'High-Resolution Images'],
-    icon: Package
-  },
-  {
-    title: 'Premium Wedding',
-    price: '$4,000+',
-    features: ['8 Hours Coverage', 'Two Photographers', 'Engagement Session', 'Online Gallery + USB', 'Print Credit'],
-    icon: Package
-  },
-  {
-    title: 'Luxury Wedding',
-    price: '$6,000+',
-    features: ['Full Day Coverage (10+ hrs)', 'Two Photographers', 'Engagement Session', 'Custom Album', 'Online Gallery + USB', 'Large Print Credit'],
-    icon: Package
+    id: 'wedding-royal',
+    title: 'Rajahmundry Royal',
+    price: '₹1,50,000+', // Example Price in INR
+    features: ['Full Day Coverage (10-12 Hrs)', '2 Photographers + 1 Cinematographer', 'Pre-Wedding Shoot', 'Luxury Album (Kalankari Cover Option)', 'Online Gallery + Drone Shots*'],
+    icon: Sparkles, // Represents luxury/grandeur
+    themeColor: 'secondary' // Maroon theme
   },
    {
-    title: 'Portrait Session',
-    price: '$500+',
-    features: ['1-2 Hour Session', 'One Location', 'Online Gallery', 'Outfit Changes'],
-    icon: Package
+    id: 'wedding-classic',
+    title: 'Vizag Classic',
+    price: '₹90,000+',
+    features: ['8 Hours Coverage', '1 Photographer + 1 Cinematographer', 'Engagement/Haldi Coverage', 'Standard Album', 'Online Gallery'],
+    icon: Package, // Standard package
+    themeColor: 'primary' // Teal theme
+  },
+  {
+    id: 'engagement',
+    title: 'Araku Bloom',
+    price: '₹40,000+',
+    features: ['4-6 Hour Session', '1 Photographer', 'Scenic Location Shoot (e.g., Araku)', 'Online Gallery', 'Outfit Changes'],
+    icon: Camera, // Represents photography focus
+    themeColor: 'accent' // Gold theme
+  },
+  {
+    id: 'event',
+    title: 'Tirupati Divine',
+    price: '₹30,000+',
+    features: ['3-4 Hours Coverage', '1 Photographer', 'Ideal for Sreemantham, Birthdays', 'Online Gallery', 'Candid & Group Shots'],
+    icon: Users, // Represents family/events
+    themeColor: 'muted' // Use muted color for simplicity or another theme color
   },
 ];
 
+// Cultural Add-ons
 const addOns = [
-  { title: 'Additional Hour of Coverage', description: 'Extend the photography time for your event.' },
-  { title: 'Second Photographer', description: 'Ensure comprehensive coverage from multiple angles.' },
-  { title: 'Engagement Session', description: 'Capture beautiful photos before the big day.' },
-  { title: 'Custom Photo Album', description: 'A professionally designed album to showcase your memories.' },
-  { title: 'Drone Photography/Videography', description: 'Get stunning aerial shots of your venue or event.' },
-  { title: 'Rush Editing', description: 'Receive your edited photos faster than standard delivery times.' },
+  { title: 'Kalankari Art Photo Album', description: 'A bespoke album featuring traditional Andhra art covers.' },
+  { title: 'Drone Wedding Entry / Coverage', description: 'Capture breathtaking aerial views of your venue and entry.' },
+  { title: 'Live Webcasting', description: 'Share your ceremony live with loved ones who cannot attend.' },
+  { title: 'Instant Photobooth', description: 'Fun, interactive booth with traditional props and instant prints.' },
+  { title: 'Same-Day Edit Highlight Reel', description: 'A short cinematic video edited and shown during your reception.' },
+  { title: 'Candid Cinematography Add-on', description: 'Dedicated cinematographer for a storytelling film.' },
 ];
 
+// Updated FAQs with cultural context
 const faqs = [
-  { question: 'What is your photography style?', answer: 'My style is a blend of photojournalism and fine art photography. I aim to capture candid moments naturally while also creating beautifully composed, artistic shots. I love working with natural light whenever possible.' },
-  { question: 'How far do you travel?', answer: 'I am based in [Your City/Area] but love to travel! Travel fees may apply for locations outside a certain radius. Please contact me with your venue details for a custom quote.' },
-  { question: 'When will we receive our photos?', answer: 'For weddings, the typical turnaround time for the full edited gallery is 6-8 weeks. For portrait sessions, it\'s usually 2-3 weeks. Sneak peeks are often provided within a few days!' },
-  { question: 'Do you offer videography services?', answer: 'While my primary focus is photography, I work closely with talented videographers and can offer package deals or recommendations.' },
-  { question: 'How do we book you?', answer: 'To book, please fill out the contact form or inquiry form on the Booking page. A signed contract and a retainer fee are required to secure your date.' },
+  { question: 'What is your photography style for Telugu weddings?', answer: 'We blend candid photojournalism with fine-art portraiture, focusing on capturing the genuine emotions, vibrant colors, and unique rituals of Telugu weddings. We love natural light and creating timeless, elegant images.' },
+  { question: 'Do you cover weddings outside Andhra Pradesh?', answer: 'Absolutely! While we are based in [Your City], Andhra Pradesh, we frequently travel across India and internationally for weddings. Travel and accommodation costs are applicable for destination weddings.' },
+  { question: 'How soon will we get our wedding photos and videos?', answer: 'You can expect a sneak peek gallery within a week! The full set of edited photos is typically delivered in 6-8 weeks, and the final cinematic wedding film within 10-12 weeks, depending on the package.' },
+  { question: 'Can we customize the packages?', answer: 'Yes, definitely! The packages listed are starting points. We understand every wedding is unique, and we are happy to create a custom package tailored to your specific needs and budget.' },
+  { question: 'How do we book Dream Captures for our wedding?', answer: 'It\'s simple! Fill out the inquiry form on our Booking page or Contact page. We\'ll schedule a consultation (online or in-person) to discuss your vision. A signed contract and a retainer fee (typically 30-50%) secures your date.' },
+   { question: 'Do you provide traditional videography?', answer: 'Our main focus is cinematic wedding films. However, we can arrange for traditional videography coverage through trusted partners if required. Please mention this during your consultation.' },
 ];
 
 export default function ServicesPage() {
   return (
     <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
-      <h1 className="text-4xl md:text-5xl font-serif font-bold text-center mb-12 text-foreground">
+      <h1 className="text-4xl md:text-5xl font-serif font-bold text-center mb-4 text-foreground">
         Our Photography Services
       </h1>
+       <p className="font-telugu text-center text-muted-foreground text-lg mb-12">మీ ప్రతి వేడుకకు, మా ప్రత్యేక ప్యాకేజీలు</p>
 
-      {/* Packages Section */}
-      <section className="mb-16 md:mb-20">
-        <h2 className="text-3xl font-serif font-semibold text-center mb-10 text-foreground">Investment Packages</h2>
+      {/* Packages Section - Enhanced Styling */}
+      <section id="packages" className="mb-16 md:mb-20 scroll-mt-20"> {/* Added ID and scroll-margin */}
+        <h2 className="text-3xl font-serif font-semibold text-center mb-10 text-foreground">Signature Packages</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {servicePackages.map((pkg) => (
-            <Card key={pkg.title} className="flex flex-col border border-border shadow-sm hover:shadow-lg transition-shadow duration-300">
-              <CardHeader className="text-center">
-                <pkg.icon className="h-10 w-10 mx-auto mb-3 text-primary" />
-                <CardTitle className="text-xl font-serif">{pkg.title}</CardTitle>
-                <CardDescription className="font-semibold text-lg text-primary">{pkg.price}</CardDescription>
+            <Card key={pkg.title} className={`flex flex-col border border-${pkg.themeColor}/30 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden bg-card transform hover:-translate-y-2`}>
+              <CardHeader className={`text-center p-6 bg-gradient-to-br from-${pkg.themeColor}/10 to-${pkg.themeColor}/5 border-b border-${pkg.themeColor}/20`}>
+                {/* Icon with background matching theme */}
+                 <div className={`mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-${pkg.themeColor} text-${pkg.themeColor}-foreground mb-4 shadow-md`}>
+                    <pkg.icon className="h-8 w-8" />
+                 </div>
+                <CardTitle className="text-xl font-serif text-foreground">{pkg.title}</CardTitle>
+                <CardDescription className={`font-semibold text-lg text-${pkg.themeColor}`}>{pkg.price}</CardDescription>
               </CardHeader>
-              <CardContent className="flex-grow">
-                <ul className="space-y-2 text-sm text-muted-foreground">
+              <CardContent className="flex-grow p-6">
+                <ul className="space-y-3 text-sm text-muted-foreground">
                   {pkg.features.map((feature) => (
-                    <li key={feature} className="flex items-center">
-                      <CheckCircle size={16} className="text-green-600 mr-2 flex-shrink-0" />
+                    <li key={feature} className="flex items-start">
+                      <CheckCircle size={16} className={`text-${pkg.themeColor} mr-2 mt-0.5 flex-shrink-0`} />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
               </CardContent>
                <div className="p-6 pt-0 mt-auto">
-                 <Button asChild className="w-full mt-4">
-                  <Link href="/contact">Inquire Now</Link>
+                 {/* Button matching theme color */}
+                 <Button asChild className={`w-full mt-4 bg-${pkg.themeColor} hover:bg-${pkg.themeColor}/90 text-${pkg.themeColor}-foreground`}>
+                  <Link href={`/contact?service=${pkg.title}`}>Inquire Now</Link>
                  </Button>
                </div>
             </Card>
           ))}
         </div>
-         <p className="text-center text-sm text-muted-foreground mt-8">
-            Need something different? <Link href="/contact" className="text-primary hover:underline">Contact us</Link> for a custom quote!
+         <p className="text-center text-sm text-muted-foreground mt-10">
+            Looking for something unique? <Link href="/contact?custom=true" className="text-secondary hover:text-accent font-semibold">Request a Custom Quote!</Link>
           </p>
       </section>
 
       {/* Add-ons Section */}
-      <section className="mb-16 md:mb-20">
-        <h2 className="text-3xl font-serif font-semibold text-center mb-10 text-foreground">Optional Add-Ons</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <section id="addons" className="mb-16 md:mb-20 scroll-mt-20 bg-muted/50 py-16 rounded-lg border border-border/30 shadow-inner">
+        <h2 className="text-3xl font-serif font-semibold text-center mb-10 text-foreground">Enhance Your Experience</h2>
+         <p className="font-telugu text-center text-muted-foreground mb-10 -mt-6">ప్రత్యేక యాడ్-ఆన్‌లు</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto px-4">
           {addOns.map((addOn) => (
-            <div key={addOn.title} className="flex items-start p-4 bg-secondary rounded-lg">
-              <PlusCircle size={20} className="text-primary mr-3 mt-1 flex-shrink-0" />
+            <div key={addOn.title} className="flex items-start p-4 bg-background rounded-lg shadow border border-border/50 transition-transform duration-300 hover:scale-105">
+               {/* Use a relevant icon - Sparkles for special items */}
+              <Sparkles size={24} className="text-accent mr-4 mt-1 flex-shrink-0" />
               <div>
-                <h4 className="font-semibold text-foreground">{addOn.title}</h4>
+                <h4 className="font-semibold text-foreground mb-1">{addOn.title}</h4>
                 <p className="text-sm text-muted-foreground">{addOn.description}</p>
               </div>
             </div>
           ))}
         </div>
+         <div className="text-center mt-8">
+            <Link href="/contact?addons=true" className="text-primary hover:text-accent text-sm font-medium">See All Add-on Details & Pricing &rarr;</Link>
+          </div>
       </section>
 
       {/* FAQs Section */}
-      <section>
+      <section id="faq" className="scroll-mt-20">
         <h2 className="text-3xl font-serif font-semibold text-center mb-10 text-foreground">Frequently Asked Questions</h2>
-        <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
+         <p className="font-telugu text-center text-muted-foreground mb-10 -mt-6">తరచుగా అడిగే ప్రశ్నలు</p>
+        <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto bg-background p-4 rounded-lg shadow border border-border/50">
           {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="text-left font-semibold hover:text-primary">{faq.question}</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed">
+            <AccordionItem key={index} value={`item-${index}`} className="border-b last:border-b-0 border-border/50">
+              <AccordionTrigger className="text-left font-semibold text-base hover:text-secondary py-4">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground leading-relaxed pt-1 pb-4 pr-2">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
       </section>
-        <div className="text-center mt-16">
-           <h3 className="text-2xl font-serif font-semibold mb-4">Ready to Capture Your Story?</h3>
-           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">Let's discuss how we can create beautiful, lasting memories for you. Get in touch today!</p>
-            <Button asChild size="lg">
-             <Link href="/booking">Book a Consultation</Link>
+
+        {/* Final CTA */}
+        <div className="text-center mt-20">
+           <h3 className="text-2xl font-serif font-semibold mb-4">Let's Create Your Dream Wedding Story</h3>
+           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">Connect with us to discuss your vision and how we can capture the magic of your special day in Andhra Pradesh and beyond.</p>
+            <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-10 py-3 shadow-lg transition-transform duration-300 hover:scale-105">
+             <Link href="/booking">Book Your Free Consultation</Link>
            </Button>
          </div>
     </div>

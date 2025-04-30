@@ -3,28 +3,34 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Dialog, DialogContent, DialogTrigger, DialogClose } from '@/components/ui/dialog'; // Added DialogClose
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'; // Removed TabsContent as grid is dynamic
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, X } from 'lucide-react';
+import { MapPin, X, Download, Share2 } from 'lucide-react'; // Added Download, Share2
+import { cn } from '@/lib/utils';
 
-// Placeholder data
+// Placeholder data - Categorized for Indian Weddings
 const allPortfolioItems = [
-  { id: 1, src: 'https://picsum.photos/seed/wedding1/800/600', alt: 'Wedding photo 1', category: 'Weddings', location: 'Sunset Beach' },
-  { id: 2, src: 'https://picsum.photos/seed/portrait1/600/800', alt: 'Portrait photo 1', category: 'Portraits', location: 'Downtown Studio' },
-  { id: 3, src: 'https://picsum.photos/seed/event1/800/600', alt: 'Event photo 1', category: 'Events', location: 'Grand Ballroom' },
-  { id: 4, src: 'https://picsum.photos/seed/landscape1/800/600', alt: 'Landscape photo 1', category: 'Landscapes', location: 'Mountain Peak' },
-  { id: 5, src: 'https://picsum.photos/seed/wedding2/600/800', alt: 'Wedding photo 2', category: 'Weddings', location: 'Vineyard Estate' },
-  { id: 6, src: 'https://picsum.photos/seed/portrait2/800/600', alt: 'Portrait photo 2', category: 'Portraits', location: 'Urban Park' },
-  { id: 7, src: 'https://picsum.photos/seed/family1/800/600', alt: 'Family photo 1', category: 'Family', location: 'Golden Meadow' },
-  { id: 8, src: 'https://picsum.photos/seed/wedding3/800/600', alt: 'Wedding photo 3', category: 'Weddings', location: 'Historic Chapel' },
-  { id: 9, src: 'https://picsum.photos/seed/landscape2/600/800', alt: 'Landscape photo 2', category: 'Landscapes', location: 'Coastal Cliffs' },
-   { id: 10, src: 'https://picsum.photos/seed/event2/800/600', alt: 'Event photo 2', category: 'Events', location: 'Rooftop Gala' },
-   { id: 11, src: 'https://picsum.photos/seed/family2/600/800', alt: 'Family photo 2', category: 'Family', location: 'Cozy Home Session' },
-   { id: 12, src: 'https://picsum.photos/seed/portrait3/800/600', alt: 'Portrait photo 3', category: 'Portraits', location: 'Art Gallery' },
+  // Weddings
+  { id: 1, src: 'https://picsum.photos/seed/telugu-wedding1/800/600', alt: 'Traditional Thali Tying', category: 'Weddings', location: 'Rajahmundry Temple' },
+  { id: 5, src: 'https://picsum.photos/seed/telugu-wedding2/600/800', alt: 'Mandapam Ceremony', category: 'Weddings', location: 'Vijayawada Convention Hall' },
+  { id: 8, src: 'https://picsum.photos/seed/telugu-wedding3/800/600', alt: 'Oonjal Fun', category: 'Weddings', location: 'Hyderabad Garden Venue' },
+  // Pre-Weddings
+  { id: 2, src: 'https://picsum.photos/seed/prewedding1/800/600', alt: 'Romantic Shoot in Araku Valley', category: 'Pre-Weddings', location: 'Araku Valley' },
+  { id: 9, src: 'https://picsum.photos/seed/prewedding2/600/800', alt: 'Beach Pre-Wedding', category: 'Pre-Weddings', location: 'Vizag Beach' },
+  // Haldi
+  { id: 3, src: 'https://picsum.photos/seed/haldi1/800/600', alt: 'Joyful Haldi Moments', category: 'Haldi', location: 'Client Residence, Guntur' },
+   { id: 10, src: 'https://picsum.photos/seed/haldi2/600/800', alt: 'Applying Turmeric Paste', category: 'Haldi', location: 'Nellore Farmhouse' },
+  // Engagements
+   { id: 6, src: 'https://picsum.photos/seed/engagement1/800/600', alt: 'Ring Exchange Ceremony', category: 'Engagements', location: 'Secunderabad Banquet Hall' },
+   { id: 12, src: 'https://picsum.photos/seed/engagement2/800/600', alt: 'Engagement Couple Portrait', category: 'Engagements', location: 'Kurnool Fort' },
+  // Baby Showers (Sreemantham)
+  { id: 7, src: 'https://picsum.photos/seed/babyshower1/800/600', alt: 'Sreemantham Blessings', category: 'Baby Showers', location: 'Tirupati Home' },
+  { id: 11, src: 'https://picsum.photos/seed/babyshower2/600/800', alt: 'Traditional Rituals', category: 'Baby Showers', location: 'Client Home, Kakinada' },
 ];
 
-const categories = ['All', 'Weddings', 'Portraits', 'Events', 'Landscapes', 'Family'];
+// Updated categories
+const categories = ['All', 'Weddings', 'Pre-Weddings', 'Engagements', 'Haldi', 'Baby Showers'];
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -42,38 +48,72 @@ export default function PortfolioPage() {
 
   const closeLightbox = () => {
     setLightboxOpen(false);
-    // Delay clearing selectedImage to allow fade-out animation
-    setTimeout(() => setSelectedImage(null), 300);
+    // Delay clearing selectedImage to allow fade-out animation if Dialog used with manual state
+    // With shadcn's Dialog onOpenChange, this might not be needed.
+    // setTimeout(() => setSelectedImage(null), 300);
   };
+
+  // Function to handle potential download action (placeholder)
+   const handleDownload = (src: string) => {
+     console.log("Download requested for:", src);
+     // Implement actual download logic here, likely needs backend for protected downloads
+     alert("Download functionality not implemented yet.");
+   };
+
+   // Function to handle potential share action (placeholder)
+   const handleShare = (src: string, alt: string) => {
+     console.log("Share requested for:", src);
+      // Implement basic web share API if available, or links to social platforms
+     if (navigator.share) {
+       navigator.share({
+         title: alt,
+         text: `Check out this photo by Dream Captures: ${alt}`,
+         url: window.location.href, // Or ideally, a direct link to the image/gallery item
+       }).catch(console.error);
+     } else {
+        alert("Share functionality not available on this browser.");
+     }
+   };
+
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
-      <h1 className="text-4xl md:text-5xl font-serif font-bold text-center mb-12 text-foreground">
+      <h1 className="text-4xl md:text-5xl font-serif font-bold text-center mb-4 text-foreground">
         Our Portfolio
       </h1>
+       <p className="font-telugu text-center text-muted-foreground text-lg mb-12">క్షణాలను కళాఖండాలుగా మార్చడం</p>
 
-      {/* Filter Tabs */}
+      {/* Filter Tabs - Styled */}
       <Tabs defaultValue="All" onValueChange={setSelectedCategory} className="mb-12 flex justify-center">
-        <TabsList>
+        <TabsList className="bg-muted p-1 rounded-full shadow-inner">
           {categories.map(category => (
-            <TabsTrigger key={category} value={category}>
+            <TabsTrigger
+              key={category}
+              value={category}
+              className="px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground data-[state=active]:shadow-md hover:text-secondary"
+            >
               {category}
             </TabsTrigger>
           ))}
         </TabsList>
       </Tabs>
 
-      {/* Gallery Grid */}
+      {/* Gallery Grid - Masonry style could be an enhancement */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         {filteredItems.map((item) => (
            <Dialog key={item.id} onOpenChange={(open) => { if (!open) closeLightbox(); }}>
              <DialogTrigger asChild>
                 <Card
-                  className="overflow-hidden cursor-pointer group border border-border shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                  className={cn(
+                    "overflow-hidden cursor-pointer group border-2 border-transparent shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-accent rounded-lg",
+                    "animate-fade-in-slow" // Add fade-in animation
+                    )}
                   onClick={() => openLightbox(item)}
+                  // Add data attributes for potential JS-based filtering/animations
+                  data-category={item.category}
                 >
                   <CardContent className="p-0">
-                     <div className="relative aspect-square">
+                     <div className="relative aspect-[4/3] bg-muted"> {/* Aspect ratio */}
                       <Image
                         src={item.src}
                         alt={item.alt}
@@ -81,36 +121,62 @@ export default function PortfolioPage() {
                         objectFit="cover"
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="transition-transform duration-500 group-hover:scale-110"
-                        // Implement lazy loading - Next/Image does this by default
                         loading="lazy"
                       />
-                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <p className="text-white text-sm font-medium truncate">{item.alt}</p>
+                       {/* Overlay with Title - enhanced styling */}
+                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 className="text-white text-base font-semibold font-serif truncate">{item.alt}</h3>
+                         {item.location && (
+                            <div className="flex items-center text-xs text-gray-300 mt-1">
+                                <MapPin size={12} className="mr-1" />
+                                <span>{item.location}</span>
+                            </div>
+                         )}
                       </div>
+                       {/* Optional: Category badge */}
+                       <span className="absolute top-2 right-2 bg-secondary/80 text-secondary-foreground text-[10px] px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">{item.category}</span>
                     </div>
                   </CardContent>
                 </Card>
              </DialogTrigger>
+
+              {/* Lightbox/Dialog Content - Enhanced */}
               {selectedImage && selectedImage.id === item.id && (
-                 <DialogContent className="max-w-4xl p-2 bg-background border-none shadow-2xl">
-                   <div className="relative aspect-video w-full">
+                 <DialogContent className="max-w-5xl w-11/12 p-2 sm:p-4 bg-background/90 backdrop-blur-lg border-secondary/30 shadow-2xl rounded-lg overflow-hidden">
+                   <div className="relative aspect-video w-full my-4"> {/* Maintain aspect ratio */}
                     <Image
                       src={selectedImage.src}
                       alt={selectedImage.alt}
                       layout="fill"
-                      objectFit="contain"
+                      objectFit="contain" // Use contain to show full image
                     />
                    </div>
-                    <div className="p-4 text-center">
-                      <p className="font-semibold text-lg mb-1">{selectedImage.alt}</p>
+                    <div className="p-4 text-center bg-muted/50 rounded-b-lg">
+                      <p className="font-semibold font-serif text-xl mb-1 text-foreground">{selectedImage.alt}</p>
                       {selectedImage.location && (
-                        <div className="flex items-center justify-center text-sm text-muted-foreground">
-                          <MapPin size={14} className="mr-1" />
+                        <div className="flex items-center justify-center text-sm text-muted-foreground mb-4">
+                          <MapPin size={14} className="mr-1.5 text-primary" />
                           <span>{selectedImage.location}</span>
                         </div>
                       )}
+                       {/* Action Buttons */}
+                       <div className="flex justify-center gap-4 mt-2">
+                         <Button variant="outline" size="sm" onClick={() => handleShare(selectedImage.src, selectedImage.alt)} className="text-primary border-primary hover:bg-primary/10">
+                           <Share2 size={16} className="mr-1.5"/> Share
+                         </Button>
+                         {/* <Button variant="outline" size="sm" onClick={() => handleDownload(selectedImage.src)} className="text-secondary border-secondary hover:bg-secondary/10">
+                           <Download size={16} className="mr-1.5"/> Download
+                         </Button> */}
+                         <DialogClose asChild>
+                           <Button variant="ghost" size="sm">Close</Button>
+                         </DialogClose>
+                       </div>
                     </div>
-                   {/* No explicit close button needed as clicking outside or escape closes Dialog */}
+                     {/* Explicit Close Button for Accessibility */}
+                      <DialogClose className="absolute top-3 right-3 rounded-full p-1.5 bg-background/50 text-muted-foreground hover:bg-background hover:text-foreground transition-colors z-10">
+                        <X className="h-5 w-5" />
+                        <span className="sr-only">Close</span>
+                      </DialogClose>
                  </DialogContent>
                )}
            </Dialog>
@@ -119,8 +185,9 @@ export default function PortfolioPage() {
 
         {/* Message if no items in category */}
         {filteredItems.length === 0 && (
-            <div className="text-center py-12 text-muted-foreground">
-            <p>No images found in the "{selectedCategory}" category.</p>
+            <div className="text-center py-16 text-muted-foreground">
+            <p className="text-lg">క్షమించండి, "{selectedCategory}" వర్గంలో చిత్రాలు కనుగొనబడలేదు.</p>
+             <p>No images found in the "{selectedCategory}" category.</p>
             </div>
         )}
     </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, Lato } from 'next/font/google';
+import { Playfair_Display, Lato, Noto_Sans_Telugu, Baloo_Tamma_2 } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -20,9 +20,23 @@ const lato = Lato({
   display: 'swap',
 });
 
+const notoSansTelugu = Noto_Sans_Telugu({
+  subsets: ['telugu'],
+  variable: '--font-noto-sans-telugu',
+  weight: ['400', '700'],
+  display: 'swap',
+});
+
+const balooTamma2 = Baloo_Tamma_2({
+  subsets: ['telugu'],
+  variable: '--font-baloo-tamma-2',
+  weight: ['400', '700'],
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Dream Captures | Photography Portfolio & Blog',
-  description: 'Professional photography services by Dream Captures. Showcasing stunning visuals and stories.',
+  title: 'Dream Captures | Telugu Wedding Photography',
+  description: 'Capturing the vibrant stories of Telugu weddings with elegance and artistry. Based in Andhra Pradesh.',
 };
 
 export default function RootLayout({
@@ -36,7 +50,9 @@ export default function RootLayout({
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
           playfairDisplay.variable,
-          lato.variable
+          lato.variable,
+          notoSansTelugu.variable,
+          balooTamma2.variable
         )}
       >
         <div className="relative flex min-h-screen flex-col">

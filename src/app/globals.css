@@ -3,92 +3,175 @@
 @tailwind utilities;
 
 body {
-  @apply font-sans; /* Default to sans-serif (Lato) */
+  @apply font-sans; /* Default to sans-serif (Lato for English) */
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-serif; /* Apply serif (Playfair Display) to headings */
+  @apply font-serif; /* Apply serif (Playfair Display) to English headings */
 }
 
+.font-telugu {
+   @apply font-noto; /* Apply Noto Sans Telugu for specific Telugu text */
+}
+.font-telugu-stylish {
+    @apply font-baloo; /* Apply Baloo Tamma 2 for stylish Telugu text */
+}
+
+
+/* Base Layer with CSS Variables */
 @layer base {
   :root {
-    --background: 33 27% 96%; /* #F8F5F2 Off-white/Light Beige */
-    --foreground: 0 0% 10%; /* Dark Grey/Black */
-    --card: 33 27% 98%; /* Slightly lighter than background */
-    --card-foreground: 0 0% 10%;
-    --popover: 33 27% 98%;
-    --popover-foreground: 0 0% 10%;
+    /* Light Theme */
+    --background: 45 33% 95%; /* #F5EFE3 Muted Sand/Beige */
+    --foreground: 15 80% 10%; /* Dark Brown/Near Black */
+
+    --card: 45 33% 97%; /* Slightly lighter than background */
+    --card-foreground: 15 80% 10%;
+
+    --popover: 45 33% 97%;
+    --popover-foreground: 15 80% 10%;
+
     --primary: 180 100% 25%; /* #008080 Teal */
-    --primary-foreground: 0 0% 98%; /* White */
-    --secondary: 0 0% 90%; /* Lighter grey */
-    --secondary-foreground: 0 0% 10%;
-    --muted: 0 0% 95%; /* Even lighter grey - close to #A9A9A9 */
-    --muted-foreground: 0 0% 45%;
-    --accent: 180 100% 35%; /* Slightly lighter Teal for accents */
-    --accent-foreground: 0 0% 98%;
+    --primary-foreground: 45 33% 98%; /* Very light beige/off-white */
+
+    --secondary: 15 90% 37%; /* #B02E0C Warm Maroon/Deep Saffron */
+    --secondary-foreground: 45 33% 98%;
+
+    --muted: 45 20% 90%; /* Lighter beige */
+    --muted-foreground: 15 30% 40%; /* Muted brown */
+
+    --accent: 46 78% 61%; /* #C9B037 Gold highlight */
+    --accent-foreground: 15 80% 10%; /* Dark Brown/Near Black for contrast on gold */
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 85%; /* Grey border */
-    --input: 0 0% 85%;
+
+    --border: 45 20% 85%; /* Beige border */
+    --input: 45 20% 88%; /* Slightly darker beige for input */
     --ring: 180 100% 25%; /* Teal ring */
-    --chart-1: 180 100% 25%;
-    --chart-2: 180 80% 35%;
-    --chart-3: 180 60% 45%;
-    --chart-4: 0 0% 66%; /* Soft Muted Grey #A9A9A9 */
-    --chart-5: 0 0% 80%;
+
+    --chart-1: 180 100% 25%; /* Teal */
+    --chart-2: 15 90% 37%; /* Maroon */
+    --chart-3: 46 78% 61%; /* Gold */
+    --chart-4: 180 50% 45%; /* Lighter Teal */
+    --chart-5: 15 70% 50%; /* Lighter Maroon */
+
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --sidebar-background: 45 33% 97%;
+    --sidebar-foreground: 15 80% 10%;
+    --sidebar-primary: 180 100% 25%; /* Teal */
+    --sidebar-primary-foreground: 45 33% 98%;
+    --sidebar-accent: 45 20% 90%;
+    --sidebar-accent-foreground: 15 80% 10%;
+    --sidebar-border: 45 20% 85%;
+    --sidebar-ring: 180 100% 25%;
   }
 
   .dark {
-    /* Define dark mode colors based on the light theme for consistency */
-    --background: 0 0% 10%; /* Dark Grey */
-    --foreground: 0 0% 95%; /* Light Grey/Off-white */
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 12%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 180 100% 35%; /* Lighter Teal for dark mode */
-    --primary-foreground: 0 0% 10%; /* Dark text on light teal */
-    --secondary: 0 0% 20%; /* Darker grey */
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 25%; /* #A9A9A9 equivalent - Darker muted grey */
-    --muted-foreground: 0 0% 60%;
-    --accent: 180 100% 45%; /* Even lighter Teal */
-    --accent-foreground: 0 0% 10%;
+    /* Dark Theme - Adjust colors for a rich, elegant dark mode */
+    --background: 15 20% 10%; /* Very dark brown */
+    --foreground: 45 33% 95%; /* Light Beige */
+
+    --card: 15 20% 15%; /* Slightly lighter dark brown */
+    --card-foreground: 45 33% 95%;
+
+    --popover: 15 20% 15%;
+    --popover-foreground: 45 33% 95%;
+
+    --primary: 180 80% 40%; /* Brighter Teal for dark mode */
+    --primary-foreground: 15 20% 10%;
+
+    --secondary: 15 80% 50%; /* Brighter Maroon for dark mode */
+    --secondary-foreground: 45 33% 98%;
+
+    --muted: 15 15% 25%; /* Dark muted brown */
+    --muted-foreground: 45 20% 70%; /* Lighter muted foreground */
+
+    --accent: 46 78% 65%; /* Slightly brighter Gold */
+    --accent-foreground: 15 20% 10%;
+
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 25%;
-    --input: 0 0% 25%;
-    --ring: 180 100% 35%; /* Lighter Teal ring */
-    --chart-1: 180 100% 35%;
-    --chart-2: 180 80% 45%;
-    --chart-3: 180 60% 55%;
-    --chart-4: 0 0% 50%; /* Darker Muted Grey */
-    --chart-5: 0 0% 30%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --border: 15 15% 30%; /* Darker border */
+    --input: 15 15% 25%;
+    --ring: 180 80% 40%; /* Brighter Teal ring */
+
+    --chart-1: 180 80% 40%;
+    --chart-2: 15 80% 50%;
+    --chart-3: 46 78% 65%;
+    --chart-4: 180 60% 55%;
+    --chart-5: 15 60% 60%;
+
+    --sidebar-background: 15 20% 12%;
+    --sidebar-foreground: 45 33% 95%;
+    --sidebar-primary: 180 80% 40%;
+    --sidebar-primary-foreground: 15 20% 10%;
+    --sidebar-accent: 15 15% 25%;
+    --sidebar-accent-foreground: 45 33% 95%;
+    --sidebar-border: 15 15% 30%;
+    --sidebar-ring: 180 80% 40%;
   }
 }
 
+
+/* Apply base styles */
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+     /* Add smooth scroll behavior */
+    scroll-behavior: smooth;
   }
+
+   /* Ensure links are visible and styled */
+  a {
+    @apply text-primary hover:text-accent transition-colors duration-300;
+  }
+
+   /* Add subtle transition to buttons */
+   button, .button {
+     @apply transition-all duration-300 ease-in-out;
+   }
+
+    /* Add subtle transition to card hover effects */
+  .card {
+    @apply transition-shadow duration-300;
+  }
+
+  /* Improve focus visibility */
+  *:focus-visible {
+     @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+/* Animations */
+@keyframes curtain-reveal {
+  from { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  to { opacity: 1; transform: scaleY(1); transform-origin: top; }
+}
+
+@keyframes fade-in-slow {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-curtain-reveal {
+  animation: curtain-reveal 0.8s ease-out forwards;
+}
+
+.animate-fade-in-slow {
+  animation: fade-in-slow 1.2s ease-in-out forwards;
+}
+
+/* Placeholder for Parallax - requires JS */
+.parallax-section {
+  /* Basic setup, actual effect needs JS */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

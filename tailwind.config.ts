@@ -9,6 +9,12 @@ export default {
   ],
   theme: {
   	extend: {
+      fontFamily: {
+        sans: ['var(--font-lato)', 'sans-serif'],
+        serif: ['var(--font-playfair-display)', 'serif'],
+        noto: ['var(--font-noto-sans-telugu)', 'sans-serif'], // Noto Sans Telugu
+        baloo: ['var(--font-baloo-tamma-2)', 'cursive'], // Baloo Tamma 2
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -82,11 +88,21 @@ export default {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+         'curtain-reveal': {
+          from: { opacity: '0', transform: 'scaleY(0)', transformOrigin: 'top' },
+          to: { opacity: '1', transform: 'scaleY(1)', transformOrigin: 'top' },
+        },
+        'fade-in-slow': {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+         'curtain-reveal': 'curtain-reveal 0.8s ease-out forwards',
+         'fade-in-slow': 'fade-in-slow 1.2s ease-in-out forwards',
   		}
   	}
   },

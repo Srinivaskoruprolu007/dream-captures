@@ -5,12 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Lock } from 'lucide-react';
+import { Lock, LogIn } from 'lucide-react'; // Added LogIn icon
 import { useToast } from "@/hooks/use-toast";
+import Link from 'next/link'; // Import Link for contact
+import { cn } from '@/lib/utils'; // Import cn for conditional classes
 
-// NOTE: This is a placeholder page.
-// Actual authentication and private gallery functionality
-// require backend integration (e.g., Firebase Auth, Firestore/Storage).
+// NOTE: Placeholder page. Requires backend integration (Firebase Auth, etc.).
 
 export default function ClientGalleryPage() {
   const { toast } = useToast();
@@ -24,14 +24,11 @@ export default function ClientGalleryPage() {
 
     // --- Placeholder Logic ---
     console.log('Attempting login for:', email);
-    // Simulate checking credentials
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // In a real app, you would verify credentials against Firebase Auth or your backend.
-    // For this placeholder, we'll just show an error.
     toast({
-      title: "Login Failed (Placeholder)",
-      description: "Authentication is not yet implemented. Please contact us for access.",
+      title: "Login Attempt (Placeholder)",
+      description: "Authentication is currently disabled. Please contact us for gallery access. (దయచేసి యాక్సెస్ కోసం మమ్మల్ని సంప్రదించండి.)",
       variant: "destructive",
     });
     setIsLoading(false);
@@ -39,17 +36,10 @@ export default function ClientGalleryPage() {
 
     /* --- Example Real Logic (with Firebase Auth) ---
     try {
-      // Assuming you have Firebase initialized and imported `auth`
       // await signInWithEmailAndPassword(auth, email, password);
-      // Redirect to the client's specific gallery page, e.g., router.push(`/client-gallery/${user.uid}`);
-      console.log("Login successful - redirecting..."); // Placeholder
+      // router.push(`/client-gallery/${user.uid}`); // Redirect to specific gallery
     } catch (error) {
-      console.error("Login failed:", error);
-      toast({
-        title: "Login Failed",
-        description: "Invalid email or password. Please try again or contact support.",
-        variant: "destructive",
-      });
+       toast({ title: "Login Failed", description: "Invalid credentials. Please try again.", variant: "destructive" });
     } finally {
       setIsLoading(false);
     }
@@ -57,51 +47,79 @@ export default function ClientGalleryPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 flex items-center justify-center min-h-[calc(100vh-10rem)]"> {/* Adjust min-height as needed */}
-      <Card className="w-full max-w-md border border-border shadow-lg">
-        <CardHeader className="text-center">
-          <Lock className="h-10 w-10 mx-auto mb-4 text-primary" />
-          <CardTitle className="font-serif text-3xl">Client Gallery Access</CardTitle>
-          <CardDescription className="pt-2">
-            Enter your credentials to view your private photo gallery.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email Address</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="bg-background"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password or Access Code</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="bg-background"
-              />
-              {/* Optional: Add a "Forgot Password?" link here */}
-            </div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Logging In...' : 'Login'}
-            </Button>
-             <p className="text-xs text-center text-muted-foreground pt-2">
-              Having trouble? <a href="/contact" className="text-primary hover:underline">Contact Support</a>.
-            </p>
-          </form>
-        </CardContent>
-      </Card>
+     // Added subtle background pattern or texture
+     <div className="bg-muted/30 min-h-[calc(100vh-10rem)] flex items-center justify-center py-16 md:py-24 px-4">
+        {/* Add relative positioning for decorative elements */}
+       <div className="relative w-full max-w-md">
+          {/* Optional: Decorative Border Element (e.g., Banana Leaf SVG) */}
+           {/* <img src="/path/to/banana-leaf-corner.svg" alt="" className="absolute -top-8 -left-8 w-24 h-auto opacity-50 hidden md:block" /> */}
+           {/* <img src="/path/to/mandala-corner.svg" alt="" className="absolute -bottom-8 -right-8 w-24 h-auto opacity-30 hidden md:block" /> */}
+
+          <Card className="w-full border border-secondary/30 shadow-xl rounded-xl overflow-hidden bg-background">
+            <CardHeader className="text-center p-8 bg-gradient-to-br from-secondary/10 via-background to-background">
+              <Lock className="h-12 w-12 mx-auto mb-4 text-secondary" />
+              <CardTitle className="font-serif text-3xl text-foreground">Client Gallery Access</CardTitle>
+              <CardDescription className="pt-2 font-telugu text-muted-foreground">
+                మీ ప్రైవేట్ ఫోటో గ్యాలరీని వీక్షించడానికి లాగిన్ చేయండి.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-8">
+              <form onSubmit={handleLogin} className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="font-medium">Email Address (ఇమెయిల్)</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="bg-background focus:border-secondary"
+                    aria-label="Email Address"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="font-medium">Password / Access Code (పాస్‌వర్డ్)</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className="bg-background focus:border-secondary"
+                     aria-label="Password or Access Code"
+                  />
+                  {/* Optional: Add a "Forgot Password?" link here */}
+                   <div className="text-right text-xs">
+                    <Link href="/forgot-password" className="text-muted-foreground hover:text-secondary transition-colors">Forgot Password?</Link>
+                   </div>
+                </div>
+                <Button type="submit" className={cn(
+                    "w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-base py-3 rounded-lg shadow-md flex items-center justify-center gap-2",
+                    isLoading && "opacity-75 cursor-not-allowed" // Style loading state
+                    )}
+                    disabled={isLoading}
+                    aria-live="polite" // Announce loading state changes
+                    >
+                  {isLoading ? (
+                    <>
+                      <span className="animate-spin inline-block h-4 w-4 border-2 border-current border-t-transparent rounded-full" role="status" aria-label="Loading"></span>
+                      <span>Logging In...</span>
+                    </>
+                  ) : (
+                     <>
+                        <LogIn size={18}/> Login (లాగిన్)
+                     </>
+                  )}
+                </Button>
+                 <p className="text-xs text-center text-muted-foreground pt-3">
+                  Having trouble? <Link href="/contact" className="text-secondary hover:underline font-medium">Contact Support</Link>. <span className="font-telugu">(సహాయం కావాలా? మమ్మల్ని సంప్రదించండి.)</span>
+                </p>
+              </form>
+            </CardContent>
+          </Card>
+       </div>
     </div>
   );
 }
