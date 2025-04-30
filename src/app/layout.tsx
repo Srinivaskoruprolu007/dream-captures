@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { cn } from '@/lib/utils';
 import { Toaster } from "@/components/ui/toaster"
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 
 const playfairDisplay = Playfair_Display({
@@ -55,12 +56,14 @@ export default function RootLayout({
           balooTamma2.variable
         )}
       >
-        <div className="relative flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
-         <Toaster />
+        <ThemeProvider>
+          <div className="relative flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,8 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { CheckCircle, Package, Sparkles, Film, Users, Camera } from 'lucide-react'; // Added Camera import
+import { CheckCircle, Package, Sparkles, Film, Users, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 // Culturally themed package names and icons with Telugu names
 const servicePackages = [
@@ -72,41 +73,74 @@ export default function ServicesPage() {
       <section id="packages" className="mb-16 md:mb-20 scroll-mt-20"> {/* Added ID and scroll-margin */}
         <h2 className="text-3xl font-serif font-semibold text-center mb-10 text-foreground">Signature Packages</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {servicePackages.map((pkg) => (
-            <Card key={pkg.title} className={`flex flex-col border border-${pkg.themeColor}/30 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden bg-card transform hover:-translate-y-2`}>
-              <CardHeader className={`text-center p-6 bg-gradient-to-br from-${pkg.themeColor}/10 to-${pkg.themeColor}/5 border-b border-${pkg.themeColor}/20`}>
-                {/* Icon with background matching theme */}
-                 <div className={`mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-${pkg.themeColor} text-${pkg.themeColor}-foreground mb-4 shadow-md`}>
+          {servicePackages.map((pkg) => {
+            const cardClasses = {
+              premium: 'border-secondary/30 hover:border-secondary/50',
+              'mid-tier': 'border-primary/30 hover:border-primary/50',
+              basic: 'border-accent/30 hover:border-accent/50',
+              event: 'border-muted/30 hover:border-muted/50'
+            };
+
+            const iconClasses = {
+              premium: 'bg-secondary text-secondary-foreground',
+              'mid-tier': 'bg-primary text-primary-foreground',
+              basic: 'bg-accent text-accent-foreground',
+              event: 'bg-muted text-muted-foreground'
+            };
+
+            const buttonClasses = {
+              premium: 'bg-secondary hover:bg-secondary/90 text-secondary-foreground',
+              'mid-tier': 'bg-primary hover:bg-primary/90 text-primary-foreground',
+              basic: 'bg-accent hover:bg-accent/90 text-accent-foreground',
+              event: 'bg-muted hover:bg-muted/90 text-muted-foreground'
+            };
+
+            return (
+              <Card 
+                key={pkg.title} 
+                className={cn(
+                  "flex flex-col shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden bg-card transform hover:-translate-y-2",
+                  cardClasses[pkg.id]
+                )}
+              >
+                <CardHeader className="text-center p-6 border-b">
+                  <div className={cn(
+                    "mx-auto h-16 w-16 flex items-center justify-center rounded-full mb-4 shadow-md",
+                    iconClasses[pkg.id]
+                  )}>
                     <pkg.icon className="h-8 w-8" />
-                 </div>
-                <CardTitle className="text-xl font-serif text-foreground font-telugu">{pkg.title}</CardTitle> {/* Apply Telugu font */}
-                <CardDescription className={`font-semibold text-lg text-${pkg.themeColor}`}>{pkg.price}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow p-6">
-                <ul className="space-y-3 text-sm text-muted-foreground">
-                  {pkg.features.map((feature) => (
-                    <li key={feature} className="flex items-start">
-                      <CheckCircle size={16} className={`text-${pkg.themeColor} mr-2 mt-0.5 flex-shrink-0`} />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                 {/* Negotiable Pricing Note */}
-                  <p className="text-xs text-center text-muted-foreground mt-4 pt-3 border-t border-border/30 font-telugu">
-                     ధరలు మాట్లాడుకోవచ్చు. మీ బడ్జెట్ ప్రకారం మేము సెట్ చేస్తాం.
-                  </p>
-                  <p className="text-xs text-center text-muted-foreground">
-                      (Pricing is negotiable based on your budget.)
-                  </p>
-              </CardContent>
-               <div className="p-6 pt-0 mt-auto">
-                 {/* Button matching theme color */}
-                 <Button asChild className={`w-full mt-4 bg-${pkg.themeColor} hover:bg-${pkg.themeColor}/90 text-${pkg.themeColor}-foreground`}>
-                  <Link href={`/contact?service=${pkg.id}`}>Inquire Now</Link> {/* Use ID for query */}
-                 </Button>
-               </div>
-            </Card>
-          ))}
+                  </div>
+                  <CardTitle className="text-xl font-serif text-foreground font-telugu">{pkg.title}</CardTitle>
+                  <CardDescription className="font-semibold text-lg">{pkg.price}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex-grow p-6">
+                  <ul className="space-y-3 text-sm text-muted-foreground">
+                    {pkg.features.map((feature) => (
+                      <li key={feature} className="flex items-start">
+                        <CheckCircle size={16} className="text-foreground mr-2 mt-0.5 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 pt-3 border-t border-border/30 text-center">
+                    <p className="text-xs text-muted-foreground font-telugu">ధరలు మాట్లాడుకోవచ్చు. మీ బడ్జెట్ ప్రకారం మేము సెట్ చేస్తాం.</p>
+                    <p className="text-xs text-muted-foreground">(Pricing is negotiable based on your budget.)</p>
+                  </div>
+                </CardContent>
+                <div className="p-6 pt-0 mt-auto">
+                  <Button 
+                    asChild 
+                    className={cn(
+                      "w-full mt-4",
+                      buttonClasses[pkg.id]
+                    )}
+                  >
+                    <Link href={`/contact?service=${pkg.id}`}>Inquire Now</Link>
+                  </Button>
+                </div>
+              </Card>
+            );
+          })}
         </div>
          <p className="text-center text-sm text-muted-foreground mt-10">
             Looking for something unique? <Link href="/contact?custom=true" className="text-secondary hover:text-accent font-semibold">Request a Custom Quote!</Link>
