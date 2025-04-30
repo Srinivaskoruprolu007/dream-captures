@@ -10,7 +10,7 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
       fill="none"
       aria-label="Dream Captures Logo"
       {...props} // Spread props first
-      className={cn("text-secondary", props.className)} // Apply default color and merge className
+      className={cn("text-secondary", props.className)} // Use Maroon (secondary) as default logo color
     >
        {/* Main Text - Using font-family from Tailwind config */}
       <text
@@ -24,17 +24,14 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
         Dream Captures
       </text>
 
-      {/* Optional Subtle Indian Motif: Simplified Paisley/Dot */}
-       <g transform="translate(145, 18)">
-          {/* Example: Simple dot with surrounding smaller dots */}
-          <circle cx="5" cy="5" r="3" fill="hsl(var(--accent))" /> {/* Gold accent dot */}
-         {/* <circle cx="0" cy="5" r="1" fill="currentColor" opacity="0.7" />
-          <circle cx="10" cy="5" r="1" fill="currentColor" opacity="0.7" />
-          <circle cx="5" cy="0" r="1" fill="currentColor" opacity="0.7" />
-          <circle cx="5" cy="10" r="1" fill="currentColor" opacity="0.7" /> */}
-           {/* Simple line element */}
-            <path d="M 0 5 H 10" stroke="currentColor" strokeWidth="0.5" opacity="0.6" />
-            <path d="M 5 0 V 10" stroke="currentColor" strokeWidth="0.5" opacity="0.6" />
+      {/* Optional Subtle Indian Motif: Simplified Gold Dot/Element */}
+       <g transform="translate(150, 18)" fill="hsl(var(--accent))"> {/* Use Gold accent */}
+          {/* Example: Simple stylized dot/element */}
+          {/* <circle cx="5" cy="5" r="3" /> */}
+           {/* Simple curve or leaf-like shape */}
+           <path d="M 3 7 Q 5 3 7 7 T 11 7" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.8" />
+           <circle cx="7" cy="7" r="1.5" />
+
        </g>
 
       {/* Original Aperture Icon (kept for photography theme) - slightly modified */}

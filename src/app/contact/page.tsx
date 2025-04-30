@@ -10,21 +10,20 @@ import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Send } from 'lucide-
 import { useToast } from "@/hooks/use-toast";
 import Link from 'next/link';
 
-// Placeholder for Map Component
+// Placeholder for Map Component - Updated Placeholder
 const MapPlaceholder = () => (
   <div className="aspect-video w-full bg-muted/50 rounded-lg flex items-center justify-center text-muted-foreground border border-border/50 shadow-inner">
-    {/* Enhance Placeholder */}
     <div className="text-center">
         <MapPin className="mx-auto h-12 w-12 text-muted-foreground/50 mb-2" />
-        <p>Map Loading...</p>
-        <p className="text-xs">(Google Maps Integration Pending)</p>
+        <p>Google Map Integration</p>
+        <p className="text-xs">(Loading map for [Your Studio Address]...)</p>
     </div>
   </div>
 );
 
 export default function ContactPage() {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({ name: '', email: '', message: '', phone: '' }); // Added phone field state
+  const [formData, setFormData] = useState({ name: '', email: '', message: '', phone: '', eventType: '', eventDate: '' }); // Added eventType and eventDate
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -40,7 +39,7 @@ export default function ContactPage() {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    setFormData({ name: '', email: '', message: '', phone: '' }); // Reset form including phone
+    setFormData({ name: '', email: '', message: '', phone: '', eventType: '', eventDate: '' }); // Reset form including new fields
     setIsSubmitting(false);
     toast({
       title: "Message Sent!",
@@ -73,12 +72,12 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                      <div className="space-y-2">
-                        <Label htmlFor="name" className="font-medium">Name (పేరు)</Label>
+                        <Label htmlFor="name" className="font-medium">Name <span className="font-telugu">(పేరు)</span></Label>
                         <Input
                         id="name"
                         name="name"
                         type="text"
-                        placeholder="Your Name"
+                        placeholder="Your Name / మీ పేరు"
                         value={formData.name}
                         onChange={handleChange}
                         required
@@ -86,7 +85,7 @@ export default function ContactPage() {
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="email" className="font-medium">Email (ఇమెయిల్)</Label>
+                        <Label htmlFor="email" className="font-medium">Email <span className="font-telugu">(ఇమెయిల్)</span></Label>
                         <Input
                         id="email"
                         name="email"
@@ -99,20 +98,47 @@ export default function ContactPage() {
                         />
                     </div>
                  </div>
-                 <div className="space-y-2">
-                     <Label htmlFor="phone" className="font-medium">Phone (ఫోన్ నంబర్) <span className="text-muted-foreground text-xs">(Optional)</span></Label>
-                     <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        placeholder="Your Phone Number"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="bg-background focus:border-secondary"
-                     />
-                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <Label htmlFor="phone" className="font-medium">Phone <span className="font-telugu">(ఫోన్)</span> <span className="text-muted-foreground text-xs">(Optional)</span></Label>
+                        <Input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            placeholder="Your Phone Number"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            className="bg-background focus:border-secondary"
+                        />
+                    </div>
+                     <div className="space-y-2">
+                        <Label htmlFor="eventDate" className="font-medium">Event Date <span className="font-telugu">(తేదీ)</span></Label>
+                        <Input
+                            id="eventDate"
+                            name="eventDate"
+                            type="date" // Use date input type
+                            value={formData.eventDate}
+                            onChange={handleChange}
+                            className="bg-background focus:border-secondary"
+                            required
+                        />
+                    </div>
+                   </div>
+                   <div className="space-y-2">
+                        <Label htmlFor="eventType" className="font-medium">Event Type <span className="font-telugu">(ఈవెంట్ పేరు)</span></Label>
+                        <Input
+                            id="eventType"
+                            name="eventType"
+                            type="text"
+                            placeholder="e.g., Wedding, Engagement, Sreemantham"
+                            value={formData.eventType}
+                            onChange={handleChange}
+                            required
+                            className="bg-background focus:border-secondary"
+                        />
+                    </div>
                 <div className="space-y-2">
-                    <Label htmlFor="message" className="font-medium">Message (సందేశం)</Label>
+                    <Label htmlFor="message" className="font-medium">Message <span className="font-telugu">(మీ వివరాలు)</span></Label>
                     <Textarea
                     id="message"
                     name="message"
@@ -183,7 +209,10 @@ export default function ContactPage() {
 
           {/* Map */}
           <div className="rounded-xl overflow-hidden shadow-lg border border-border/50">
-             {/* <h3 className="text-xl font-serif font-semibold mb-4 text-foreground px-6 pt-4">Find Our Studio</h3> */}
+              {/* Telugu Label for Map */}
+              <h3 className="text-xl font-serif font-semibold text-center mb-0 text-foreground px-6 pt-4 bg-muted/30 pb-3 font-telugu">
+                ఇక్కడ మాతో కలవండి
+             </h3>
             <MapPlaceholder />
           </div>
         </div>

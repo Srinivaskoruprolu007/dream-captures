@@ -9,8 +9,8 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      // Updated styles: Softer shadow, slightly rounded corners, theme-based border
-      "rounded-xl border border-border/50 bg-card text-card-foreground shadow-lg transition-shadow duration-300 hover:shadow-xl", // Use rounded-xl for softer corners, more prominent shadow on hover
+      // Updated styles: Softer shadow, potentially more rounded corners, theme-based border
+      "rounded-lg border border-border/60 bg-card text-card-foreground shadow-md transition-shadow duration-300 hover:shadow-lg", // Use rounded-lg, slightly softer border, medium shadow
       className
     )}
     {...props}
@@ -24,8 +24,8 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    // Adjusted padding, potentially add border-bottom if needed for separation
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    // Adjusted padding
+    className={cn("flex flex-col space-y-1.5 p-5 md:p-6", className)}
     {...props}
   />
 ))
@@ -40,7 +40,7 @@ const CardTitle = React.forwardRef<
         ref={ref}
         // Use font-serif for titles, adjust size and weight
         className={cn(
-            "text-xl font-serif font-semibold leading-none tracking-tight", // Adjusted size and font
+            "text-lg md:text-xl font-serif font-semibold leading-tight tracking-tight", // Adjusted size and font
             className
         )}
         {...props} />
@@ -67,7 +67,7 @@ const CardContent = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   // Ensure padding consistency
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  <div ref={ref} className={cn("p-5 md:p-6 pt-0", className)} {...props} />
 ))
 CardContent.displayName = "CardContent"
 
@@ -75,10 +75,10 @@ const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  // Ensure padding consistency, potentially add border-top for separation
+  // Ensure padding consistency
   <div
     ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
+    className={cn("flex items-center p-5 md:p-6 pt-0", className)}
     {...props}
   />
 ))

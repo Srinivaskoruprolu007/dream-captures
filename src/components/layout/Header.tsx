@@ -27,10 +27,13 @@ const navLinks = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/90 backdrop-blur-md shadow-sm supports-[backdrop-filter]:bg-background/70 transition-shadow duration-300">
+    <header className={cn(
+      "sticky top-0 z-50 w-full border-b border-border/40 bg-background/85 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60",
+      "transition-shadow duration-300 shadow-sm hover:shadow-md" // Slightly more prominent shadow on hover
+    )}>
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2" aria-label="Dream Captures Home">
-          {/* Adjusted Logo size slightly */}
+          {/* Adjusted Logo size */}
           <Logo className="h-9 w-auto text-secondary" />
         </Link>
 
@@ -41,7 +44,10 @@ export function Header() {
               <NavigationMenuItem key={link.href}>
                 <Link href={link.href} legacyBehavior passHref>
                   {/* Use cn to apply styles and ensure smooth transition */}
-                  <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "hover:text-secondary transition-colors duration-300")}>
+                  <NavigationMenuLink className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-sm font-medium text-foreground/80 hover:text-secondary hover:bg-secondary/5 transition-colors duration-200 px-3 py-2" // Refined styling
+                  )}>
                     {link.label}
                   </NavigationMenuLink>
                 </Link>
@@ -49,7 +55,10 @@ export function Header() {
             ))}
              <NavigationMenuItem>
                 <Link href="/client-gallery" legacyBehavior passHref>
-                  <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "flex items-center gap-1 hover:text-secondary transition-colors duration-300")}>
+                  <NavigationMenuLink className={cn(
+                    navigationMenuTriggerStyle(),
+                    "flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-secondary hover:bg-secondary/5 transition-colors duration-200 px-3 py-2" // Refined styling
+                   )}>
                      <Lock size={14} /> Client Access
                   </NavigationMenuLink>
                 </Link>
@@ -66,7 +75,7 @@ export function Header() {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[350px] bg-background p-6">
+            <SheetContent side="right" className="w-[300px] sm:w-[350px] bg-background p-6 shadow-xl border-l border-border/50">
               <nav className="flex flex-col gap-5 pt-8">
                  {/* Mobile Logo */}
                  <Link href="/" className="mb-6 block">
@@ -76,14 +85,14 @@ export function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="block px-3 py-2 text-lg font-medium text-foreground hover:bg-accent/50 hover:text-accent-foreground rounded-md transition-colors duration-200"
+                    className="block px-3 py-2 text-base font-medium text-foreground hover:bg-accent/10 hover:text-accent-foreground rounded-md transition-colors duration-200" // Use accent for mobile hover
                   >
                     {link.label}
                   </Link>
                 ))}
                  <Link
                     href="/client-gallery"
-                    className="block px-3 py-2 text-lg font-medium text-foreground hover:bg-accent/50 hover:text-accent-foreground rounded-md transition-colors duration-200 flex items-center gap-2"
+                    className="block px-3 py-2 text-base font-medium text-foreground hover:bg-accent/10 hover:text-accent-foreground rounded-md transition-colors duration-200 flex items-center gap-2"
                   >
                    <Lock size={18} /> Client Access
                   </Link>

@@ -9,33 +9,33 @@ import { Card, CardContent } from '@/components/ui/card';
 import { MapPin, X, Download, Share2 } from 'lucide-react'; // Added Download, Share2
 import { cn } from '@/lib/utils';
 
-// Placeholder data - Categorized for Indian Weddings
+// Placeholder data - Categorized for Indian Weddings with Telugu names
 const allPortfolioItems = [
-  // Weddings
-  { id: 1, src: 'https://picsum.photos/seed/telugu-wedding1/800/600', alt: 'Traditional Thali Tying', category: 'Weddings', location: 'Rajahmundry Temple' },
-  { id: 5, src: 'https://picsum.photos/seed/telugu-wedding2/600/800', alt: 'Mandapam Ceremony', category: 'Weddings', location: 'Vijayawada Convention Hall' },
-  { id: 8, src: 'https://picsum.photos/seed/telugu-wedding3/800/600', alt: 'Oonjal Fun', category: 'Weddings', location: 'Hyderabad Garden Venue' },
-  // Pre-Weddings
-  { id: 2, src: 'https://picsum.photos/seed/prewedding1/800/600', alt: 'Romantic Shoot in Araku Valley', category: 'Pre-Weddings', location: 'Araku Valley' },
-  { id: 9, src: 'https://picsum.photos/seed/prewedding2/600/800', alt: 'Beach Pre-Wedding', category: 'Pre-Weddings', location: 'Vizag Beach' },
-  // Haldi
-  { id: 3, src: 'https://picsum.photos/seed/haldi1/800/600', alt: 'Joyful Haldi Moments', category: 'Haldi', location: 'Client Residence, Guntur' },
-   { id: 10, src: 'https://picsum.photos/seed/haldi2/600/800', alt: 'Applying Turmeric Paste', category: 'Haldi', location: 'Nellore Farmhouse' },
-  // Engagements
-   { id: 6, src: 'https://picsum.photos/seed/engagement1/800/600', alt: 'Ring Exchange Ceremony', category: 'Engagements', location: 'Secunderabad Banquet Hall' },
-   { id: 12, src: 'https://picsum.photos/seed/engagement2/800/600', alt: 'Engagement Couple Portrait', category: 'Engagements', location: 'Kurnool Fort' },
-  // Baby Showers (Sreemantham)
-  { id: 7, src: 'https://picsum.photos/seed/babyshower1/800/600', alt: 'Sreemantham Blessings', category: 'Baby Showers', location: 'Tirupati Home' },
-  { id: 11, src: 'https://picsum.photos/seed/babyshower2/600/800', alt: 'Traditional Rituals', category: 'Baby Showers', location: 'Client Home, Kakinada' },
+  // Weddings (పెళ్లిళ్లు)
+  { id: 1, src: 'https://picsum.photos/seed/telugu-wedding1/800/600', alt: 'Traditional Thali Tying', altTelugu: 'సంప్రదాయ తాళి కట్టు వేడుక', category: 'పెళ్లిళ్లు', location: 'Rajahmundry Temple' },
+  { id: 5, src: 'https://picsum.photos/seed/telugu-wedding2/600/800', alt: 'Mandapam Ceremony', altTelugu: 'మండపం వేడుక', category: 'పెళ్లిళ్లు', location: 'Vijayawada Convention Hall' },
+  { id: 8, src: 'https://picsum.photos/seed/telugu-wedding3/800/600', alt: 'Oonjal Fun', altTelugu: 'ఊయల వేడుక', category: 'పెళ్లిళ్లు', location: 'Hyderabad Garden Venue' },
+  // Pre-Weddings (ప్రీ-వెడ్డింగ్)
+  { id: 2, src: 'https://picsum.photos/seed/prewedding1/800/600', alt: 'Romantic Shoot in Araku Valley', altTelugu: 'అరకు లోయలో ప్రీ-వెడ్డింగ్', category: 'ప్రీ-వెడ్డింగ్', location: 'Araku Valley' },
+  { id: 9, src: 'https://picsum.photos/seed/prewedding2/600/800', alt: 'Beach Pre-Wedding', altTelugu: 'బీచ్ ప్రీ-వెడ్డింగ్', category: 'ప్రీ-వెడ్డింగ్', location: 'Vizag Beach' },
+  // Haldi (పసుపు కొట్టడం) - Note: Using Haldi as category name for simplicity in code, label can be Telugu
+  { id: 3, src: 'https://picsum.photos/seed/haldi1/800/600', alt: 'Joyful Haldi Moments', altTelugu: 'పసుపు కొట్టడం ఆనందం', category: 'Haldi', location: 'Client Residence, Guntur' },
+  { id: 10, src: 'https://picsum.photos/seed/haldi2/600/800', alt: 'Applying Turmeric Paste', altTelugu: 'పసుపు పూత', category: 'Haldi', location: 'Nellore Farmhouse' },
+  // Engagements (ఎంగేజ్‌మెంట్)
+  { id: 6, src: 'https://picsum.photos/seed/engagement1/800/600', alt: 'Ring Exchange Ceremony', altTelugu: 'ఉంగరాల మార్పిడి', category: 'ఎంగేజ్‌మెంట్', location: 'Secunderabad Banquet Hall' },
+  { id: 12, src: 'https://picsum.photos/seed/engagement2/800/600', alt: 'Engagement Couple Portrait', altTelugu: 'ఎంగేజ్‌మెంట్ జంట చిత్రం', category: 'ఎంగేజ్‌మెంట్', location: 'Kurnool Fort' },
+  // Baby Showers (సీమంతం)
+  { id: 7, src: 'https://picsum.photos/seed/babyshower1/800/600', alt: 'Sreemantham Blessings', altTelugu: 'సీమంతం ఆశీస్సులు', category: 'సీమంతం', location: 'Tirupati Home' },
+  { id: 11, src: 'https://picsum.photos/seed/babyshower2/600/800', alt: 'Traditional Rituals', altTelugu: 'సంప్రదాయ క్రతువులు', category: 'సీమంతం', location: 'Client Home, Kakinada' },
 ];
 
-// Updated categories
-const categories = ['All', 'Weddings', 'Pre-Weddings', 'Engagements', 'Haldi', 'Baby Showers'];
+// Updated categories with Telugu names
+const categories = ['All', 'పెళ్లిళ్లు', 'ప్రీ-వెడ్డింగ్', 'ఎంగేజ్‌మెంట్', 'Haldi', 'సీమంతం']; // Keep 'Haldi' simple or use 'పసుపు కొట్టడం'
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<typeof allPortfolioItems[0] | null>(null);
+  const [selectedImage, setSelectedImage] = useState<(typeof allPortfolioItems)[0] | null>(null);
 
   const filteredItems = selectedCategory === 'All'
     ? allPortfolioItems
@@ -90,9 +90,13 @@ export default function PortfolioPage() {
             <TabsTrigger
               key={category}
               value={category}
-              className="px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground data-[state=active]:shadow-md hover:text-secondary"
+              className={cn(
+                "px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground data-[state=active]:shadow-md hover:text-secondary",
+                 // Apply Telugu font if category is in Telugu
+                 category !== 'All' && category !== 'Haldi' && 'font-telugu' // Example condition
+              )}
             >
-              {category}
+              {category === 'Haldi' ? 'పసుపు కొట్టడం' : category} {/* Display Telugu label for Haldi */}
             </TabsTrigger>
           ))}
         </TabsList>
@@ -126,6 +130,7 @@ export default function PortfolioPage() {
                        {/* Overlay with Title - enhanced styling */}
                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                         <h3 className="text-white text-base font-semibold font-serif truncate">{item.alt}</h3>
+                        {item.altTelugu && <p className="text-gray-200 text-xs font-telugu truncate">{item.altTelugu}</p>}
                          {item.location && (
                             <div className="flex items-center text-xs text-gray-300 mt-1">
                                 <MapPin size={12} className="mr-1" />
@@ -134,7 +139,12 @@ export default function PortfolioPage() {
                          )}
                       </div>
                        {/* Optional: Category badge */}
-                       <span className="absolute top-2 right-2 bg-secondary/80 text-secondary-foreground text-[10px] px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">{item.category}</span>
+                       <span className={cn(
+                          "absolute top-2 right-2 bg-secondary/80 text-secondary-foreground text-[10px] px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm",
+                          item.category !== 'All' && item.category !== 'Haldi' && 'font-telugu' // Apply Telugu font to badge if needed
+                       )}>
+                         {item.category === 'Haldi' ? 'పసుపు' : item.category}
+                       </span>
                     </div>
                   </CardContent>
                 </Card>
@@ -153,6 +163,7 @@ export default function PortfolioPage() {
                    </div>
                     <div className="p-4 text-center bg-muted/50 rounded-b-lg">
                       <p className="font-semibold font-serif text-xl mb-1 text-foreground">{selectedImage.alt}</p>
+                      {selectedImage.altTelugu && <p className="font-telugu text-muted-foreground mb-2">{selectedImage.altTelugu}</p>}
                       {selectedImage.location && (
                         <div className="flex items-center justify-center text-sm text-muted-foreground mb-4">
                           <MapPin size={14} className="mr-1.5 text-primary" />
@@ -186,7 +197,7 @@ export default function PortfolioPage() {
         {/* Message if no items in category */}
         {filteredItems.length === 0 && (
             <div className="text-center py-16 text-muted-foreground">
-            <p className="text-lg">క్షమించండి, "{selectedCategory}" వర్గంలో చిత్రాలు కనుగొనబడలేదు.</p>
+            <p className="text-lg font-telugu">క్షమించండి, "{selectedCategory === 'Haldi' ? 'పసుపు కొట్టడం' : selectedCategory}" వర్గంలో చిత్రాలు కనుగొనబడలేదు.</p>
              <p>No images found in the "{selectedCategory}" category.</p>
             </div>
         )}

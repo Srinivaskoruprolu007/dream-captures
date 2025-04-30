@@ -4,35 +4,35 @@ import { CheckCircle, Package, Sparkles, Film, Users, Camera } from 'lucide-reac
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-// Culturally themed package names and icons
+// Culturally themed package names and icons with Telugu names
 const servicePackages = [
   {
-    id: 'wedding-royal',
-    title: 'Rajahmundry Royal',
+    id: 'premium', // Changed ID for clarity
+    title: 'పెళ్లి పందిరి సూపర్', // Premium
     price: '₹1,50,000+', // Example Price in INR
     features: ['Full Day Coverage (10-12 Hrs)', '2 Photographers + 1 Cinematographer', 'Pre-Wedding Shoot', 'Luxury Album (Kalankari Cover Option)', 'Online Gallery + Drone Shots*'],
     icon: Sparkles, // Represents luxury/grandeur
     themeColor: 'secondary' // Maroon theme
   },
    {
-    id: 'wedding-classic',
-    title: 'Vizag Classic',
+    id: 'mid-tier', // Changed ID
+    title: 'ఆలయ ఘనత', // Mid-tier
     price: '₹90,000+',
     features: ['8 Hours Coverage', '1 Photographer + 1 Cinematographer', 'Engagement/Haldi Coverage', 'Standard Album', 'Online Gallery'],
     icon: Package, // Standard package
     themeColor: 'primary' // Teal theme
   },
   {
-    id: 'engagement',
-    title: 'Araku Bloom',
+    id: 'basic', // Changed ID
+    title: 'వెంకటాద్రి ప్లాన్', // Basic
     price: '₹40,000+',
-    features: ['4-6 Hour Session', '1 Photographer', 'Scenic Location Shoot (e.g., Araku)', 'Online Gallery', 'Outfit Changes'],
+    features: ['4-6 Hour Session', '1 Photographer', 'Key Ceremony Coverage', 'Online Gallery', 'Essential Edits'],
     icon: Camera, // Represents photography focus
     themeColor: 'accent' // Gold theme
   },
   {
     id: 'event',
-    title: 'Tirupati Divine',
+    title: 'తిరుపతి ప్రత్యేకం', // Renamed for consistency
     price: '₹30,000+',
     features: ['3-4 Hours Coverage', '1 Photographer', 'Ideal for Sreemantham, Birthdays', 'Online Gallery', 'Candid & Group Shots'],
     icon: Users, // Represents family/events
@@ -42,12 +42,12 @@ const servicePackages = [
 
 // Cultural Add-ons
 const addOns = [
-  { title: 'Kalankari Art Photo Album', description: 'A bespoke album featuring traditional Andhra art covers.' },
-  { title: 'Drone Wedding Entry / Coverage', description: 'Capture breathtaking aerial views of your venue and entry.' },
-  { title: 'Live Webcasting', description: 'Share your ceremony live with loved ones who cannot attend.' },
-  { title: 'Instant Photobooth', description: 'Fun, interactive booth with traditional props and instant prints.' },
-  { title: 'Same-Day Edit Highlight Reel', description: 'A short cinematic video edited and shown during your reception.' },
-  { title: 'Candid Cinematography Add-on', description: 'Dedicated cinematographer for a storytelling film.' },
+  { title: 'కలంకారి ఆర్ట్ ఫోటో ఆల్బమ్', description: 'A bespoke album featuring traditional Andhra art covers.' },
+  { title: 'డ్రోన్ వెడ్డింగ్ ఎంట్రీ / కవరేజ్', description: 'Capture breathtaking aerial views of your venue and entry.' },
+  { title: 'లైవ్ వెబ్‌కాస్టింగ్', description: 'Share your ceremony live with loved ones who cannot attend.' },
+  { title: 'ఇన్‌స్టంట్ ఫోటోబూత్', description: 'Fun, interactive booth with traditional props and instant prints.' },
+  { title: 'సేమ్-డే ఎడిట్ హైలైట్ రీల్', description: 'A short cinematic video edited and shown during your reception.' },
+  { title: 'క్యాండిడ్ సినిమాటోగ్రఫీ యాడ్-ఆన్', description: 'Dedicated cinematographer for a storytelling film.' },
 ];
 
 // Updated FAQs with cultural context
@@ -79,7 +79,7 @@ export default function ServicesPage() {
                  <div className={`mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-${pkg.themeColor} text-${pkg.themeColor}-foreground mb-4 shadow-md`}>
                     <pkg.icon className="h-8 w-8" />
                  </div>
-                <CardTitle className="text-xl font-serif text-foreground">{pkg.title}</CardTitle>
+                <CardTitle className="text-xl font-serif text-foreground font-telugu">{pkg.title}</CardTitle> {/* Apply Telugu font */}
                 <CardDescription className={`font-semibold text-lg text-${pkg.themeColor}`}>{pkg.price}</CardDescription>
               </CardHeader>
               <CardContent className="flex-grow p-6">
@@ -91,11 +91,18 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
+                 {/* Negotiable Pricing Note */}
+                  <p className="text-xs text-center text-muted-foreground mt-4 pt-3 border-t border-border/30 font-telugu">
+                     ధరలు మాట్లాడుకోవచ్చు. మీ బడ్జెట్ ప్రకారం మేము సెట్ చేస్తాం.
+                  </p>
+                  <p className="text-xs text-center text-muted-foreground">
+                      (Pricing is negotiable based on your budget.)
+                  </p>
               </CardContent>
                <div className="p-6 pt-0 mt-auto">
                  {/* Button matching theme color */}
                  <Button asChild className={`w-full mt-4 bg-${pkg.themeColor} hover:bg-${pkg.themeColor}/90 text-${pkg.themeColor}-foreground`}>
-                  <Link href={`/contact?service=${pkg.title}`}>Inquire Now</Link>
+                  <Link href={`/contact?service=${pkg.id}`}>Inquire Now</Link> {/* Use ID for query */}
                  </Button>
                </div>
             </Card>
@@ -116,7 +123,7 @@ export default function ServicesPage() {
                {/* Use a relevant icon - Sparkles for special items */}
               <Sparkles size={24} className="text-accent mr-4 mt-1 flex-shrink-0" />
               <div>
-                <h4 className="font-semibold text-foreground mb-1">{addOn.title}</h4>
+                <h4 className="font-semibold text-foreground mb-1 font-telugu">{addOn.title}</h4>
                 <p className="text-sm text-muted-foreground">{addOn.description}</p>
               </div>
             </div>

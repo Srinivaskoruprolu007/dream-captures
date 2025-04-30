@@ -13,9 +13,10 @@ const portfolioImages = [
   { id: 4, src: 'https://picsum.photos/seed/baby-shower1/600/400', alt: 'Traditional Baby Shower', category: 'Baby Showers' },
 ];
 
+// Updated testimonials with bilingual example
 const testimonials = [
-  { id: 1, name: 'శ్రీనివాస్ & లక్ష్మి', quote: 'మా పెళ్లి ఫోటోలు అద్భుతం! ప్రతి క్షణం ఎంతో అందంగా తీశారు. Dream Captures కి మా ధన్యవాదాలు.', avatar: 'https://picsum.photos/seed/avatar-telugu1/100/100' },
-  { id: 2, name: 'Ravi & Priya K.', quote: 'Professional, creative, and captured the soul of our Andhra wedding. Highly recommend!', avatar: 'https://picsum.photos/seed/avatar-telugu2/100/100' },
+   { id: 3, name: 'పల్లవి, విజయవాడ', quote: 'మన పెళ్లిని ఇలా అందంగా క్యాప్చర్ చేస్తారని అనుకోలేదు! డ్రీమ్ క్యాప్చర్స్ టీమ్ చాల బాగుంది.', avatar: 'https://picsum.photos/seed/avatar-telugu2/100/100' },
+  { id: 2, name: 'Ravi & Priya K.', quote: 'Professional, creative, and captured the soul of our Andhra wedding. Highly recommend!', avatar: 'https://picsum.photos/seed/avatar-english1/100/100' },
 ];
 
 // Example Service Icons (Replace with actual Indian themed icons/SVGs later)
@@ -44,17 +45,17 @@ export default function Home() {
             Dream Captures
           </h1>
            <p className="text-2xl md:text-3xl font-telugu-stylish text-accent mb-8 drop-shadow-md">
-            ప్రతి ఫోటోలో ఒక కథ...
+            ప్రతి ఫోటోలో ఒక అందమైన గుర్తు...
           </p>
           <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto drop-shadow text-gray-200">
-            Capturing the vibrant traditions and emotions of Telugu weddings across Andhra Pradesh.
+             Capturing the vibrant traditions and emotions of Telugu weddings across Andhra Pradesh. Every photo holds a beautiful memory.
           </p>
           <div className="space-x-4">
             <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold px-8 py-3 rounded-full shadow-lg transition-transform duration-300 hover:scale-105 border border-secondary-foreground/20">
-              <Link href="/portfolio">Explore Our Captures</Link>
+              <Link href="/portfolio">View Our Work</Link>
             </Button>
              <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white font-semibold px-8 py-3 rounded-full shadow-lg transition-transform duration-300 hover:scale-105">
-              <Link href="/contact" className="font-telugu">మీ క్షణాలను బుక్ చేసుకోండి</Link>
+              <Link href="/portfolio" className="font-telugu">ఫొటోలను చూడండి</Link>
             </Button>
           </div>
         </div>
@@ -77,7 +78,7 @@ export default function Home() {
           <div className="animate-fade-in-slow">
             <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-4 text-foreground">Meet the Artist</h2>
             <p className="text-muted-foreground mb-6 leading-relaxed font-telugu">
-             నమస్కారం! నేను [Photographer Name], డ్రీమ్ క్యాప్చర్స్ వెనుక ఉన్న కళాకారుడిని. ఆంధ్రప్రదేశ్‌లో పుట్టి పెరిగిన నాకు, మన సంప్రదాయాలను, పెళ్లి వేడుకల భావోద్వేగాలను చిత్రించడం అంటే ఎంతో ఇష్టం.
+             నమస్కారం! నేను ఆంధ్రప్రదేశ్‌లోని [మీ ఊరు] నుండి వచ్చిన ఒక ప్రేమతో నిండిన ఫోటోగ్రాఫర్‌ని. ప్రతి సందర్భం ప్రత్యేకం, ప్రతి క్లిక్ ఒక గుర్తుగా ఉంటుంది.
             </p>
              <p className="text-muted-foreground mb-6 leading-relaxed">
               Rooted in the rich culture of Andhra Pradesh, I blend traditional aesthetics with modern storytelling to create images that resonate with heart and heritage.
@@ -166,11 +167,11 @@ export default function Home() {
                   <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-gradient-to-br from-primary to-teal-600 text-primary-foreground mb-4 shadow-md">
                     <MangalsutraIcon /> {/* Represents Wedding */}
                   </div>
-                 <CardTitle className="font-serif text-xl text-foreground">Rajahmundry Royal</CardTitle>
-                 <CardDescription className="text-sm text-primary font-semibold">Comprehensive Wedding Coverage</CardDescription>
+                 <CardTitle className="font-serif text-xl text-foreground">వెంకటాద్రి ప్లాన్</CardTitle> {/* Updated Name */}
+                 <CardDescription className="text-sm text-primary font-semibold">Basic Wedding Coverage</CardDescription> {/* Updated Desc */}
                </CardHeader>
                <CardContent className="p-6 pt-4">
-                 <p className="text-muted-foreground text-sm">Capturing every ritual and emotion of your grand Telugu wedding with artistic flair.</p>
+                 <p className="text-muted-foreground text-sm">Capturing the essential moments of your special day with elegance.</p> {/* Updated Content */}
                </CardContent>
              </Card>
               {/* Service Card 2: Portraits/Pre-Wedding */}
@@ -179,11 +180,11 @@ export default function Home() {
                  <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-gradient-to-br from-secondary to-orange-600 text-secondary-foreground mb-4 shadow-md">
                     <Heart /> {/* Represents Love/Couples */}
                  </div>
-                 <CardTitle className="font-serif text-xl text-foreground">Vizag Classic</CardTitle>
-                 <CardDescription className="text-sm text-secondary font-semibold">Engagements & Portraits</CardDescription>
+                 <CardTitle className="font-serif text-xl text-foreground">ఆలయ ఘనత</CardTitle> {/* Updated Name */}
+                 <CardDescription className="text-sm text-secondary font-semibold">Mid-Tier Coverage</CardDescription> {/* Updated Desc */}
                </CardHeader>
                <CardContent className="p-6 pt-4">
-                 <p className="text-muted-foreground text-sm">Beautifully crafted couple portraits and engagement stories against scenic backdrops.</p>
+                 <p className="text-muted-foreground text-sm">Comprehensive coverage including pre-wedding moments and detailed shots.</p> {/* Updated Content */}
                </CardContent>
              </Card>
               {/* Service Card 3: Events/Baby Shower */}
@@ -192,11 +193,11 @@ export default function Home() {
                  <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-gradient-to-br from-accent to-yellow-500 text-accent-foreground mb-4 shadow-md">
                     <Users /> {/* Represents Family/Events */}
                  </div>
-                 <CardTitle className="font-serif text-xl text-foreground">Tirupati Divine</CardTitle>
-                  <CardDescription className="text-sm text-accent-foreground font-semibold bg-accent/80 px-2 py-0.5 rounded inline-block">Family & Events</CardDescription>
+                 <CardTitle className="font-serif text-xl text-foreground">పెళ్లి పందిరి సూపర్</CardTitle> {/* Updated Name */}
+                  <CardDescription className="text-sm text-accent-foreground font-semibold bg-accent/80 px-2 py-0.5 rounded inline-block">Premium Wedding & Events</CardDescription> {/* Updated Desc */}
                </CardHeader>
                <CardContent className="p-6 pt-4">
-                 <p className="text-muted-foreground text-sm">Documenting baby showers (Sreemantham), birthdays, and other cherished family milestones.</p>
+                 <p className="text-muted-foreground text-sm">All-inclusive coverage for weddings, engagements, baby showers, and more.</p> {/* Updated Content */}
                </CardContent>
              </Card>
            </div>

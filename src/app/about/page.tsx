@@ -43,8 +43,11 @@ export default function AboutPage() {
             Behind the Lens: My Andhra Story
           </h1>
            <p className="text-lg font-telugu text-secondary mb-4">నా ప్రయాణం, నా కళ.</p>
+           <p className="text-lg text-muted-foreground mb-4 leading-relaxed font-telugu">
+              నేను ఆంధ్రప్రదేశ్‌లోని [మీ ఊరు] నుండి వచ్చిన ఒక ప్రేమతో నిండిన ఫోటోగ్రాఫర్‌ని. ప్రతి సందర్భం ప్రత్యేకం, ప్రతి క్లిక్ ఒక గుర్తుగా ఉంటుంది.
+          </p>
           <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
-            నమస్కారం! I'm [Photographer Name], the heart and soul behind Dream Captures. Born and raised amidst the vibrant culture of Andhra Pradesh, photography became my language to express the beauty I saw in our traditions, landscapes, and most importantly, our celebrations.
+            Namaskaram! I'm [Photographer Name], the heart and soul behind Dream Captures. Born and raised amidst the vibrant culture of Andhra Pradesh, photography became my language to express the beauty I saw in our traditions, landscapes, and most importantly, our celebrations.
           </p>
           <p className="text-muted-foreground leading-relaxed">
             From the intricate details of a pellikuthuru ceremony to the joyous chaos of a sangeeth, my passion lies in capturing the genuine emotions and untold stories that make each Telugu wedding unique. I believe every photograph should be a window back to a cherished moment, filled with the warmth and richness of our heritage.

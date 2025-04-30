@@ -7,8 +7,9 @@ import { Star } from 'lucide-react'; // Keep Star for rating
 import Autoplay from "embla-carousel-autoplay" // Import Autoplay plugin
 import * as React from "react"; // Import React for plugin ref
 
-// Placeholder data with Telugu names/context
+// Placeholder data with Telugu names/context including the new example
 const testimonials = [
+   { id: 6, name: 'పల్లవి, విజయవాడ', quote: 'మన పెళ్లిని ఇలా అందంగా క్యాప్చర్ చేస్తారని అనుకోలేదు! డ్రీమ్ క్యాప్చర్స్ టీమ్ చాల బాగుంది.', avatar: 'https://picsum.photos/seed/avatar-telugu4/100/100', rating: 5, service: 'Wedding Photography' },
   { id: 1, name: 'శ్రీనివాస్ & లక్ష్మి', quote: 'మా పెళ్లి ఫోటోలు అద్భుతం! డ్రీమ్ క్యాప్చర్స్ ప్రతి క్షణాన్ని ఎంతో అందంగా బంధించారు. చాలా ప్రొఫెషనల్ గా, సృజనాత్మకంగా పనిచేశారు.', avatar: 'https://picsum.photos/seed/avatar-telugu1/100/100', rating: 5, service: 'Wedding Photography' },
   { id: 2, name: 'The Rao Family', quote: 'Our family function photos (Gruhapravesam) are cherished memories now, thanks to their wonderful work. Very patient and captured natural moments.', avatar: 'https://picsum.photos/seed/avatar-english1/100/100', rating: 5, service: 'Family Event' },
   { id: 3, name: 'Priya & Ravi Kumar', quote: 'From our engagement shoot near Charminar to the wedding day, every photo is stunning. They made us feel so comfortable!', avatar: 'https://picsum.photos/seed/avatar-telugu2/100/100', rating: 5, service: 'Engagement & Wedding' },
@@ -72,7 +73,8 @@ export default function TestimonialsPage() {
                         <Avatar className="h-20 w-20 mb-4 border-4 border-background shadow-md"> {/* Larger Avatar */}
                           <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
                           <AvatarFallback className="text-lg font-semibold bg-secondary text-secondary-foreground">
-                            {testimonial.name.split(' ').map(n => n[0]).join('')}
+                            {/* Handle both English and Telugu names for fallback */}
+                            {testimonial.name.split(' ').map(n => n[0]).join('') || testimonial.name.charAt(0)}
                           </AvatarFallback>
                         </Avatar>
                         <CardTitle className="text-lg font-telugu-stylish text-foreground">{testimonial.name}</CardTitle>

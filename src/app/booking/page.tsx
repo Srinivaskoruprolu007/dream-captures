@@ -101,42 +101,42 @@ export default function BookingPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                    <div className="space-y-2">
-                     <Label htmlFor="name" className="font-medium">Name (పేరు)</Label>
-                     <Input id="name" name="name" type="text" placeholder="Your Full Name" value={formData.name} onChange={handleChange} required className="bg-background focus:border-secondary" />
+                     <Label htmlFor="name" className="font-medium">Name <span className="font-telugu">(పేరు)</span></Label>
+                     <Input id="name" name="name" type="text" placeholder="Your Full Name / మీ పూర్తి పేరు" value={formData.name} onChange={handleChange} required className="bg-background focus:border-secondary" />
                    </div>
                    <div className="space-y-2">
-                     <Label htmlFor="email" className="font-medium">Email (ఇమెయిల్)</Label>
+                     <Label htmlFor="email" className="font-medium">Email <span className="font-telugu">(ఇమెయిల్)</span></Label>
                      <Input id="email" name="email" type="email" placeholder="your.email@example.com" value={formData.email} onChange={handleChange} required className="bg-background focus:border-secondary" />
                    </div>
                  </div>
 
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                    <div className="space-y-2">
-                     <Label htmlFor="phone" className="font-medium">Phone (ఫోన్ నంబర్) <span className="text-muted-foreground text-xs">(Optional)</span></Label>
+                     <Label htmlFor="phone" className="font-medium">Phone <span className="font-telugu">(ఫోన్)</span> <span className="text-muted-foreground text-xs">(Optional)</span></Label>
                      <Input id="phone" name="phone" type="tel" placeholder="+91 Your Number" value={formData.phone} onChange={handleChange} className="bg-background focus:border-secondary" />
                    </div>
                    <div className="space-y-2">
-                     <Label htmlFor="serviceType" className="font-medium">Event Type (కార్యక్రమ రకం)</Label>
+                     <Label htmlFor="serviceType" className="font-medium">Event Type <span className="font-telugu">(ఈవెంట్ పేరు)</span></Label>
                      <Select name="serviceType" onValueChange={handleSelectChange} value={formData.serviceType} required>
                        <SelectTrigger id="serviceType" className="bg-background focus:border-secondary text-left">
-                         <SelectValue placeholder="Select Event Type" />
+                         <SelectValue placeholder="Select Event Type / ఈవెంట్ పేరు ఎంచుకోండి" />
                        </SelectTrigger>
                        <SelectContent>
-                         <SelectItem value="Wedding">Wedding (పెళ్లి)</SelectItem>
-                         <SelectItem value="Engagement">Engagement (నిశ్చితార్థం)</SelectItem>
-                          <SelectItem value="Pre-Wedding">Pre-Wedding Shoot</SelectItem>
-                         <SelectItem value="Haldi">Haldi Ceremony (పసుపు కొట్టడం)</SelectItem>
-                         <SelectItem value="Baby Shower">Baby Shower (శ్రీమంతం)</SelectItem>
+                         <SelectItem value="Wedding">Wedding <span className="font-telugu">(పెళ్లి)</span></SelectItem>
+                         <SelectItem value="Engagement">Engagement <span className="font-telugu">(ఎంగేజ్‌మెంట్)</span></SelectItem>
+                         <SelectItem value="Pre-Wedding">Pre-Wedding Shoot <span className="font-telugu">(ప్రీ-వెడ్డింగ్)</span></SelectItem>
+                         <SelectItem value="Haldi">Haldi Ceremony <span className="font-telugu">(పసుపు కొట్టడం)</span></SelectItem>
+                         <SelectItem value="Baby Shower">Baby Shower <span className="font-telugu">(సీమంతం)</span></SelectItem>
                          <SelectItem value="Portrait">Portrait Session</SelectItem>
                          <SelectItem value="Family">Family Session</SelectItem>
-                         <SelectItem value="Event">Other Event</SelectItem>
+                         <SelectItem value="Event">Other Event <span className="font-telugu">(ఇతర ఈవెంట్)</span></SelectItem>
                        </SelectContent>
                      </Select>
                    </div>
                  </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="eventDate" className="font-medium">Preferred Date (ఇష్టమైన తేదీ)</Label>
+                  <Label htmlFor="eventDate" className="font-medium">Preferred Date <span className="font-telugu">(తేదీ)</span></Label>
                   <Input
                     id="eventDate"
                     name="eventDate"
@@ -149,7 +149,7 @@ export default function BookingPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="details" className="font-medium">Additional Details (అదనపు వివరాలు)</Label>
+                  <Label htmlFor="details" className="font-medium">Additional Details <span className="font-telugu">(మీ వివరాలు)</span></Label>
                   <Textarea
                     id="details"
                     name="details"
