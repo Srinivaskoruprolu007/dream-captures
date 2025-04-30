@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { CheckCircle, Package, Sparkles, Film, Users } from 'lucide-react'; // Added Sparkles, Film, Users
+import { CheckCircle, Package, Sparkles, Film, Users, Camera } from 'lucide-react'; // Added Camera import
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
