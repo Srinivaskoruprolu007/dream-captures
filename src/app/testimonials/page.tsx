@@ -6,9 +6,10 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Star } from 'lucide-react'; // Keep Star for rating
 import Autoplay from "embla-carousel-autoplay" // Import Autoplay plugin
 import * as React from "react"; // Import React for plugin ref
+import Link from 'next/link'; // Import Link
 import { cn } from '@/lib/utils'; // Import cn
 
-// Placeholder data
+// Placeholder data with Telugu names/context
 const testimonials = [
    { id: 6, name: 'పల్లవి, విజయవాడ', quote: 'మన పెళ్లిని ఇలా అందంగా క్యాప్చర్ చేస్తారని అనుకోలేదు! డ్రీమ్ క్యాప్చర్స్ టీమ్ చాల బాగుంది.', avatar: 'https://picsum.photos/seed/avatar-telugu4/100/100', rating: 5, service: 'Wedding Photography', dataAiHint: 'woman portrait smiling' },
   { id: 1, name: 'శ్రీనివాస్ & లక్ష్మి', quote: 'మా పెళ్లి ఫోటోలు అద్భుతం! డ్రీమ్ క్యాప్చర్స్ ప్రతి క్షణాన్ని ఎంతో అందంగా బంధించారు. చాలా ప్రొఫెషనల్ గా, సృజనాత్మకంగా పనిచేశారు.', avatar: 'https://picsum.photos/seed/avatar-telugu1/100/100', rating: 5, service: 'Wedding Photography', dataAiHint: 'couple portrait wedding' },
