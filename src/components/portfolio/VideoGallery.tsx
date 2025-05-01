@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image"; // Import Next Image
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
@@ -9,6 +10,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogHeader, // Import DialogHeader
+  DialogTrigger, // Import DialogTrigger
 } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
