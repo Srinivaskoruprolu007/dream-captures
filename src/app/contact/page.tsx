@@ -9,17 +9,18 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Send } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import Link from 'next/link';
-import { cn } from '@/lib/utils'; // Import cn
+import { cn } from '@/lib/utils';
 
-// Placeholder for Map Component - Improved Accessibility
+// Placeholder for Map Component - Pastel Theme
 const MapPlaceholder = () => (
   <div
-    className="aspect-video w-full bg-muted/50 rounded-lg flex items-center justify-center text-muted-foreground border border-border/50 shadow-inner"
-    role="img" // Role for image/graphic
-    aria-label="Placeholder for Google Map showing service location" // Descriptive ARIA label
+    className="aspect-video w-full bg-muted/50 rounded-lg flex items-center justify-center text-muted-foreground border border-border/50 shadow-inner" // Muted background
+    role="img"
+    aria-label="Placeholder for Google Map showing service location"
     >
-    <div className="text-center p-4"> {/* Add padding */}
-        <MapPin className="mx-auto h-10 w-10 md:h-12 md:w-12 text-muted-foreground/50 mb-2" aria-hidden="true"/>
+    <div className="text-center p-4">
+        {/* Use primary color for icon */}
+        <MapPin className="mx-auto h-10 w-10 md:h-12 md:w-12 text-primary/50 mb-2" aria-hidden="true"/>
         <p className="font-semibold">Google Map Integration</p>
         <p className="text-xs font-noto" lang="te">(ఇక్కడ మాతో కలవండి)</p>
     </div>
@@ -41,21 +42,20 @@ export default function ContactPage() {
     setIsSubmitting(true);
 
     console.log('Form submitted:', formData);
-    // Simulate API call (replace with actual submission logic)
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    setFormData({ name: '', email: '', message: '', phone: '', eventType: '', eventDate: '' }); // Reset form
+    setFormData({ name: '', email: '', message: '', phone: '', eventType: '', eventDate: '' });
     setIsSubmitting(false);
     toast({
       title: "Message Sent!",
       description: "Thank you for reaching out (ధన్యవాదాలు!). Our team will connect with you shortly.",
-      variant: "default", // Use default variant for success
+      variant: "default",
     });
   };
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
-      <header className="text-center mb-16"> {/* Use header */}
+    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 bg-background"> {/* Use theme background */}
+      <header className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-foreground">
             Get In Touch
           </h1>
@@ -65,17 +65,15 @@ export default function ContactPage() {
           </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12"> {/* Adjusted gap */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
         {/* Contact Form */}
         <div className="lg:col-span-2">
-            <Card className="border border-border/50 shadow-lg rounded-xl overflow-hidden">
-            <CardHeader className="bg-muted/30 p-6">
-                {/* Use h2 for section heading */}
-                <CardTitle as="h2" className="font-serif text-2xl">Send Our Team a Message</CardTitle>
-                <CardDescription className="font-noto" lang="te">మీ సందేశం పంపండి</CardDescription>
+            <Card className="border border-border/50 shadow-lg rounded-xl overflow-hidden bg-card"> {/* Use card bg */}
+            <CardHeader className="bg-muted/50 p-6"> {/* Muted pastel header */}
+                <CardTitle as="h2" className="font-serif text-2xl text-foreground">Send Our Team a Message</CardTitle>
+                <CardDescription className="font-noto text-muted-foreground" lang="te">మీ సందేశం పంపండి</CardDescription>
             </CardHeader>
             <CardContent className="p-6 md:p-8">
-                {/* Add status role for screen readers */}
                 <form onSubmit={handleSubmit} className="space-y-6" aria-live="polite">
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                      <div className="space-y-2">
@@ -90,7 +88,7 @@ export default function ContactPage() {
                             required
                             aria-required="true"
                             autoComplete="name"
-                            className="bg-background focus:border-secondary"
+                            className="bg-input focus:border-primary" // Use input bg, primary focus
                         />
                     </div>
                     <div className="space-y-2">
@@ -105,7 +103,7 @@ export default function ContactPage() {
                             required
                             aria-required="true"
                             autoComplete="email"
-                            className="bg-background focus:border-secondary"
+                            className="bg-input focus:border-primary" // Use input bg, primary focus
                         />
                     </div>
                  </div>
@@ -120,7 +118,7 @@ export default function ContactPage() {
                             value={formData.phone}
                             onChange={handleChange}
                             autoComplete="tel"
-                            className="bg-background focus:border-secondary"
+                            className="bg-input focus:border-primary" // Use input bg, primary focus
                         />
                     </div>
                      <div className="space-y-2">
@@ -128,11 +126,11 @@ export default function ContactPage() {
                         <Input
                             id="eventDate"
                             name="eventDate"
-                            type="date" // Use date type for better UX
+                            type="date"
                             value={formData.eventDate}
                             onChange={handleChange}
-                            className="bg-background focus:border-secondary"
-                            // Consider adding min attribute for usability: min={new Date().toISOString().split('T')[0]}
+                            className="bg-input focus:border-primary" // Use input bg, primary focus
+                            // Consider adding min attribute for usability
                         />
                     </div>
                    </div>
@@ -147,7 +145,7 @@ export default function ContactPage() {
                             onChange={handleChange}
                             required
                             aria-required="true"
-                            className="bg-background focus:border-secondary"
+                            className="bg-input focus:border-primary" // Use input bg, primary focus
                         />
                     </div>
                 <div className="space-y-2">
@@ -161,17 +159,19 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         aria-required="true"
-                        className="bg-background focus:border-secondary"
+                        className="bg-input focus:border-primary" // Use input bg, primary focus
                     />
                 </div>
+                {/* Submit Button - Use Primary (Mint) */}
                 <Button
                     type="submit"
+                    variant="default" // Use default variant (Mint)
                     className={cn(
-                        "w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-base py-3 rounded-lg shadow-md",
-                        isSubmitting && "opacity-75 cursor-wait" // Loading state styles
+                        "w-full text-base py-3 rounded-lg shadow-md",
+                        isSubmitting && "opacity-75 cursor-wait"
                     )}
                     disabled={isSubmitting}
-                    aria-busy={isSubmitting} // Indicate busy state
+                    aria-busy={isSubmitting}
                     >
                     <Send size={18} className="mr-2" aria-hidden="true"/>
                     {isSubmitting ? (
@@ -188,20 +188,18 @@ export default function ContactPage() {
         </div>
 
         {/* Contact Info & Map */}
-        <aside className="lg:col-span-1 space-y-8"> {/* Use aside for secondary content */}
-           <Card className="border border-border/50 shadow-lg rounded-xl overflow-hidden">
-             <CardHeader className="bg-muted/30 p-6">
-                 {/* Use h2 for section heading */}
-                <CardTitle as="h2" className="font-serif text-2xl">Contact Information</CardTitle>
-                <CardDescription className="font-noto" lang="te">సంప్రదింపు వివరాలు</CardDescription>
+        <aside className="lg:col-span-1 space-y-8">
+           <Card className="border border-border/50 shadow-lg rounded-xl overflow-hidden bg-card"> {/* Use card bg */}
+             <CardHeader className="bg-muted/50 p-6"> {/* Muted pastel header */}
+                <CardTitle as="h2" className="font-serif text-2xl text-foreground">Contact Information</CardTitle>
+                <CardDescription className="font-noto text-muted-foreground" lang="te">సంప్రదింపు వివరాలు</CardDescription>
              </CardHeader>
              <CardContent className="p-6 space-y-5 text-muted-foreground">
-                 {/* Use definition list (dl, dt, dd) for semantics */}
                  <dl className="space-y-4">
                      <div className="flex items-start">
-                        <dt className="sr-only">Address</dt> {/* Screen reader only term */}
+                        <dt className="sr-only">Address</dt>
                         <dd className="flex items-start">
-                            <MapPin size={20} className="mr-4 mt-1 text-primary flex-shrink-0" aria-hidden="true" />
+                            <MapPin size={20} className="mr-4 mt-1 text-primary flex-shrink-0" aria-hidden="true" /> {/* Mint icon */}
                             <div>
                                 <span className="font-medium text-foreground block">Our Base</span>
                                 <span>[Your City/Area], Andhra Pradesh</span>
@@ -212,36 +210,38 @@ export default function ContactPage() {
                     <div className="flex items-start">
                         <dt className="sr-only">Phone</dt>
                         <dd className="flex items-center">
-                            <Phone size={18} className="mr-4 text-primary flex-shrink-0" aria-hidden="true" />
+                            <Phone size={18} className="mr-4 text-primary flex-shrink-0" aria-hidden="true" /> {/* Mint icon */}
                             <div>
                                 <span className="font-medium text-foreground block">Call Us</span>
-                                <a href="tel:+91xxxxxxxxxx" className="hover:text-secondary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">[+91 Your Phone Number]</a>
+                                {/* Hover uses primary color */}
+                                <a href="tel:+91xxxxxxxxxx" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">[+91 Your Phone Number]</a>
                             </div>
                         </dd>
                     </div>
                     <div className="flex items-start">
                         <dt className="sr-only">Email</dt>
                         <dd className="flex items-center">
-                            <Mail size={18} className="mr-4 text-primary flex-shrink-0" aria-hidden="true" />
+                            <Mail size={18} className="mr-4 text-primary flex-shrink-0" aria-hidden="true" /> {/* Mint icon */}
                             <div>
                                 <span className="font-medium text-foreground block">Email Us</span>
-                                <a href="mailto:hello@dreamcaptures.com" className="hover:text-secondary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">hello@dreamcaptures.com</a>
+                                {/* Hover uses primary color */}
+                                <a href="mailto:hello@dreamcaptures.com" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">hello@dreamcaptures.com</a>
                             </div>
                         </dd>
                     </div>
                  </dl>
                   {/* Social Links */}
                   <div className="pt-4 border-t border-border/30">
-                     {/* Use h3 for subsection */}
                      <h3 className="font-semibold text-foreground mb-3 text-sm">Connect With Us</h3>
-                     <div className="flex space-x-5" role="group" aria-label="Social Media"> {/* Group social links */}
-                        <Link href="#" aria-label="Facebook" className="text-muted-foreground hover:text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-full p-1">
+                     <div className="flex space-x-5" role="group" aria-label="Social Media">
+                        {/* Hover uses primary color */}
+                        <Link href="#" aria-label="Facebook" className="text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-full p-1">
                             <Facebook size={22}/>
                         </Link>
-                        <Link href="#" aria-label="Instagram" className="text-muted-foreground hover:text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-full p-1">
+                        <Link href="#" aria-label="Instagram" className="text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-full p-1">
                             <Instagram size={22}/>
                         </Link>
-                        <Link href="#" aria-label="YouTube" className="text-muted-foreground hover:text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-full p-1">
+                        <Link href="#" aria-label="YouTube" className="text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-full p-1">
                              <Youtube size={22}/>
                         </Link>
                      </div>
@@ -251,8 +251,8 @@ export default function ContactPage() {
 
           {/* Map Section */}
           <section className="rounded-xl overflow-hidden shadow-lg border border-border/50" aria-labelledby="map-heading">
-              {/* Use h3 for map heading */}
-              <h3 id="map-heading" className="text-xl font-serif font-semibold text-center mb-0 text-foreground px-6 pt-4 bg-muted/30 pb-3 font-noto" lang="te">
+              {/* Muted pastel header */}
+              <h3 id="map-heading" className="text-xl font-serif font-semibold text-center mb-0 text-foreground px-6 pt-4 bg-muted/50 pb-3 font-noto" lang="te">
                 ఇక్కడ మాతో కలవండి
              </h3>
             <MapPlaceholder />
@@ -260,13 +260,12 @@ export default function ContactPage() {
         </aside>
       </div>
 
-       {/* Consultation CTA */}
-        <section className="mt-16 md:mt-24 text-center bg-gradient-to-r from-primary/5 via-accent/5 to-secondary/5 py-12 rounded-lg border border-border/30" aria-labelledby="consultation-heading"> {/* Increased margin */}
-            {/* Use H2 */}
-            <h2 id="consultation-heading" className="text-2xl font-serif font-semibold mb-3">Ready to Book or Discuss?</h2>
+       {/* Consultation CTA - Pastel gradient background */}
+        <section className="mt-16 md:mt-24 text-center bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 py-12 rounded-lg border border-border/30" aria-labelledby="consultation-heading">
+            <h2 id="consultation-heading" className="text-2xl font-serif font-semibold mb-3 text-foreground">Ready to Book or Discuss?</h2>
             <p className="text-muted-foreground mb-6 max-w-lg mx-auto">Schedule a quick call with our team to discuss your photography needs and get a personalized quote.</p>
-            {/* Updated Bilingual CTA Button */}
-            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-md px-8">
+            {/* Updated Bilingual CTA Button - Use Primary (Mint) */}
+            <Button asChild size="lg" variant="default" className="rounded-full shadow-md px-8">
                 <Link href="/booking">మమ్మల్ని బుక్ చేయండి / Book Now</Link>
             </Button>
         </section>

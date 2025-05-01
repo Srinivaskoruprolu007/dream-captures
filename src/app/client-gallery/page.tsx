@@ -22,9 +22,8 @@ export default function ClientGalleryPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    // --- Placeholder Logic ---
     console.log('Attempting login for:', email);
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     toast({
       title: "Login Attempt (Placeholder)",
@@ -32,34 +31,19 @@ export default function ClientGalleryPage() {
       variant: "destructive",
     });
     setIsLoading(false);
-    // --- End Placeholder Logic ---
-
-    /* --- Example Real Logic (with Firebase Auth) ---
-    try {
-      // await signInWithEmailAndPassword(auth, email, password);
-      // router.push(`/client-gallery/${user.uid}`); // Redirect to specific gallery
-    } catch (error) {
-       const errorMessage = error instanceof Error ? error.message : "An unknown error occurred.";
-       toast({ title: "Login Failed", description: `Invalid credentials or error: ${errorMessage}. Please try again.`, variant: "destructive" });
-    } finally {
-      setIsLoading(false);
-    }
-    */
   };
 
   return (
-     // Ensure full height and center content properly
-     <div className="bg-muted/30 min-h-[calc(100dvh-var(--header-height,10rem))] flex items-center justify-center py-16 md:py-24 px-4"> {/* Use dynamic viewport height and variable for header */}
-        {/* Add relative positioning for decorative elements */}
+     // Use theme background and ensure vertical centering
+     <div className="bg-background min-h-[calc(100dvh-var(--header-height,10rem))] flex items-center justify-center py-16 md:py-24 px-4">
        <div className="relative w-full max-w-md">
-          {/* Optional: Decorative Border Element (e.g., Banana Leaf SVG) */}
-           {/* <img src="/path/to/banana-leaf-corner.svg" alt="" className="absolute -top-8 -left-8 w-24 h-auto opacity-50 hidden md:block" aria-hidden="true" /> */}
-           {/* <img src="/path/to/mandala-corner.svg" alt="" className="absolute -bottom-8 -right-8 w-24 h-auto opacity-30 hidden md:block" aria-hidden="true" /> */}
+          {/* Optional: Decorative element with pastel color */}
+           {/* <div className="absolute -top-8 -left-8 w-24 h-24 bg-primary/10 rounded-full opacity-50 hidden md:block blur-lg" aria-hidden="true"></div> */}
+           {/* <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-accent/10 rounded-full opacity-50 hidden md:block blur-lg" aria-hidden="true"></div> */}
 
-          <Card className="w-full border border-secondary/30 shadow-xl rounded-xl overflow-hidden bg-background">
-            <CardHeader className="text-center p-8 bg-gradient-to-br from-secondary/10 via-background to-background">
-              <Lock className="h-12 w-12 mx-auto mb-4 text-secondary" aria-hidden="true" />
-              {/* Use H1 for the main page title */}
+          <Card className="w-full border border-border/50 shadow-xl rounded-xl overflow-hidden bg-card"> {/* Use card bg */}
+            <CardHeader className="text-center p-8 bg-gradient-to-br from-primary/10 via-background to-background"> {/* Mint tint gradient */}
+              <Lock className="h-12 w-12 mx-auto mb-4 text-primary" aria-hidden="true" /> {/* Mint icon */}
               <CardTitle as="h1" className="font-serif text-3xl text-foreground">Client Gallery Access</CardTitle>
               <CardDescription className="pt-2 font-telugu text-muted-foreground" lang="te">
                 మీ ప్రైవేట్ ఫోటో గ్యాలరీని వీక్షించడానికి లాగిన్ చేయండి.
@@ -76,9 +60,9 @@ export default function ClientGalleryPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="bg-background focus:border-secondary"
-                    aria-required="true" // Indicate required field
-                    autoComplete="email" // Assistive technology hint
+                    className="bg-input focus:border-primary" // Use input bg, primary focus
+                    aria-required="true"
+                    autoComplete="email"
                   />
                 </div>
                 <div className="space-y-2">
@@ -90,30 +74,31 @@ export default function ClientGalleryPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="bg-background focus:border-secondary"
-                    aria-required="true" // Indicate required field
-                    autoComplete="current-password" // Assistive technology hint
+                    className="bg-input focus:border-primary" // Use input bg, primary focus
+                    aria-required="true"
+                    autoComplete="current-password"
                   />
-                  {/* Optional: Add a "Forgot Password?" link here */}
-                   <div className="text-right text-xs pt-1"> {/* Added padding top */}
-                    <Link href="/forgot-password" className="text-muted-foreground hover:text-secondary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Forgot Password?</Link>
+                   <div className="text-right text-xs pt-1">
+                     {/* Use primary color for link */}
+                    <Link href="/forgot-password" className="text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Forgot Password?</Link>
                    </div>
                 </div>
+                {/* Login Button - Use Primary (Mint) */}
                 <Button
                     type="submit"
                     className={cn(
-                        "w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-base py-3 rounded-lg shadow-md flex items-center justify-center gap-2",
-                        isLoading && "opacity-75 cursor-wait" // Use cursor-wait for loading
+                        "w-full bg-primary hover:opacity-90 text-primary-foreground text-base py-3 rounded-lg shadow-md flex items-center justify-center gap-2",
+                        isLoading && "opacity-75 cursor-wait"
                     )}
                     disabled={isLoading}
-                    aria-live="polite" // Announce loading state changes
-                    aria-busy={isLoading} // Indicate busy state
+                    aria-live="polite"
+                    aria-busy={isLoading}
                     >
                   {isLoading ? (
                     <>
                       <span className="animate-spin inline-block h-4 w-4 border-2 border-current border-t-transparent rounded-full" role="status" aria-hidden="true"></span>
-                      <span aria-hidden="true">Logging In...</span> {/* Hide text visually, keep for screen readers if needed */}
-                      <span className="sr-only">Processing login request</span> {/* Screen reader only text */}
+                      <span aria-hidden="true">Logging In...</span>
+                      <span className="sr-only">Processing login request</span>
                     </>
                   ) : (
                      <>
@@ -122,7 +107,8 @@ export default function ClientGalleryPage() {
                   )}
                 </Button>
                  <p className="text-xs text-center text-muted-foreground pt-3">
-                  Having trouble? <Link href="/contact" className="text-secondary hover:underline font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Contact Support</Link>. <span className="font-telugu" lang="te">(సహాయం కావాలా? మమ్మల్ని సంప్రదించండి.)</span>
+                   {/* Use primary color for link */}
+                  Having trouble? <Link href="/contact" className="text-primary hover:underline font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Contact Support</Link>. <span className="font-telugu" lang="te">(సహాయం కావాలా? మమ్మల్ని సంప్రదించండి.)</span>
                 </p>
               </form>
             </CardContent>

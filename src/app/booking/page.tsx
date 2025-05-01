@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react'; // Import useEffect
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,28 +11,28 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 import { CalendarCheck, Send } from 'lucide-react';
+import { cn } from '@/lib/utils'; // Import cn
 
 export default function BookingPage() {
   const { toast } = useToast();
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined); // Initialize as undefined
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     serviceType: '',
-    eventDate: '', // Initialize empty, update on select
+    eventDate: '',
     details: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isClient, setIsClient] = useState(false); // State to track client-side mount
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); // Set to true once component mounts
-    // Set initial date only on client side to avoid hydration mismatch
+    setIsClient(true);
     const today = new Date();
     setSelectedDate(today);
     setFormData(prev => ({ ...prev, eventDate: format(today, "PPP") }));
-  }, []); // Empty dependency array ensures this runs only once on mount
+  }, []);
 
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedDate(date);
@@ -58,10 +58,8 @@ export default function BookingPage() {
     const submissionData = { ...formData, eventDate: selectedDate ? format(selectedDate, "PPP") : '' };
 
     console.log('Booking inquiry submitted:', submissionData);
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    // Reset form - keep selected date maybe? Or reset fully.
     const today = new Date();
     setSelectedDate(today);
     setFormData({ name: '', email: '', phone: '', serviceType: '', eventDate: format(today, "PPP") , details: '' });
@@ -75,9 +73,9 @@ export default function BookingPage() {
 
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
-        <header className="text-center mb-16"> {/* Use header */}
-            <CalendarCheck className="h-12 w-12 mx-auto text-secondary mb-4" aria-hidden="true" />
+    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 bg-background"> {/* Use theme background */}
+        <header className="text-center mb-16">
+            <CalendarCheck className="h-12 w-12 mx-auto text-primary mb-4" aria-hidden="true" /> {/* Mint icon */}
             <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-foreground">
                 Book Your Session
             </h1>
@@ -87,25 +85,26 @@ export default function BookingPage() {
             </p>
        </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 items-start"> {/* Use lg breakpoint */}
-        {/* Calendar - Enhanced Styling & Accessibility */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 items-start">
+        {/* Calendar - Pastel Styling */}
         <div className="lg:col-span-1 flex justify-center lg:justify-start">
-           {/* Wrap Calendar in Card for better styling control */}
-           <Card className="border border-border/50 shadow-lg rounded-xl overflow-hidden w-full max-w-sm lg:max-w-none">
-                {/* Conditional rendering to avoid hydration mismatch */}
+           <Card className="border border-border/50 shadow-lg rounded-xl overflow-hidden w-full max-w-sm lg:max-w-none bg-card"> {/* Use card bg */}
                 {isClient ? (
                     <Calendar
                         mode="single"
                         selected={selectedDate}
                         onSelect={handleDateSelect}
-                        className="p-0 border-none [&_button]:rounded-md [&>[data-selected]]:bg-secondary [&>[data-selected]]:text-secondary-foreground [&>[data-today]]:bg-accent/20 [&>[data-today]]:text-accent-foreground" // Shadcn calendar styling
-                        // Disable past dates - ensure date logic is robust
+                        // Use pastel colors for calendar: primary (Mint) for selected, accent (Pink) for today
+                        className={cn(
+                            "p-0 border-none [&_button]:rounded-md",
+                            "[&>[data-selected]]:bg-primary [&>[data-selected]]:text-primary-foreground", // Mint selected
+                            "[&>[data-today]]:bg-accent/20 [&>[data-today]]:text-accent-foreground" // Pink today
+                        )}
                         disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
-                        initialFocus // Improve keyboard navigation
-                        footer={<p className="text-center text-sm text-muted-foreground p-2">Select your preferred date.</p>} // Add footer for context
+                        initialFocus
+                        footer={<p className="text-center text-sm text-muted-foreground p-2">Select your preferred date.</p>}
                     />
                 ) : (
-                    // Render a placeholder or loading state on the server
                     <div className="p-4 text-center text-muted-foreground">Loading Calendar...</div>
                 )}
            </Card>
@@ -113,38 +112,36 @@ export default function BookingPage() {
 
         {/* Inquiry Form */}
         <div className="lg:col-span-2">
-          <Card className="border border-border/50 shadow-lg rounded-xl overflow-hidden">
-            <CardHeader className="bg-muted/30 p-6">
-              <CardTitle className="font-serif text-2xl">Inquiry Details</CardTitle>
-               <CardDescription className="font-telugu" lang="te">విచారణ వివరాలు</CardDescription>
+          <Card className="border border-border/50 shadow-lg rounded-xl overflow-hidden bg-card"> {/* Use card bg */}
+            <CardHeader className="bg-muted/50 p-6"> {/* Muted pastel header */}
+              <CardTitle className="font-serif text-2xl text-foreground">Inquiry Details</CardTitle>
+               <CardDescription className="font-telugu text-muted-foreground" lang="te">విచారణ వివరాలు</CardDescription>
             </CardHeader>
             <CardContent className="p-6 md:p-8">
-              {/* Add status role for screen readers */}
               <form onSubmit={handleSubmit} className="space-y-6" aria-live="polite">
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                    <div className="space-y-2">
-                     {/* Link label to input */}
                      <Label htmlFor="name" className="font-medium">Name <span className="font-telugu" lang="te">(పేరు)</span></Label>
-                     <Input id="name" name="name" type="text" placeholder="Your Full Name / మీ పూర్తి పేరు" value={formData.name} onChange={handleChange} required className="bg-background focus:border-secondary" aria-required="true" autoComplete="name" />
+                     <Input id="name" name="name" type="text" placeholder="Your Full Name / మీ పూర్తి పేరు" value={formData.name} onChange={handleChange} required className="bg-input focus:border-primary" aria-required="true" autoComplete="name" /> {/* Use input bg, primary focus */}
                    </div>
                    <div className="space-y-2">
                      <Label htmlFor="email" className="font-medium">Email <span className="font-telugu" lang="te">(ఇమెయిల్)</span></Label>
-                     <Input id="email" name="email" type="email" placeholder="your.email@example.com" value={formData.email} onChange={handleChange} required className="bg-background focus:border-secondary" aria-required="true" autoComplete="email" />
+                     <Input id="email" name="email" type="email" placeholder="your.email@example.com" value={formData.email} onChange={handleChange} required className="bg-input focus:border-primary" aria-required="true" autoComplete="email" />
                    </div>
                  </div>
 
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                    <div className="space-y-2">
                      <Label htmlFor="phone" className="font-medium">Phone <span className="font-telugu" lang="te">(ఫోన్)</span> <span className="text-muted-foreground text-xs">(Optional)</span></Label>
-                     <Input id="phone" name="phone" type="tel" placeholder="+91 Your Number" value={formData.phone} onChange={handleChange} className="bg-background focus:border-secondary" autoComplete="tel" />
+                     <Input id="phone" name="phone" type="tel" placeholder="+91 Your Number" value={formData.phone} onChange={handleChange} className="bg-input focus:border-primary" autoComplete="tel" />
                    </div>
                    <div className="space-y-2">
                      <Label htmlFor="serviceType" className="font-medium">Event Type <span className="font-telugu" lang="te">(ఈవెంట్ పేరు)</span></Label>
                      <Select name="serviceType" onValueChange={handleSelectChange} value={formData.serviceType} required>
-                       <SelectTrigger id="serviceType" className="bg-background focus:border-secondary text-left w-full" aria-required="true">
+                       <SelectTrigger id="serviceType" className="bg-input focus:border-primary text-left w-full" aria-required="true"> {/* Use input bg, primary focus */}
                          <SelectValue placeholder="Select Event Type / ఈవెంట్ పేరు ఎంచుకోండి" />
                        </SelectTrigger>
-                       <SelectContent>
+                       <SelectContent> {/* Uses pastel theme from ui/select */}
                          <SelectItem value="Wedding">Wedding <span className="font-telugu" lang="te">(పెళ్లి)</span></SelectItem>
                          <SelectItem value="Engagement">Engagement <span className="font-telugu" lang="te">(ఎంగేజ్‌మెంట్)</span></SelectItem>
                          <SelectItem value="Pre-Wedding">Pre-Wedding Shoot <span className="font-telugu" lang="te">(ప్రీ-వెడ్డింగ్)</span></SelectItem>
@@ -166,9 +163,9 @@ export default function BookingPage() {
                     type="text"
                     value={formData.eventDate}
                     readOnly
-                    className="bg-muted cursor-default focus:border-secondary"
+                    className="bg-muted cursor-default focus:border-primary" // Muted bg, primary focus
                     placeholder="Select date from calendar"
-                    aria-label="Selected event date (read-only)" // ARIA label for read-only field
+                    aria-label="Selected event date (read-only)"
                   />
                 </div>
 
@@ -181,12 +178,13 @@ export default function BookingPage() {
                     rows={4}
                     value={formData.details}
                     onChange={handleChange}
-                    className="bg-background focus:border-secondary"
+                    className="bg-input focus:border-primary" // Use input bg, primary focus
                     aria-label="Additional details about your event"
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-base py-3 rounded-lg shadow-md" disabled={isSubmitting}>
+                {/* Submit Button - Use Primary (Mint) */}
+                <Button type="submit" className="w-full bg-primary hover:opacity-90 text-primary-foreground text-base py-3 rounded-lg shadow-md" disabled={isSubmitting}>
                   <Send size={18} className="mr-2" aria-hidden="true"/>
                   {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
                 </Button>

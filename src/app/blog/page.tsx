@@ -54,8 +54,8 @@ const blogPosts = [
 
 export default function BlogPage() {
   return (
-    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
-       <header className="text-center mb-16"> {/* Use header for semantic structure */}
+    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 bg-background"> {/* Use theme background */}
+       <header className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-foreground">
             From the Dream Captures Blog
           </h1>
@@ -65,32 +65,29 @@ export default function BlogPage() {
           </p>
        </header>
 
-      {/* Use UL for the list of blog posts */}
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts.map((post) => (
-          // Wrap each post in an LI
           <li key={post.id}>
-            {/* Use article tag for each blog post */}
+            {/* Use theme card style */}
             <article className="flex flex-col h-full overflow-hidden border border-border/50 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl bg-card transform hover:-translate-y-1">
-              {/* Image Link */}
               <Link href={`/blog/${post.slug}`} className="block relative aspect-video overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-t-xl" aria-label={`Read more about ${post.title}`}>
                 <Image
                   src={post.imageUrl}
-                  alt="" // Alt text handled by the link's aria-label
+                  alt="" // Alt handled by the link's aria-label
                   layout="fill"
                   objectFit="cover"
                   className="transition-transform duration-500 group-hover:scale-110 group-focus-visible:scale-110"
                   data-ai-hint={post.dataAiHint}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" // Optimize image sizes
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                 {/* Category Tag - consider moving outside the link if it's just decorative */}
+                 {/* Category Tag - Use Secondary (Ice Blue) */}
                   <span className="absolute top-3 right-3 bg-secondary/90 text-secondary-foreground text-xs px-2.5 py-1 rounded-full shadow font-medium flex items-center gap-1 z-10">
                       <Tag size={12} aria-hidden="true" /> {post.category}
                   </span>
               </Link>
               {/* Content */}
-              <div className="flex flex-col flex-grow p-5"> {/* Use flex-grow */}
-                  {/* Meta Info first */}
+              <div className="flex flex-col flex-grow p-5">
+                  {/* Meta Info - Use Primary (Mint) for icons */}
                   <div className="flex items-center space-x-4 text-xs text-muted-foreground mb-3">
                     <div className="flex items-center">
                       <User size={14} className="mr-1.5 text-primary shrink-0" aria-hidden="true" />
@@ -98,20 +95,19 @@ export default function BlogPage() {
                     </div>
                     <div className="flex items-center">
                       <Calendar size={14} className="mr-1.5 text-primary shrink-0" aria-hidden="true" />
-                       {/* Use time tag for semantic date */}
                        <time dateTime={new Date(post.date).toISOString()}>{post.date}</time>
                     </div>
                   </div>
-                 {/* Use H2 for post title */}
                  <h2 className="font-serif text-xl leading-snug mb-2 flex-grow">
-                    <Link href={`/blog/${post.slug}`} className="text-foreground hover:text-secondary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">
+                     {/* Link uses primary color */}
+                    <Link href={`/blog/${post.slug}`} className="text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">
                     {post.title}
                     </Link>
                  </h2>
-                <CardDescription className="text-sm leading-relaxed mb-4">{post.excerpt}</CardDescription> {/* Add margin bottom */}
-                {/* Read More Button */}
-                <div className="mt-auto"> {/* Push button to bottom */}
-                    <Button asChild variant="link" className="p-0 h-auto text-secondary hover:text-accent font-semibold group">
+                <CardDescription className="text-sm leading-relaxed mb-4">{post.excerpt}</CardDescription>
+                {/* Read More Button - Use Primary (Mint) */}
+                <div className="mt-auto">
+                    <Button asChild variant="link" className="p-0 h-auto text-primary hover:text-accent font-semibold group">
                         <Link href={`/blog/${post.slug}`}>
                         Read More <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />
                         </Link>
@@ -124,7 +120,6 @@ export default function BlogPage() {
       </ul>
 
        {/* TODO: Add Pagination component if there are many posts */}
-       {/* Consider using nav > ol > li structure for pagination for accessibility */}
        {/* <nav aria-label="Blog Pagination" className="mt-16 flex justify-center">
             <ol className="flex space-x-2">
                 <li><Button variant="outline">Previous</Button></li>
