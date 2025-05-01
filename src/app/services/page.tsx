@@ -1,68 +1,69 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { CheckCircle, Package, Sparkles, Camera, Users, PartyPopper, Mountain, Video, Rings, Flower, Bell } from 'lucide-react'; // Added more relevant pastel icons
+import { CheckCircle, Package, Sparkles, Camera, Users, PartyPopper, Mountain, Video, Gem, Bell, Flower } from 'lucide-react'; // Replaced Rings with Gem, imported Camera
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
-// Updated service packages with pastel theme colors
+// Updated service packages with cultural names and themes
 const servicePackages = [
   {
-    id: 'weddings-premium',
+    id: 'pelli-pandiri-super',
     title: 'పెళ్లి పందిరి సూపర్', // Premium Wedding
     category: 'Weddings',
     price: '₹1,50,000+',
-    features: ['Full Day Coverage (10-12 Hrs)', '2 Photographers + 1 Cinematographer', 'Pre-Wedding Shoot Included', 'Luxury Album (e.g., Kalankari Cover)', 'Drone Shots*', 'Online Gallery'],
-    icon: Rings, // Wedding Rings icon
-    themeColor: 'accent' // Powder Pink
+    features: ['Full Day Coverage (10-12 Hrs)', '2 Photographers + 1 Cinematographer', 'Pre-Wedding Shoot Included', 'Luxury Album (e.g., Kalamkari Cover)', 'Drone Shots*', 'Online Gallery'],
+    icon: Gem, // Use Gem icon
+    themeColor: 'secondary' // Maroon theme
   },
   {
-    id: 'weddings-standard',
+    id: 'aalaya-ghanata',
     title: 'ఆలయ ఘనత', // Standard Wedding
     category: 'Weddings',
     price: '₹90,000+',
     features: ['8 Hours Coverage', '1 Photographer + 1 Cinematographer', 'Key Ceremonies (Haldi/Engagement)', 'Standard Album', 'Online Gallery'],
     icon: Bell, // Temple Bell icon
-    themeColor: 'primary' // Mint Green
+    themeColor: 'accent' // Teal theme
   },
    {
-    id: 'outdoor-shoots',
+    id: 'prakriti-odilo',
     title: 'ప్రకృతి ఒడిలో', // In Nature's Lap (Outdoor)
     category: 'Outdoor',
     price: '₹40,000+',
     features: ['4-6 Hour Session', '1 Photographer', 'Scenic Location Shoot (e.g., Araku)', 'Online Gallery', 'Outfit Changes'],
-    icon: Flower, // Flower icon
-    themeColor: 'lavender' // Soft Lavender
+    icon: Camera, // Represents photography focus
+    themeColor: 'accent' // Gold theme
   },
   {
-    id: 'events-parties',
+    id: 'veduka-special',
     title: 'వేడుక స్పెషల్', // Event Special (Parties)
     category: 'Parties',
     price: '₹35,000+',
     features: ['3-4 Hours Coverage', '1 Photographer', 'Birthdays, Anniversaries, Small Events', 'Candid & Group Shots', 'Online Gallery'],
     icon: PartyPopper,
-    themeColor: 'secondary' // Ice Blue
+    themeColor: 'primary' // Muted Sand/Beige theme
   },
    {
-    id: 'model-shoots',
+    id: 'fashion-focus',
     title: 'ఫ్యాషన్ ఫోకస్', // Fashion Focus (Model Shoots)
     category: 'Model Shoots',
     price: 'Contact Us',
     features: ['Portfolio Building', 'Fashion & Lifestyle Clicks', 'Studio or Outdoor Options', 'Professional Editing', 'Usage Rights Discussion'],
     icon: Camera,
-    themeColor: 'muted' // Muted Grey/Beige
+    themeColor: 'muted' // Muted Grey
   },
    {
-    id: 'reels-edits',
+    id: 'cinematic-touch',
     title: 'సినిమాటిక్ టచ్', // Cinematic Touch (Reels/Edits)
     category: 'Reels & Edits',
     price: 'Starting ₹15,000',
     features: ['Instagram Reel Creation', 'Cinematic Highlights Video', 'Short Films for Events', 'Advanced Editing & Color Grading', 'Music Licensing'],
     icon: Video,
-    themeColor: 'primary' // Mint Green again for variation
+    themeColor: 'accent' // Teal theme again
   },
 ];
 
+// Add-ons with Telugu names
 const addOns = [
   { title: 'కలంకారి ఆర్ట్ ఫోటో ఆల్బమ్', description: 'Bespoke album with traditional Andhra art covers.' },
   { title: 'డ్రోన్ ఏరియల్ ఫోటోగ్రఫీ/వీడియోగ్రఫీ', description: 'Breathtaking aerial views for weddings or outdoor shoots.' },
@@ -82,37 +83,45 @@ const faqs = [
 ];
 
 export default function ServicesPage() {
-  // Helper function to get theme classes based on pastel palette
+  // Helper function to get theme classes based on the new palette
   const getThemeClasses = (themeColor: string) => {
-     const baseColors = ['primary', 'secondary', 'accent', 'lavender', 'muted'];
+     const baseColors = ['primary', 'secondary', 'accent', 'muted', 'gold']; // Added gold
      if (baseColors.includes(themeColor)) {
-        // Adjust hover based on theme color lightness
-        const hoverOpacity = ['primary', 'secondary', 'accent', 'lavender'].includes(themeColor) ? 'hover:opacity-90' : 'hover:bg-muted/80';
+        const hoverOpacity = ['primary', 'secondary', 'accent', 'gold'].includes(themeColor) ? 'hover:opacity-90' : 'hover:bg-muted/80';
         return {
            border: `border-${themeColor}/30`,
-           headerBg: `bg-${themeColor}/10`, // Use light tint for header
+           headerBg: `bg-${themeColor}/10`,
            iconBg: `bg-${themeColor}`,
            iconText: `text-${themeColor}-foreground`,
-           priceText: `text-${themeColor}`, // Use the direct color for price
-           checkColor: `text-${themeColor}`, // Use direct color for checkmark
+           priceText: `text-${themeColor}`,
+           checkColor: `text-${themeColor}`,
            buttonBg: `bg-${themeColor}`,
            buttonHover: hoverOpacity,
            buttonText: `text-${themeColor}-foreground`,
-           titleText: `text-${themeColor}`, // Use direct color for title if needed
+           titleText: `text-${themeColor}`,
+           // Add gradient support
+           gradientFrom: `from-${themeColor}/10`,
+           gradientTo: themeColor === 'primary' ? 'to-yellow-100' : `to-accent/10`, // Example gradient logic
+           iconGradientFrom: `from-${themeColor}`,
+           iconGradientTo: themeColor === 'secondary' ? 'to-yellow-600' : `to-teal-600`, // Example icon gradient
         };
      }
-     // Fallback for unexpected values (shouldn't happen with current setup)
+     // Fallback
      return {
        border: 'border-border/30',
        headerBg: 'bg-muted/10',
        iconBg: 'bg-muted',
        iconText: 'text-muted-foreground',
        priceText: 'text-muted-foreground',
-       checkColor: 'text-primary', // Default to primary
+       checkColor: 'text-primary',
        buttonBg: 'bg-primary',
        buttonHover: 'hover:opacity-90',
        buttonText: 'text-primary-foreground',
        titleText: 'text-foreground',
+       gradientFrom: 'from-transparent',
+       gradientTo: 'to-transparent',
+       iconGradientFrom: 'from-muted',
+       iconGradientTo: 'to-muted',
      };
    };
 
@@ -134,12 +143,12 @@ export default function ServicesPage() {
               const theme = getThemeClasses(pkg.themeColor);
               return (
                 <li key={pkg.id} className="h-full">
+                    {/* Use Card component with theme border and background */}
                     <Card className={cn(`flex flex-col h-full border shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden bg-card transform hover:-translate-y-2`, theme.border)}>
-                    <CardHeader className={cn(`text-center p-6 border-b`, theme.headerBg, theme.border)}>
-                        <div className={cn(`mx-auto h-16 w-16 flex items-center justify-center rounded-full mb-4 shadow-md shrink-0`, theme.iconBg, theme.iconText)} aria-hidden="true">
+                    <CardHeader className={cn(`text-center p-6 border-b bg-gradient-to-br`, theme.gradientFrom, theme.gradientTo, theme.border)}>
+                        <div className={cn(`mx-auto h-16 w-16 flex items-center justify-center rounded-full mb-4 shadow-md shrink-0 bg-gradient-to-br`, theme.iconGradientFrom, theme.iconGradientTo, theme.iconText)} aria-hidden="true">
                             <pkg.icon className="h-8 w-8" />
                         </div>
-                        {/* Use specific theme color for title */}
                         <CardTitle as="h3" className={cn(`text-xl font-serif font-noto`, theme.titleText || 'text-foreground')} lang="te">{pkg.title}</CardTitle>
                         <CardDescription className={cn(`font-semibold text-lg`, theme.priceText)}>{pkg.price}</CardDescription>
                     </CardHeader>
@@ -147,23 +156,23 @@ export default function ServicesPage() {
                         <ul className="space-y-3 text-sm text-muted-foreground">
                         {pkg.features.map((feature) => (
                             <li key={feature} className="flex items-start">
-                            {/* Use theme color for checkmark */}
                             <CheckCircle size={16} className={cn(`mr-2 mt-0.5 flex-shrink-0`, theme.checkColor)} aria-hidden="true" />
                             <span>{feature}</span>
                             </li>
                         ))}
                         </ul>
+                        {/* Pricing Flexibility Note */}
                         <div className="text-xs text-center text-muted-foreground mt-4 pt-3 border-t border-border/30 space-y-1">
                             <p className="font-noto" lang="te">
                                 ధరలు మాట్లాడుకోవచ్చు. మీ బడ్జెట్ ప్రకారం మేము సెట్ చేస్తాం.
                             </p>
                             <p>
-                                (Pricing is flexible based on your needs.)
+                                (Pricing is negotiable based on your budget.)
                             </p>
                         </div>
                     </CardContent>
                     <div className="p-6 pt-0 mt-auto">
-                        {/* Use specific button theme */}
+                        {/* Button uses theme colors */}
                         <Button asChild className={cn(`w-full mt-4`, theme.buttonBg, theme.buttonHover, theme.buttonText)}>
                         <Link href={`/contact?service=${pkg.id}`}>Inquire Now</Link>
                         </Button>
@@ -174,21 +183,20 @@ export default function ServicesPage() {
           })}
         </ul>
          <p className="text-center text-sm text-muted-foreground mt-10">
-            {/* Link uses accent color */}
+            {/* Link uses accent color (Teal) */}
             Looking for something specific? <Link href="/contact?custom=true" className="text-accent hover:opacity-80 font-semibold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Request a Custom Quote!</Link>
           </p>
       </section>
 
-      {/* Add-ons Section - Muted pastel background */}
+      {/* Add-ons Section - Muted background */}
       <section id="addons" className="mb-16 md:mb-20 scroll-mt-20 bg-muted/50 py-16 rounded-lg border border-border/30 shadow-inner" aria-labelledby="addons-heading">
         <h2 id="addons-heading" className="text-3xl font-serif font-semibold text-center mb-4 text-foreground">Enhance Your Package</h2>
          <p className="font-noto text-center text-muted-foreground mb-10 -mt-2" lang="te">ప్రత్యేక యాడ్-ఆన్‌లు</p>
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto px-4">
           {addOns.map((addOn) => (
             <li key={addOn.title}>
-                {/* Use card background for add-on items */}
                 <div className="flex items-start h-full p-4 bg-card rounded-lg shadow border border-border/50 transition-transform duration-300 hover:scale-105">
-                 {/* Use accent color for Sparkles */}
+                 {/* Use accent color (Teal) for Sparkles */}
                 <Sparkles size={24} className="text-accent mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
                 <div>
                     <h4 className="font-semibold text-foreground mb-1 font-noto" lang="te">{addOn.title}</h4>
@@ -199,7 +207,7 @@ export default function ServicesPage() {
           ))}
         </ul>
          <div className="text-center mt-8">
-             {/* Link uses primary color */}
+             {/* Link uses primary color (Maroon) */}
             <Link href="/contact?addons=true" className="text-primary hover:text-accent text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">See All Add-on Details &rarr;</Link>
           </div>
       </section>
@@ -208,11 +216,10 @@ export default function ServicesPage() {
       <section id="faq" className="scroll-mt-20" aria-labelledby="faq-heading">
         <h2 id="faq-heading" className="text-3xl font-serif font-semibold text-center mb-4 text-foreground">Frequently Asked Questions</h2>
          <p className="font-noto text-center text-muted-foreground mb-10 -mt-2" lang="te">తరచుగా అడిగే ప్రశ్నలు</p>
-         {/* Accordion uses card background */}
         <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto bg-card p-4 rounded-lg shadow border border-border/50">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`} className="border-b last:border-b-0 border-border/50">
-              {/* Hover uses secondary color */}
+              {/* Hover uses secondary color (Maroon) */}
               <AccordionTrigger className="text-left font-semibold text-base hover:text-secondary py-4 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">
                 <h3>{faq.question}</h3>
               </AccordionTrigger>
@@ -228,7 +235,7 @@ export default function ServicesPage() {
         <section className="text-center mt-16 md:mt-20" aria-labelledby="final-cta-services-heading">
            <h2 id="final-cta-services-heading" className="text-2xl font-serif font-semibold mb-4 text-foreground">Let's Capture Your Story</h2>
            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">Connect with our team to discuss your event and how we can bring your vision to life.</p>
-           {/* Button uses Accent (Pink) */}
+           {/* Button uses Accent (Teal) */}
             <Button asChild size="lg" variant="accent" className="rounded-full px-10 py-3 shadow-lg transition-transform duration-300 hover:scale-105">
              <Link href="/booking">మమ్మల్ని బుక్ చేయండి / Book Now</Link>
            </Button>
