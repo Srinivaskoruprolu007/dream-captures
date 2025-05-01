@@ -28,12 +28,14 @@ const notoSansTelugu = Noto_Sans_Telugu({
   display: 'swap',
 });
 
+// Use Baloo Tamma 2 for stylistic Telugu headings/taglines
 const balooTamma2 = Baloo_Tamma_2({
   subsets: ['telugu'],
   variable: '--font-baloo-tamma-2',
-  weight: ['400', '700'],
+  weight: ['400', '700'], // Include needed weights
   display: 'swap',
 });
+
 
 export const metadata: Metadata = {
   title: 'Dream Captures | Young Photographers in Andhra Pradesh',
@@ -46,14 +48,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // Add lang="en" for accessibility
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
-          playfairDisplay.variable,
-          lato.variable,
-          notoSansTelugu.variable,
-          balooTamma2.variable
+           playfairDisplay.variable, // Serif for English Headings
+           lato.variable, // Sans-serif for English Body
+           notoSansTelugu.variable, // Default Telugu font
+           balooTamma2.variable // Stylistic Telugu font
         )}
       >
         {/* Wrap with ThemeProvider */}
@@ -63,9 +66,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col">
+          <div className="relative flex min-h-dvh flex-col bg-background"> {/* Use min-h-dvh and bg-background */}
             <Header />
-            <main className="flex-1">{children}</main>
+            {/* Ensure main content area is focusable for keyboard navigation */}
+            {/* Use flex-1 to push footer down */}
+            <main className="flex-1 focus:outline-none" tabIndex={-1}>
+              {children}
+            </main>
             <Footer />
           </div>
            <Toaster />

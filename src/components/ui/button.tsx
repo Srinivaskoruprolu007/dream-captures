@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
   // Base styles: focus ring, disabled state, active scale, hover brightness
+  // Ensure consistent focus-visible styles across all variants
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] hover:brightness-105 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
@@ -15,7 +16,7 @@ const buttonVariants = cva(
         outline: "border border-input bg-background hover:bg-accent/10 hover:text-accent-foreground shadow-sm", // Subtle accent hover for outline
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm", // Maroon
         ghost: "hover:bg-accent/10 hover:text-accent-foreground", // Subtle accent hover for ghost
-        link: "text-primary underline-offset-4 hover:underline hover:text-secondary", // Link hover to secondary (Maroon)
+        link: "text-primary underline-offset-4 hover:underline hover:text-secondary", // Link hover to secondary (Maroon), focus ring adjusted for links
         accent: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-md border border-accent-foreground/10", // Gold Accent Button
       },
       size: {
@@ -43,7 +44,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          // Specific focus adjustment for link variant to avoid overlapping underline
+          variant === 'link' && 'focus-visible:ring-offset-0 focus-visible:ring-1'
+          )}
         ref={ref}
         {...props}
       />
