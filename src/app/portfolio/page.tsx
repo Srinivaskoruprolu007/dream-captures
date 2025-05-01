@@ -365,7 +365,7 @@ export default function PortfolioPage() {
           </Tabs>
         </TabsContent>
 
-        <TabsContent value="videos" className="mt-0">
+        <TabsContent value="videos" className="mt-4">
           <VideoGallery />
         </TabsContent>
       </Tabs>
