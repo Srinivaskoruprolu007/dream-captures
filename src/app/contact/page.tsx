@@ -21,7 +21,7 @@ const MapPlaceholder = () => (
     <div className="text-center p-4"> {/* Add padding */}
         <MapPin className="mx-auto h-10 w-10 md:h-12 md:w-12 text-muted-foreground/50 mb-2" aria-hidden="true"/>
         <p className="font-semibold">Google Map Integration</p>
-        <p className="text-xs">(Map loading for [Our Base Location]...)</p>
+        <p className="text-xs font-noto" lang="te">(ఇక్కడ మాతో కలవండి)</p>
     </div>
   </div>
 );
@@ -262,11 +262,11 @@ export default function ContactPage() {
 
        {/* Consultation CTA */}
         <section className="mt-16 md:mt-24 text-center bg-gradient-to-r from-primary/5 via-accent/5 to-secondary/5 py-12 rounded-lg border border-border/30" aria-labelledby="consultation-heading"> {/* Increased margin */}
-            {/* Use h2 for section heading */}
+            {/* Use H2 */}
             <h2 id="consultation-heading" className="text-2xl font-serif font-semibold mb-3">Ready to Book or Discuss?</h2>
             <p className="text-muted-foreground mb-6 max-w-lg mx-auto">Schedule a quick call with our team to discuss your photography needs and get a personalized quote.</p>
             {/* Updated Bilingual CTA Button */}
-            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-md px-8"> {/* Adjust padding */}
+            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-md px-8">
                 <Link href="/booking">మమ్మల్ని బుక్ చేయండి / Book Now</Link>
             </Button>
         </section>
