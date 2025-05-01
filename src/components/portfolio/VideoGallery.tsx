@@ -1,39 +1,62 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogClose,
+  DialogTitle,
+  DialogDescription,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { X, Share2, Instagram } from "lucide-react";
+import { X, Share2, Instagram, PlayCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Sample video data - Replace with your actual video content
+// Sample video data remains the same
 const allVideoItems = [
-  {
+    {
     id: 1,
-    title: "Wedding Highlights",
-    titleTelugu: "పెళ్లి హైలైట్స్",
+    title: "Vibrant Wedding Highlights Reel",
+    titleTelugu: "కలర్‌ఫుల్ పెళ్లి హైలైట్స్",
     category: "Weddings",
     thumbnailUrl: "https://picsum.photos/seed/video1/800/450",
-    videoUrl: "https://example.com/video1.mp4",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
     duration: "2:30",
-    location: "Hyderabad",
+    location: "Hyderabad Convention Center",
+    dataAiHint: "wedding highlights cinematic couple",
   },
   {
     id: 2,
-    title: "Pre-Wedding Story",
-    titleTelugu: "ప్రీ వెడ్డింగ్ స్టోరీ",
+    title: "Araku Valley Pre-Wedding Story",
+    titleTelugu: "అరకులోయ ప్రీ-వెడ్డింగ్ కథ",
     category: "Pre-Wedding",
     thumbnailUrl: "https://picsum.photos/seed/video2/800/450",
-    videoUrl: "https://example.com/video2.mp4",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
     duration: "3:45",
-    location: "Vizag Beach",
+    location: "Araku Valley, Andhra Pradesh",
+    dataAiHint: "prewedding cinematic couple nature",
+  },
+   {
+    id: 3,
+    title: "Grand Engagement Ceremony Film",
+    titleTelugu: "ఘనమైన ఎంగేజ్‌మెంట్ వేడుక",
+    category: "Events",
+    thumbnailUrl: "https://picsum.photos/seed/video3/800/450",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    duration: "5:10",
+    location: "Vijayawada Function Hall",
+    dataAiHint: "engagement ceremony event cinematic",
   },
   // Add more video items as needed
 ];
 
-const categories = ["All", "Weddings", "Pre-Wedding", "Events", "Short Films"];
+// Categories adjusted for videos
+const categories = ["All", "Weddings", "Pre-Wedding", "Events"];
 
 export function VideoGallery() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -47,33 +70,39 @@ export function VideoGallery() {
       : allVideoItems.filter((video) => video.category === selectedCategory);
 
   const handleShare = (video: (typeof allVideoItems)[0]) => {
-    if (navigator.share) {
+     if (navigator.share) {
       navigator
         .share({
-          title: video.title,
-          text: `Check out this video by Dream Captures: ${video.title}`,
+          title: `Dream Captures: ${video.title}`,
+          text: `Check out this video by Dream Captures!`,
           url: window.location.href,
         })
-        .catch(console.error);
+        .catch((error) => console.error("Error sharing:", error));
     } else {
-      alert("Share functionality not available on this browser.");
+       navigator.clipboard.writeText(window.location.href)
+         .then(() => alert("Link copied to clipboard! Share functionality not available."))
+         .catch(() => alert("Share functionality not available on this browser."));
     }
   };
 
   return (
     <div className="space-y-8">
-      {/* Filter Tabs */}
+      {/* Filter Tabs - Pastel Theme */}
       <Tabs
         defaultValue="All"
+        value={selectedCategory}
         onValueChange={setSelectedCategory}
         className="flex justify-center"
+        aria-label="Filter video categories"
       >
-        <TabsList className="bg-muted p-1 rounded-full shadow-inner">
+        {/* Use muted pastel for TabsList background */}
+        <TabsList className="bg-muted/70 p-1 rounded-full shadow-inner flex flex-wrap gap-1 justify-center">
           {categories.map((category) => (
             <TabsTrigger
               key={category}
               value={category}
-              className="px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300"
+              // Use Secondary (Ice Blue) for active state
+              className="px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground data-[state=active]:shadow-md hover:text-primary focus-visible:ring-offset-background"
             >
               {category}
             </TabsTrigger>
@@ -82,112 +111,133 @@ export function VideoGallery() {
       </Tabs>
 
       {/* Video Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredVideos.map((video) => (
-          <Dialog
-            key={video.id}
-            onOpenChange={(open) => {
-              if (!open) setSelectedVideo(null);
-            }}
-          >
-            <Card
-              className={cn(
-                "overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1",
-                "animate-fade-in"
-              )}
-              onClick={() => setSelectedVideo(video)}
+         <li key={video.id}>
+            <Dialog
+                onOpenChange={(open) => {
+                if (open) setSelectedVideo(video); else setSelectedVideo(null);
+                }}
             >
-              <CardContent className="p-0">
-                <div className="relative aspect-video">
-                  {/* Thumbnail */}
-                  <img
-                    src={video.thumbnailUrl}
-                    alt={video.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* Duration Badge */}
-                  <span className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-0.5 rounded-full">
-                    {video.duration}
-                  </span>
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <h3 className="text-white text-lg font-semibold">
-                      {video.title}
-                    </h3>
-                    <p className="text-gray-200 text-sm font-telugu">
-                      {video.titleTelugu}
-                    </p>
-                    <p className="text-gray-300 text-xs mt-1">
-                      {video.location}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Video Dialog */}
-            {selectedVideo && selectedVideo.id === video.id && (
-              <DialogContent className="max-w-4xl w-11/12 p-2 sm:p-4 bg-background/95 backdrop-blur-lg">
-                <div className="relative aspect-video w-full">
-                  {/* Replace with actual video player component */}
-                  <video
-                    src={selectedVideo.videoUrl}
-                    controls
-                    className="w-full h-full"
-                    poster={selectedVideo.thumbnailUrl}
-                  />
-                </div>
-                <div className="p-4 space-y-4">
-                  <div>
-                    <h2 className="text-2xl font-semibold">
-                      {selectedVideo.title}
-                    </h2>
-                    <p className="text-muted-foreground font-telugu">
-                      {selectedVideo.titleTelugu}
-                    </p>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleShare(selectedVideo)}
-                        className="flex items-center gap-2"
-                      >
-                        <Share2 size={16} />
-                        Share
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex items-center gap-2"
-                        onClick={() =>
-                          window.open(
-                            "https://instagram.com/your_account",
-                            "_blank"
-                          )
-                        }
-                      >
-                        <Instagram size={16} />
-                        Follow on Instagram
-                      </Button>
+                <DialogTrigger asChild>
+                <button
+                    className={cn(
+                    // Use Accent (Pink) for hover border
+                    "block w-full overflow-hidden cursor-pointer group border border-border/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-accent rounded-xl bg-card text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                    "animate-fade-in"
+                    )}
+                    aria-label={`Watch video: ${video.title}`}
+                >
+                    <CardContent className="p-0">
+                    <div className="relative aspect-video bg-muted">
+                        <Image
+                        src={video.thumbnailUrl}
+                        alt=""
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105 group-focus:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        quality={80}
+                        data-ai-hint={video.dataAiHint}
+                        />
+                        {/* Play Icon Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300" aria-hidden="true">
+                            <PlayCircle className="h-16 w-16 text-white/80" />
+                        </div>
+                        {/* Duration Badge */}
+                        <span className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-0.5 rounded-full z-10" aria-hidden="true">
+                        {video.duration}
+                        </span>
+                        {/* Text Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent" aria-hidden="true">
+                        <h3 className="text-white text-base font-semibold truncate">{video.title}</h3>
+                        <p className="text-gray-200 text-xs font-telugu truncate" lang="te">{video.titleTelugu}</p>
+                        </div>
                     </div>
-                    <DialogClose asChild>
-                      <Button variant="ghost" size="sm">
-                        <X className="h-5 w-5" />
-                      </Button>
-                    </DialogClose>
-                  </div>
-                </div>
-              </DialogContent>
-            )}
-          </Dialog>
-        ))}
-      </div>
+                    </CardContent>
+                </button>
+                </DialogTrigger>
 
+                {/* Video Dialog - Frosted Glass Effect */}
+                {selectedVideo && selectedVideo.id === video.id && (
+                <DialogContent
+                    className={cn(
+                        "max-w-4xl w-11/12 p-2 sm:p-4 border-border/50 shadow-2xl rounded-xl overflow-hidden",
+                        "bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60" // Frosted glass effect
+                    )}
+                    aria-labelledby={`video-title-${video.id}`}
+                    aria-describedby={`video-desc-${video.id}`}
+                >
+                    <DialogHeader className="sr-only">
+                        <DialogTitle id={`video-title-${video.id}`}>{selectedVideo.title}</DialogTitle>
+                        <DialogDescription id={`video-desc-${video.id}`}>
+                            Video playback for {selectedVideo.title}. Location: {selectedVideo.location}.
+                        </DialogDescription>
+                    </DialogHeader>
+                    {/* Video Player */}
+                    <div className="relative aspect-video w-full bg-black rounded-lg overflow-hidden">
+                    <video
+                        src={selectedVideo.videoUrl}
+                        controls
+                        className="w-full h-full"
+                        poster={selectedVideo.thumbnailUrl}
+                        aria-label={`Video player for ${selectedVideo.title}`}
+                        preload="metadata"
+                    >
+                        Your browser does not support the video tag.
+                    </video>
+                    </div>
+                    {/* Video Info & Actions - Muted pastel background */}
+                    <div className="p-4 space-y-3 sm:space-y-4 bg-muted/50 rounded-b-lg">
+                    <div>
+                        <h2 className="text-xl sm:text-2xl font-semibold text-foreground">{selectedVideo.title}</h2>
+                        <p className="text-muted-foreground font-telugu" lang="te">{selectedVideo.titleTelugu}</p>
+                         <p className="text-sm text-muted-foreground mt-1">{selectedVideo.location}</p>
+                    </div>
+                    {/* Action buttons - Use pastel variants */}
+                    <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+                        <div className="flex gap-2 flex-wrap justify-center sm:justify-start">
+                        {/* Share button - Mint outline */}
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleShare(selectedVideo)}
+                            className="flex items-center gap-2 text-primary border-primary hover:bg-primary/10"
+                            aria-label={`Share video: ${selectedVideo.title}`}
+                        >
+                            <Share2 size={16} aria-hidden="true"/> Share
+                        </Button>
+                        {/* Instagram button - Pink outline */}
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex items-center gap-2 text-accent border-accent hover:bg-accent/10"
+                            asChild
+                        >
+                           <a href="https://instagram.com/your_account" target="_blank" rel="noopener noreferrer">
+                             <Instagram size={16} aria-hidden="true"/> Follow on Instagram
+                           </a>
+                        </Button>
+                        </div>
+                        {/* Close Button */}
+                        <DialogClose asChild>
+                        <Button variant="ghost" size="sm" className="mt-2 sm:mt-0">
+                            Close <X className="h-4 w-4 ml-2" aria-hidden="true"/>
+                        </Button>
+                        </DialogClose>
+                    </div>
+                    </div>
+                </DialogContent>
+                )}
+            </Dialog>
+          </li>
+        ))}
+      </ul>
+
+      {/* No Videos Message */}
       {filteredVideos.length === 0 && (
-        <div className="text-center py-16 text-muted-foreground">
+        <div className="text-center py-16 text-muted-foreground" role="alert">
           <p className="text-lg">No videos found in this category.</p>
+          <p className="text-sm mt-2">Please try selecting another category or check back later.</p>
         </div>
       )}
     </div>

@@ -1,4 +1,32 @@
-# **App Name**: Dream Captures
+# Dream Captures
+
+Dream Captures is a team of passionate young photographers based in Andhra Pradesh. We specialize in capturing weddings, parties, model shoots, and stunning outdoor photoshoots. Our goal is to turn your special moments into timeless memories.
+
+**తెలుగు + English:** Dream Captures is a team of young photographers from Andhra Pradesh. We do pelli, parties, model shoots, and outdoor photoshoots. We want to make every moment a special memory.
+
+## Services
+
+| Category          | Telugu Name                      | Details                                        |
+| ----------------- | -------------------------------- | ---------------------------------------------- |
+| Weddings          | పెళ్లిళ్లు (Pellilu)             | Traditional, candid, haldi, reception           |
+| Parties           | పుట్టినరోజులు / పార్టీలు (Puttina Rojulu / Parties) | Birthdays, events, anniversaries              |
+| Model Shoots      | మోడల్ షూట్స్ (Model Shoots)       | Portfolio shoots, fashion clicks               |
+| Outdoor Sessions  | అవుట్‌డోర్ ఫోటోలు (Outdoor Photolu) | Pre-wedding, nature, sunset shoots             |
+| Reels & Edits     | వీడియోస్ (Videos)              | Instagram reels, cinematic edits               |
+
+
+**Tagline:**
+
+"మీ ప్రతి షాట్ లో ఒక కథ ఉంటుంది!" (Every shot tells a story!)
+
+
+## Additional Recommendations
+
+-   **Meet the Team**: Add a section for “Meet the Team” and suggest adding the team members photos and short Telugu intros.
+-   **Instagram Feed**: Integrate Instagram feed to showcase reels/posts.
+-   **Book Us**: Add a “Book Us” CTA with Bilingual button — “మమ్మల్ని బుక్ చేయండి / Book Now”
+
+
 
 ## Core Features:
 
@@ -83,4 +111,6 @@ Design and develop a stunning, responsive portfolio and blog website for **Dream
 - Logo files in SVG/PNG.
 - Clean, well-structured codebase (GitHub optional).
 - Clear documentation on how to run locally and deploy (e.g., Vercel/Netlify).
+
+
   

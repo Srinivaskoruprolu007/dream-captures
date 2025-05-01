@@ -16,63 +16,67 @@ export default {
         baloo: ['var(--font-baloo-tamma-2)', 'cursive'], // Baloo Tamma 2
       },
   		colors: {
-        // Updated based on globals.css HSL variables
-  			background: 'hsl(var(--background))', // Off-white / Very Light Greyish Beige
-  			foreground: 'hsl(var(--foreground))', // Warm Grey / Dark Grey
+        // Updated based on globals.css HSL variables - Pastel Palette
+  			background: 'hsl(var(--background))', // Champagne Beige
+  			foreground: 'hsl(var(--foreground))', // Near Black
   			card: {
-  				DEFAULT: 'hsl(var(--card))', // Slightly lighter than background
-  				foreground: 'hsl(var(--card-foreground))' // Slightly darker grey
+  				DEFAULT: 'hsl(var(--card))', // White
+  				foreground: 'hsl(var(--card-foreground))' // Dark grey
   			},
   			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
+  				DEFAULT: 'hsl(var(--popover))', // White
+  				foreground: 'hsl(var(--popover-foreground))' // Near Black
   			},
   			primary: {
-  				DEFAULT: 'hsl(var(--primary))', // Teal
-  				foreground: 'hsl(var(--primary-foreground))' // Very light contrast
+  				DEFAULT: 'hsl(var(--primary))', // Mint Green
+  				foreground: 'hsl(var(--primary-foreground))' // Dark text on Mint
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))', // Maroon
-  				foreground: 'hsl(var(--secondary-foreground))' // Very light contrast
+  				DEFAULT: 'hsl(var(--secondary))', // Ice Blue
+  				foreground: 'hsl(var(--secondary-foreground))' // Dark text on Ice Blue
   			},
   			muted: {
-  				DEFAULT: 'hsl(var(--muted))', // Muted Grey
+  				DEFAULT: 'hsl(var(--muted))', // Very Light Grey
   				foreground: 'hsl(var(--muted-foreground))' // Darker Muted Grey
   			},
   			accent: {
-  				DEFAULT: 'hsl(var(--accent))', // Gold
-  				foreground: 'hsl(var(--accent-foreground))' // Dark contrast
+  				DEFAULT: 'hsl(var(--accent))', // Powder Pink
+  				foreground: 'hsl(var(--accent-foreground))' // Dark text on Pink
   			},
+            lavender: { // Added Lavender
+                DEFAULT: 'hsl(var(--lavender))',
+                foreground: 'hsl(var(--lavender-foreground))',
+            },
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
   			},
-  			border: 'hsl(var(--border))', // Lighter Grey border
-  			input: 'hsl(var(--input))', // Slightly darker Grey input
-  			ring: 'hsl(var(--ring))', // Teal ring
+  			border: 'hsl(var(--border))', // Slightly darker border
+  			input: 'hsl(var(--input))', // Slightly off-white input background
+  			ring: 'hsl(var(--ring))', // Mint Green ring
   			chart: {
-  				'1': 'hsl(var(--chart-1))', // Teal
-  				'2': 'hsl(var(--chart-2))', // Maroon
-  				'3': 'hsl(var(--chart-3))', // Gold
-  				'4': 'hsl(var(--chart-4))', // Lighter Teal
-  				'5': 'hsl(var(--chart-5))'  // Lighter Maroon
+  				'1': 'hsl(var(--chart-1))', // Mint Green
+  				'2': 'hsl(var(--chart-2))', // Ice Blue
+  				'3': 'hsl(var(--chart-3))', // Powder Pink
+  				'4': 'hsl(var(--chart-4))', // Soft Lavender
+  				'5': 'hsl(var(--chart-5))'  // Champagne Beige
   			},
-        // Updated Sidebar colors to match the new theme
+        // Updated Sidebar colors
   			sidebar: {
-  				DEFAULT: 'hsl(var(--sidebar-background))', // Off-white variation
-  				foreground: 'hsl(var(--sidebar-foreground))', // Warm Grey
-  				primary: 'hsl(var(--sidebar-primary))', // Teal
-  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+  				DEFAULT: 'hsl(var(--sidebar-background))', // Champagne Beige
+  				foreground: 'hsl(var(--sidebar-foreground))', // Dark grey
+  				primary: 'hsl(var(--sidebar-primary))', // Mint Green
+  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))', // Dark text
   				accent: 'hsl(var(--sidebar-accent))', // Lighter grey accent
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
+  				ring: 'hsl(var(--sidebar-ring))' // Mint Green ring
   			}
   		},
   		borderRadius: {
-  			lg: 'var(--radius)', // 0.5rem
-  			md: 'calc(var(--radius) - 2px)', // 0.375rem
-  			sm: 'calc(var(--radius) - 4px)' // 0.25rem
+  			lg: 'var(--radius)', // 0.75rem (increased)
+  			md: 'calc(var(--radius) - 4px)', // 0.5rem
+  			sm: 'calc(var(--radius) - 6px)' // 0.375rem
   		},
   		keyframes: {
   			'accordion-down': {

@@ -5,7 +5,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { cn } from '@/lib/utils';
 import { Toaster } from "@/components/ui/toaster"
-import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider"; // Import ThemeProvider
 
 
 const playfairDisplay = Playfair_Display({
@@ -28,16 +28,18 @@ const notoSansTelugu = Noto_Sans_Telugu({
   display: 'swap',
 });
 
+// Use Baloo Tamma 2 for stylistic Telugu headings/taglines
 const balooTamma2 = Baloo_Tamma_2({
   subsets: ['telugu'],
   variable: '--font-baloo-tamma-2',
-  weight: ['400', '700'],
+  weight: ['400', '700'], // Include needed weights
   display: 'swap',
 });
 
+
 export const metadata: Metadata = {
-  title: 'Dream Captures | Telugu Wedding Photography',
-  description: 'Capturing the vibrant stories of Telugu weddings with elegance and artistry. Based in Andhra Pradesh.',
+  title: 'Dream Captures | Young Photographers in Andhra Pradesh',
+  description: 'Team of passionate young photographers in Andhra Pradesh specializing in weddings, parties, model shoots, and outdoor photography.',
 };
 
 export default function RootLayout({
@@ -46,24 +48,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // Add lang="en" for accessibility
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
-          playfairDisplay.variable,
-          lato.variable,
-          notoSansTelugu.variable,
-          balooTamma2.variable
+           playfairDisplay.variable, // Serif for English Headings
+           lato.variable, // Sans-serif for English Body
+           notoSansTelugu.variable, // Default Telugu font
+           balooTamma2.variable // Stylistic Telugu font
         )}
       >
-        <ThemeProvider>
-          <div className="relative flex min-h-screen flex-col">
+        {/* Wrap with ThemeProvider */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="relative flex min-h-dvh flex-col bg-background"> {/* Use min-h-dvh and bg-background */}
             <Header />
-            <main className="flex-1">{children}</main>
+            {/* Ensure main content area is focusable for keyboard navigation */}
+            {/* Use flex-1 to push footer down */}
+            <main className="flex-1 focus:outline-none" tabIndex={-1}>
+              {children}
+            </main>
             <Footer />
           </div>
-          <Toaster />
-        </ThemeProvider>
+           <Toaster />
+         </ThemeProvider>
       </body>
     </html>
   );
