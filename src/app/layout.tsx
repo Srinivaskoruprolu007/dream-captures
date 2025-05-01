@@ -5,7 +5,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { cn } from '@/lib/utils';
 import { Toaster } from "@/components/ui/toaster"
-import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider"; // Import ThemeProvider
 
 
 const playfairDisplay = Playfair_Display({
@@ -36,8 +36,8 @@ const balooTamma2 = Baloo_Tamma_2({
 });
 
 export const metadata: Metadata = {
-  title: 'Dream Captures | Telugu Wedding Photography',
-  description: 'Capturing the vibrant stories of Telugu weddings with elegance and artistry. Based in Andhra Pradesh.',
+  title: 'Dream Captures | Young Photographers in Andhra Pradesh',
+  description: 'Team of passionate young photographers in Andhra Pradesh specializing in weddings, parties, model shoots, and outdoor photography.',
 };
 
 export default function RootLayout({
@@ -56,14 +56,20 @@ export default function RootLayout({
           balooTamma2.variable
         )}
       >
-        <ThemeProvider>
+        {/* Wrap with ThemeProvider */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <div className="relative flex min-h-screen flex-col">
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
-          <Toaster />
-        </ThemeProvider>
+           <Toaster />
+         </ThemeProvider>
       </body>
     </html>
   );

@@ -16,57 +16,57 @@ export default {
         baloo: ['var(--font-baloo-tamma-2)', 'cursive'], // Baloo Tamma 2
       },
   		colors: {
-        // Updated based on globals.css HSL variables
-  			background: 'hsl(var(--background))', // Off-white / Very Light Greyish Beige
-  			foreground: 'hsl(var(--foreground))', // Warm Grey / Dark Grey
+        // Updated based on globals.css HSL variables - Clearer Palette
+  			background: 'hsl(var(--background))', // White
+  			foreground: 'hsl(var(--foreground))', // Near Black
   			card: {
-  				DEFAULT: 'hsl(var(--card))', // Slightly lighter than background
-  				foreground: 'hsl(var(--card-foreground))' // Slightly darker grey
+  				DEFAULT: 'hsl(var(--card))', // Very light grey
+  				foreground: 'hsl(var(--card-foreground))' // Dark grey
   			},
   			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
+  				DEFAULT: 'hsl(var(--popover))', // White
+  				foreground: 'hsl(var(--popover-foreground))' // Near Black
   			},
   			primary: {
-  				DEFAULT: 'hsl(var(--primary))', // Teal
-  				foreground: 'hsl(var(--primary-foreground))' // Very light contrast
+  				DEFAULT: 'hsl(var(--primary))', // Brighter Teal
+  				foreground: 'hsl(var(--primary-foreground))' // White
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))', // Maroon
-  				foreground: 'hsl(var(--secondary-foreground))' // Very light contrast
+  				DEFAULT: 'hsl(var(--secondary))', // Brighter Maroon/Red
+  				foreground: 'hsl(var(--secondary-foreground))' // White
   			},
   			muted: {
-  				DEFAULT: 'hsl(var(--muted))', // Muted Grey
+  				DEFAULT: 'hsl(var(--muted))', // Light Grey
   				foreground: 'hsl(var(--muted-foreground))' // Darker Muted Grey
   			},
   			accent: {
-  				DEFAULT: 'hsl(var(--accent))', // Gold
-  				foreground: 'hsl(var(--accent-foreground))' // Dark contrast
+  				DEFAULT: 'hsl(var(--accent))', // Clearer Gold
+  				foreground: 'hsl(var(--accent-foreground))' // Near Black
   			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
   			},
   			border: 'hsl(var(--border))', // Lighter Grey border
-  			input: 'hsl(var(--input))', // Slightly darker Grey input
-  			ring: 'hsl(var(--ring))', // Teal ring
+  			input: 'hsl(var(--input))', // Slightly darker Grey input background
+  			ring: 'hsl(var(--ring))', // Brighter Teal ring
   			chart: {
   				'1': 'hsl(var(--chart-1))', // Teal
   				'2': 'hsl(var(--chart-2))', // Maroon
   				'3': 'hsl(var(--chart-3))', // Gold
   				'4': 'hsl(var(--chart-4))', // Lighter Teal
-  				'5': 'hsl(var(--chart-5))'  // Lighter Maroon
+  				'5': 'hsl(var(--chart-5))'  // Lighter Maroon/Pinkish
   			},
-        // Updated Sidebar colors to match the new theme
+        // Updated Sidebar colors for clarity
   			sidebar: {
-  				DEFAULT: 'hsl(var(--sidebar-background))', // Off-white variation
-  				foreground: 'hsl(var(--sidebar-foreground))', // Warm Grey
+  				DEFAULT: 'hsl(var(--sidebar-background))', // Off-white
+  				foreground: 'hsl(var(--sidebar-foreground))', // Dark grey
   				primary: 'hsl(var(--sidebar-primary))', // Teal
-  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))', // White
   				accent: 'hsl(var(--sidebar-accent))', // Lighter grey accent
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-  				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
+  				border: 'hsl(var(--sidebar-border))', // Slightly darker border
+  				ring: 'hsl(var(--sidebar-ring))' // Brighter Teal ring
   			}
   		},
   		borderRadius: {

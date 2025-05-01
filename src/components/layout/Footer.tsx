@@ -17,9 +17,9 @@ export function Footer() {
              <Logo className="h-10 w-auto text-secondary" />
            </Link>
           <p className="text-sm leading-relaxed mb-4">
-            Capturing the timeless elegance and vibrant emotions of Telugu weddings. Based in Andhra Pradesh.
+            A team of young, passionate photographers from Andhra Pradesh capturing weddings, parties, and more.
           </p>
-           <p className="text-sm font-telugu">మీ కలల పెళ్లి క్షణాలను శాశ్వతంగా మార్చే ఫోటోగ్రఫీ.</p>
+           <p className="text-sm font-noto">ఆంధ్రప్రదేశ్‌లోని యువ ఫోటోగ్రాఫర్ల టీమ్.</p>
           <div className="flex space-x-5 mt-6"> {/* Slightly increased spacing */}
             {/* Styled Social Icons */}
             <Link href="#" aria-label="Facebook" className="text-muted-foreground hover:text-secondary transition-colors duration-200">
@@ -56,11 +56,11 @@ export function Footer() {
         <div className="md:col-span-1">
           <h4 className="font-serif text-lg font-semibold text-foreground mb-4">Our Services</h4>
           <ul className="space-y-2.5 text-sm"> {/* Increased spacing */}
-            <li><Link href="/services#packages" className="hover:text-secondary transition-colors duration-200">Wedding Photography</Link></li> {/* Linked to package section */}
-            <li><Link href="/services#packages" className="hover:text-secondary transition-colors duration-200">Engagement Sessions</Link></li>
-             <li><Link href="/services#packages" className="hover:text-secondary transition-colors duration-200">Pre-Wedding Shoots</Link></li>
-            <li><Link href="/services#packages" className="hover:text-secondary transition-colors duration-200">Portraits & Family</Link></li>
-            <li><Link href="/services#packages" className="hover:text-secondary transition-colors duration-200">Events & Baby Showers</Link></li>
+            <li><Link href="/services#packages" className="hover:text-secondary transition-colors duration-200">Weddings</Link></li>
+            <li><Link href="/services#packages" className="hover:text-secondary transition-colors duration-200">Parties & Events</Link></li>
+            <li><Link href="/services#packages" className="hover:text-secondary transition-colors duration-200">Model Shoots</Link></li>
+            <li><Link href="/services#packages" className="hover:text-secondary transition-colors duration-200">Outdoor Sessions</Link></li>
+            <li><Link href="/services#packages" className="hover:text-secondary transition-colors duration-200">Reels & Edits</Link></li>
           </ul>
         </div>
 
@@ -68,7 +68,7 @@ export function Footer() {
         {/* Newsletter */}
         <div className="md:col-span-1">
           <h4 className="font-serif text-lg font-semibold text-foreground mb-4">Stay Inspired</h4>
-          <p className="text-sm mb-4">Get the latest wedding trends, stories, and exclusive offers delivered to your inbox.</p>
+          <p className="text-sm mb-4">Get the latest photography trends, stories, and offers from our team.</p>
           <form className="flex flex-col sm:flex-row gap-2">
             <Input type="email" placeholder="Enter your email" className="bg-background flex-1 border-input focus:border-secondary text-sm" aria-label="Newsletter Email"/>
             <Button type="submit" variant="default" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-sm">Subscribe</Button>
@@ -78,7 +78,7 @@ export function Footer() {
       {/* Use Separator for a cleaner look */}
        <Separator className="container my-8 md:my-10 bg-border/50" />
       <div className="container text-center text-xs">
-        <p>&copy; {currentYear} Dream Captures. All rights reserved. Designed with <span className="text-red-500">❤</span> in Andhra Pradesh.</p>
+        <p>&copy; {currentYear} Dream Captures Team. All rights reserved. Crafted with <span className="text-red-500">❤</span> in Andhra Pradesh.</p>
         {/* Optional: Add links to Privacy Policy, Terms */}
          <div className="mt-2 space-x-4">
            <Link href="/privacy-policy" className="hover:text-secondary transition-colors">Privacy Policy</Link>

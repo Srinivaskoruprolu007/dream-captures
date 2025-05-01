@@ -10,109 +10,109 @@ h1, h2, h3, h4, h5, h6 {
   @apply font-serif; /* Apply serif (Playfair Display) to English headings */
 }
 
-.font-telugu {
-   @apply font-noto; /* Apply Noto Sans Telugu for specific Telugu text */
-}
-.font-telugu-stylish {
-    @apply font-baloo; /* Apply Baloo Tamma 2 for stylish Telugu text */
-}
+/* The font-noto and font-baloo utilities are already defined by Tailwind */
+/* via the fontFamily extension in tailwind.config.ts. */
+/* Defining them here using @apply creates a circular dependency. */
 
 
-/* Base Layer with CSS Variables */
+/* Base Layer with CSS Variables - Adjusted for Clarity and Vibrancy */
 @layer base {
   :root {
-    /* Light Theme - Refined Colors */
-    --background: 40 10% 97%; /* Off-white / Very Light Greyish Beige */
-    --foreground: 0 0% 20%; /* Warm Grey / Dark Grey */
+    /* Light Theme - Clearer Colors */
+    --background: 0 0% 100%; /* White */
+    --foreground: 0 0% 13%; /* Near Black for high contrast text */
 
-    --card: 40 10% 99%; /* Slightly lighter than background */
-    --card-foreground: 0 0% 15%; /* Slightly darker grey */
+    --card: 0 0% 98%; /* Very light grey card */
+    --card-foreground: 0 0% 15%; /* Dark grey card text */
 
-    --popover: 40 10% 99%;
-    --popover-foreground: 0 0% 15%;
+    --popover: 0 0% 100%; /* White popover */
+    --popover-foreground: 0 0% 13%; /* Near black popover text */
 
-    --primary: 180 100% 25%; /* #008080 Teal */
-    --primary-foreground: 0 0% 98%; /* Very light contrast for Teal */
+    --primary: 180 70% 40%; /* #218f8f - Slightly brighter Teal */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 0 100% 25%; /* #800000 Maroon */
-    --secondary-foreground: 0 0% 98%; /* Very light contrast for Maroon */
+    --secondary: 0 75% 45%; /* #c02828 - Brighter Maroon/Red */
+    --secondary-foreground: 0 0% 100%; /* White */
 
-    --muted: 0 0% 85%; /* Muted Grey */
-    --muted-foreground: 0 0% 40%; /* Darker Muted Grey */
+    --muted: 0 0% 94%; /* Light Grey */
+    --muted-foreground: 0 0% 40%; /* Darker Muted Grey Text */
 
-    --accent: 46 78% 61%; /* #C9B037 Gold highlight */
-    --accent-foreground: 0 0% 10%; /* Dark contrast for Gold */
+    --accent: 45 80% 55%; /* #e6b83c - Clearer Gold */
+    --accent-foreground: 0 0% 13%; /* Near Black contrast for Gold */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 88%; /* Lighter Grey border */
-    --input: 0 0% 92%; /* Slightly darker Grey for input */
-    --ring: 180 100% 25%; /* Teal ring */
+    --input: 0 0% 92%; /* Slightly darker Grey for input background */
+    --ring: 180 70% 45%; /* Brighter Teal ring */
 
-    --chart-1: 180 100% 25%; /* Teal */
-    --chart-2: 0 100% 25%;   /* Maroon */
-    --chart-3: 46 78% 61%;   /* Gold */
-    --chart-4: 180 50% 45%;   /* Lighter Teal */
-    --chart-5: 0 70% 50%;    /* Lighter Maroon */
+    /* Chart colors adjusted slightly for better distinction */
+    --chart-1: 180 70% 40%; /* Teal */
+    --chart-2: 0 75% 45%;   /* Maroon */
+    --chart-3: 45 80% 55%;   /* Gold */
+    --chart-4: 180 50% 60%;   /* Lighter Teal */
+    --chart-5: 0 60% 65%;    /* Lighter Maroon/Pinkish */
 
     --radius: 0.5rem;
 
-    /* Sidebar colors can inherit or be defined separately if needed */
-    --sidebar-background: 40 10% 98%;
-    --sidebar-foreground: 0 0% 15%;
-    --sidebar-primary: 180 100% 25%; /* Teal */
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Sidebar colors adjusted for clarity */
+    --sidebar-background: 0 0% 97%; /* Off-white */
+    --sidebar-foreground: 0 0% 15%; /* Dark grey */
+    --sidebar-primary: 180 70% 40%; /* Teal */
+    --sidebar-primary-foreground: 0 0% 100%; /* White */
     --sidebar-accent: 0 0% 90%; /* Lighter grey accent */
     --sidebar-accent-foreground: 0 0% 15%;
-    --sidebar-border: 0 0% 88%;
-    --sidebar-ring: 180 100% 25%;
+    --sidebar-border: 0 0% 85%; /* Slightly darker border */
+    --sidebar-ring: 180 70% 45%; /* Brighter Teal ring */
   }
 
   .dark {
-    /* Dark Theme - Optional adjustments for dark mode */
-    --background: 0 0% 10%; /* Very dark grey */
-    --foreground: 0 0% 95%; /* Light Grey */
+    /* Dark Theme - Adjusted for contrast */
+    --background: 0 0% 8%; /* Very dark grey */
+    --foreground: 0 0% 96%; /* Light Grey */
 
-    --card: 0 0% 15%; /* Slightly lighter dark grey */
+    --card: 0 0% 12%; /* Slightly lighter dark grey */
     --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 15%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 10%; /* Darker popover */
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 180 80% 40%; /* Brighter Teal for dark mode */
-    --primary-foreground: 0 0% 10%;
+    --primary: 180 65% 55%; /* Brighter Teal for dark mode */
+    --primary-foreground: 0 0% 10%; /* Dark text on primary */
 
-    --secondary: 0 80% 50%; /* Brighter Maroon for dark mode */
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 70% 60%; /* Brighter Maroon/Red for dark mode */
+    --secondary-foreground: 0 0% 98%; /* Light text on secondary */
 
-    --muted: 0 0% 25%; /* Dark muted grey */
-    --muted-foreground: 0 0% 70%; /* Lighter muted foreground */
+    --muted: 0 0% 20%; /* Dark muted grey */
+    --muted-foreground: 0 0% 75%; /* Lighter muted foreground */
 
-    --accent: 46 78% 65%; /* Slightly brighter Gold */
-    --accent-foreground: 0 0% 10%;
+    --accent: 45 75% 65%; /* Brighter Gold */
+    --accent-foreground: 0 0% 10%; /* Dark contrast for Gold */
 
-    --destructive: 0 70% 50%;
+    --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 30%; /* Darker border */
-    --input: 0 0% 25%;
-    --ring: 180 80% 40%; /* Brighter Teal ring */
+    --border: 0 0% 25%; /* Darker border */
+    --input: 0 0% 18%; /* Dark input background */
+    --ring: 180 65% 60%; /* Brighter Teal ring */
 
-    --chart-1: 180 80% 40%;
-    --chart-2: 0 80% 50%;
-    --chart-3: 46 78% 65%;
-    --chart-4: 180 60% 55%;
-    --chart-5: 0 60% 60%;
+    /* Chart colors adjusted for dark mode */
+    --chart-1: 180 65% 55%;
+    --chart-2: 0 70% 60%;
+    --chart-3: 45 75% 65%;
+    --chart-4: 180 50% 70%;
+    --chart-5: 0 55% 75%;
 
-    --sidebar-background: 0 0% 12%;
+    /* Sidebar dark theme */
+    --sidebar-background: 0 0% 10%; /* Dark sidebar */
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 180 80% 40%;
+    --sidebar-primary: 180 65% 55%;
     --sidebar-primary-foreground: 0 0% 10%;
-    --sidebar-accent: 0 0% 25%;
+    --sidebar-accent: 0 0% 20%;
     --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 30%;
-    --sidebar-ring: 180 80% 40%;
+    --sidebar-border: 0 0% 25%;
+    --sidebar-ring: 180 65% 60%;
   }
 }
 
