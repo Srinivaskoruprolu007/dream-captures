@@ -5,23 +5,31 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogContent,
   DialogTrigger,
-  DialogClose,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog"; // Keep DialogTrigger
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, X, Share2, PlayCircle } from "lucide-react";
+import { MapPin, Share2, PlayCircle } from "lucide-react"; // Removed X
 import { cn } from "@/lib/utils";
 import { VideoGallery } from "@/components/portfolio/VideoGallery";
 import { CameraBackground } from "@/components/portfolio/CameraBackground";
 import { FeaturedCarousel } from "@/components/portfolio/FeaturedCarousel";
 import { BeforeAfterGallery } from "@/components/portfolio/BeforeAfterGallery";
+import { ImageLightbox } from "@/components/portfolio/ImageLightbox"; // Import the new Lightbox component
+
+// Placeholder data structure for portfolio items
+interface PortfolioItem {
+  id: number;
+  src: string;
+  alt: string;
+  altTelugu?: string;
+  category: string;
+  location: string;
+  dataAiHint: string;
+}
 
 // Placeholder data remains the same
-const allPortfolioItems = [
+const allPortfolioItems: PortfolioItem[] = [
   // ... (existing portfolio items) ...
   {
     id: 1,
@@ -137,42 +145,22 @@ const categories = [
 export default function PortfolioPage() {
   const [galleryType, setGalleryType] = useState("photos");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedImage, setSelectedImage] = useState<
-    (typeof allPortfolioItems)[0] | null
-  >(null);
+  const [selectedImage, setSelectedImage] = useState<PortfolioItem | null>(null);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const filteredItems =
     selectedCategory === "All"
       ? allPortfolioItems
       : allPortfolioItems.filter((item) => item.category === selectedCategory);
 
-  const openLightbox = (item: (typeof allPortfolioItems)[0]) => {
+  const openLightbox = (item: PortfolioItem) => {
     setSelectedImage(item);
+    setIsLightboxOpen(true);
   };
 
   const closeLightbox = () => {
     setSelectedImage(null);
-  };
-
-  const handleShare = (src: string, alt: string) => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: `Dream Captures: ${alt}`,
-          text: `Check out this photo captured by Dream Captures!`,
-          url: window.location.href,
-        })
-        .catch((error) => console.error("Error sharing:", error));
-    } else {
-      navigator.clipboard
-        .writeText(window.location.href)
-        .then(() =>
-          alert("Link copied to clipboard! Share functionality not available.")
-        )
-        .catch(() =>
-          alert("Share functionality not available on this browser.")
-        );
-    }
+    setIsLightboxOpen(false);
   };
 
   return (
@@ -252,14 +240,10 @@ export default function PortfolioPage() {
             <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {filteredItems.map((item) => (
                 <li key={item.id}>
-                  <Dialog
-                    onOpenChange={(open) => {
-                      if (open) openLightbox(item);
-                      else closeLightbox();
-                    }}
-                  >
-                    <DialogTrigger asChild>
+                   {/* Use DialogTrigger to open the lightbox */}
+                  <DialogTrigger asChild>
                       <button
+                        onClick={() => openLightbox(item)} // Open lightbox on click
                         className={cn(
                           // Use Accent (Pink) for hover border
                           "block w-full overflow-hidden group border border-border/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-accent rounded-xl bg-card text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
@@ -323,98 +307,17 @@ export default function PortfolioPage() {
                           </div>
                         </CardContent>
                       </button>
-                    </DialogTrigger>
-
-                    {/* Lightbox/Dialog Content - Frosted Glass Effect */}
-                    {selectedImage && selectedImage.id === item.id && (
-                      <DialogContent
-                        className={cn(
-                          "max-w-3xl w-11/12 p-0 border-border/50 shadow-2xl rounded-xl overflow-hidden",
-                          "bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60" // Frosted glass effect
-                        )}
-                        aria-labelledby={`lightbox-title-${item.id}`}
-                        aria-describedby={`lightbox-desc-${item.id}`}
-                      >
-                        <div className="relative aspect-video w-full bg-muted/30">
-                          <Image
-                            src={selectedImage.src}
-                            alt={selectedImage.alt}
-                            fill
-                            className="object-contain"
-                            quality={95}
-                            priority
-                          />
-                        </div>
-                        {/* Use muted background for description area */}
-                        <div className="p-4 sm:p-6 text-center bg-muted/50 rounded-b-lg">
-                          <DialogTitle
-                            id={`lightbox-title-${item.id}`}
-                            className="font-semibold font-serif text-xl sm:text-2xl mb-2 text-foreground"
-                          >
-                            {selectedImage.alt}
-                          </DialogTitle>
-                          <DialogDescription
-                            id={`lightbox-desc-${item.id}`}
-                            className="space-y-2"
-                          >
-                            {selectedImage.altTelugu && (
-                              <p
-                                className="font-telugu text-base sm:text-lg text-muted-foreground"
-                                lang="te"
-                              >
-                                {selectedImage.altTelugu}
-                              </p>
-                            )}
-                            {selectedImage.location && (
-                              <div className="flex items-center justify-center text-sm text-muted-foreground">
-                                {/* Use Primary (Mint) icon */}
-                                <MapPin
-                                  size={16}
-                                  className="mr-2 text-primary"
-                                  aria-hidden="true"
-                                />
-                                <span>{selectedImage.location}</span>
-                              </div>
-                            )}
-                          </DialogDescription>
-                          {/* Action Buttons - Use pastel variants */}
-                          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6">
-                            <Button
-                              variant="outline" // Outline button
-                              size="sm"
-                              onClick={() =>
-                                handleShare(
-                                  selectedImage.src,
-                                  selectedImage.alt
-                                )
-                              }
-                              className="text-primary border-primary hover:bg-primary/10 px-4" // Mint outline
-                              aria-label={`Share photo: ${selectedImage.alt}`}
-                            >
-                              <Share2
-                                size={16}
-                                className="mr-2"
-                                aria-hidden="true"
-                              />{" "}
-                              Share
-                            </Button>
-                            <DialogClose asChild>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="px-4"
-                              >
-                                Close
-                              </Button>
-                            </DialogClose>
-                          </div>
-                        </div>
-                      </DialogContent>
-                    )}
-                  </Dialog>
+                  </DialogTrigger>
                 </li>
               ))}
             </ul>
+
+            {/* Render the ImageLightbox component */}
+            <ImageLightbox
+              image={selectedImage}
+              isOpen={isLightboxOpen}
+              onClose={closeLightbox}
+            />
 
             {filteredItems.length === 0 && (
               <div

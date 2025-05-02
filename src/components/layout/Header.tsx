@@ -11,7 +11,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Lock,  Sparkles } from 'lucide-react'; // Import  Sparkles icons
+import { Menu, Lock, Sparkles, X } from 'lucide-react'; // Import Sparkles and X icons
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import logo from '../../lib/logo.png'; // Adjust the path to your logo.png
@@ -121,10 +121,7 @@ export function Header() {
                  <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm">
                     <Logo className="h-8 w-auto text-primary" /> {/* Slightly smaller logo, Mint */}
                  </Link>
-                 <SheetClose asChild>
-                   <Button variant="ghost" size="icon" className="text-foreground hover:text-primary" aria-label="Close Menu"> {/* Mint hover */}
-                   </Button>
-                 </SheetClose>
+                 {/* The SheetContent component provides a default close button, so the explicit one is removed. */}
               </div>
 
               {/* Navigation Links */}

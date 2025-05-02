@@ -218,12 +218,7 @@ export function VideoGallery() {
                            </a>
                         </Button>
                         </div>
-                        {/* Close Button */}
-                        <DialogClose asChild>
-                        <Button variant="ghost" size="sm" className="mt-2 sm:mt-0">
-                            Close <X className="h-4 w-4 ml-2" aria-hidden="true"/>
-                        </Button>
-                        </DialogClose>
+                        {/* Removed explicit Close button; DialogContent provides one */}
                     </div>
                     </div>
                 </DialogContent>

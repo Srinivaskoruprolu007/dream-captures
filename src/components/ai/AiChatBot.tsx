@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetFooter, SheetClose } from '@/components/ui/sheet';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { MessageSquare, Send, Bot, User} from 'lucide-react';
+import { MessageSquare, Send, Bot, User, X } from 'lucide-react'; // Import X icon
 import { chatBotFlowHandler, ChatBotInput, ChatBotOutput } from '@/ai/flows/chat-bot-flow';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '../ui/skeleton';
@@ -121,10 +121,7 @@ export function AiChatBot() {
             </Avatar>
             <SheetTitle className="text-lg font-semibold text-foreground">Dream Captures AI</SheetTitle>
           </div>
-           <SheetClose asChild>
-             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-             </Button>
-           </SheetClose>
+           {/* Removed the redundant SheetClose button here. The SheetContent component provides one by default. */}
         </SheetHeader>
 
         {/* Chat Area */}
