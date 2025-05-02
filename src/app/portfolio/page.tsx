@@ -20,7 +20,7 @@ import { VideoGallery } from "@/components/portfolio/VideoGallery"; // Keep Vide
 // Placeholder data remains the same
 const allPortfolioItems = [
   // ... (existing portfolio items) ...
-    {
+  {
     id: 1,
     src: "https://picsum.photos/seed/telugu-wedding1/800/600",
     alt: "Traditional Thali Tying ceremony during a Telugu wedding",
@@ -161,14 +161,21 @@ export default function PortfolioPage() {
         })
         .catch((error) => console.error("Error sharing:", error));
     } else {
-      navigator.clipboard.writeText(window.location.href)
-        .then(() => alert("Link copied to clipboard! Share functionality not available."))
-        .catch(() => alert("Share functionality not available on this browser."));
+      navigator.clipboard
+        .writeText(window.location.href)
+        .then(() =>
+          alert("Link copied to clipboard! Share functionality not available.")
+        )
+        .catch(() =>
+          alert("Share functionality not available on this browser.")
+        );
     }
   };
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 bg-background"> {/* Use theme background */}
+    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 bg-background">
+      {" "}
+      {/* Use theme background */}
       <header className="text-center mb-8 md:mb-12">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">
           Our Portfolio
@@ -177,7 +184,6 @@ export default function PortfolioPage() {
           క్షణాలను కళాఖండాలుగా మార్చడం
         </p>
       </header>
-
       {/* Gallery Type Selector - Main Tabs - Pastel Theme */}
       <Tabs
         defaultValue="photos"
@@ -204,7 +210,10 @@ export default function PortfolioPage() {
         </TabsList>
 
         {/* Photo Gallery Content */}
-        <TabsContent value="photos" className="w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md">
+        <TabsContent
+          value="photos"
+          className="w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
+        >
           {/* Photo Category Filter Tabs - Pastel Theme */}
           <Tabs
             defaultValue="All"
@@ -213,33 +222,33 @@ export default function PortfolioPage() {
             className="w-full"
             aria-label="Filter photo categories"
           >
-             {/* Use muted pastel for TabsList background */}
-             <TabsList className="flex flex-wrap justify-center bg-muted/70 p-1 rounded-full shadow-inner gap-1 mb-8">
-                {categories.map((category) => (
-                  <TabsTrigger
-                    key={category}
-                    value={category}
-                    className={cn(
-                      // Use Secondary (Ice Blue) for active state in category filter
-                      "px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground data-[state=active]:shadow-md hover:text-primary focus-visible:ring-offset-background",
-                      category !== "All" && category !== "Haldi" && "font-telugu"
-                    )}
+            {/* Use muted pastel for TabsList background */}
+            <TabsList className="flex flex-wrap justify-center bg-muted/70 p-1 rounded-full shadow-inner gap-1 mb-8 max-w-fit mx-auto">
+              {categories.map((category) => (
+                <TabsTrigger
+                  key={category}
+                  value={category}
+                  className={cn(
+                    // Use Secondary (Ice Blue) for active state in category filter
+                    "px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-300 data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground data-[state=active]:shadow-md hover:text-primary focus-visible:ring-offset-background",
+                    category !== "All" && category !== "Haldi" && "font-telugu"
+                  )}
+                >
+                  {category === "Haldi" ? "పసుపు కొట్టడం" : category}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+
+            {/* Gallery Grid */}
+            <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+              {filteredItems.map((item) => (
+                <li key={item.id}>
+                  <Dialog
+                    onOpenChange={(open) => {
+                      if (open) openLightbox(item);
+                      else closeLightbox();
+                    }}
                   >
-                    {category === "Haldi" ? "పసుపు కొట్టడం" : category}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-
-
-              {/* Gallery Grid */}
-              <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                {filteredItems.map((item) => (
-                 <li key={item.id}>
-                    <Dialog
-                        onOpenChange={(open) => {
-                        if (open) openLightbox(item); else closeLightbox();
-                        }}
-                    >
                     <DialogTrigger asChild>
                       <button
                         className={cn(
@@ -263,19 +272,28 @@ export default function PortfolioPage() {
                               data-ai-hint={item.dataAiHint}
                             />
                             {/* Overlay with Title */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 sm:p-4" aria-hidden="true">
+                            <div
+                              className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 sm:p-4"
+                              aria-hidden="true"
+                            >
                               <h3 className="text-white text-sm sm:text-base font-semibold font-serif truncate">
                                 {item.alt}
                               </h3>
                               {item.altTelugu && (
-                                <p className="text-gray-200 text-xs font-telugu truncate" lang="te">
+                                <p
+                                  className="text-gray-200 text-xs font-telugu truncate"
+                                  lang="te"
+                                >
                                   {item.altTelugu}
                                 </p>
                               )}
                               {item.location && (
                                 <div className="flex items-center text-xs text-gray-300 mt-1">
-                                  <MapPin size={12} className="mr-1 shrink-0" /> {/* Default muted color */}
-                                  <span className="truncate">{item.location}</span>
+                                  <MapPin size={12} className="mr-1 shrink-0" />{" "}
+                                  {/* Default muted color */}
+                                  <span className="truncate">
+                                    {item.location}
+                                  </span>
                                 </div>
                               )}
                             </div>
@@ -283,11 +301,15 @@ export default function PortfolioPage() {
                             <span
                               className={cn(
                                 "absolute top-2 right-2 bg-secondary/80 text-secondary-foreground text-[10px] px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 backdrop-blur-sm z-10",
-                                item.category !== "All" && item.category !== "Haldi" && "font-telugu"
+                                item.category !== "All" &&
+                                  item.category !== "Haldi" &&
+                                  "font-telugu"
                               )}
                               aria-hidden="true"
                             >
-                              {item.category === "Haldi" ? "పసుపు" : item.category}
+                              {item.category === "Haldi"
+                                ? "పసుపు"
+                                : item.category}
                             </span>
                           </div>
                         </CardContent>
@@ -298,8 +320,8 @@ export default function PortfolioPage() {
                     {selectedImage && selectedImage.id === item.id && (
                       <DialogContent
                         className={cn(
-                            "max-w-3xl w-11/12 p-0 border-border/50 shadow-2xl rounded-xl overflow-hidden",
-                            "bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60" // Frosted glass effect
+                          "max-w-3xl w-11/12 p-0 border-border/50 shadow-2xl rounded-xl overflow-hidden",
+                          "bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60" // Frosted glass effect
                         )}
                         aria-labelledby={`lightbox-title-${item.id}`}
                         aria-describedby={`lightbox-desc-${item.id}`}
@@ -316,36 +338,63 @@ export default function PortfolioPage() {
                         </div>
                         {/* Use muted background for description area */}
                         <div className="p-4 sm:p-6 text-center bg-muted/50 rounded-b-lg">
-                           <DialogTitle id={`lightbox-title-${item.id}`} className="font-semibold font-serif text-xl sm:text-2xl mb-2 text-foreground">
-                             {selectedImage.alt}
-                           </DialogTitle>
-                           <DialogDescription id={`lightbox-desc-${item.id}`} className="space-y-2">
-                             {selectedImage.altTelugu && (
-                               <p className="font-telugu text-base sm:text-lg text-muted-foreground" lang="te">
-                                 {selectedImage.altTelugu}
-                               </p>
-                             )}
-                             {selectedImage.location && (
-                               <div className="flex items-center justify-center text-sm text-muted-foreground">
-                                 {/* Use Primary (Mint) icon */}
-                                 <MapPin size={16} className="mr-2 text-primary" aria-hidden="true" />
-                                 <span>{selectedImage.location}</span>
-                               </div>
-                             )}
-                           </DialogDescription>
+                          <DialogTitle
+                            id={`lightbox-title-${item.id}`}
+                            className="font-semibold font-serif text-xl sm:text-2xl mb-2 text-foreground"
+                          >
+                            {selectedImage.alt}
+                          </DialogTitle>
+                          <DialogDescription
+                            id={`lightbox-desc-${item.id}`}
+                            className="space-y-2"
+                          >
+                            {selectedImage.altTelugu && (
+                              <p
+                                className="font-telugu text-base sm:text-lg text-muted-foreground"
+                                lang="te"
+                              >
+                                {selectedImage.altTelugu}
+                              </p>
+                            )}
+                            {selectedImage.location && (
+                              <div className="flex items-center justify-center text-sm text-muted-foreground">
+                                {/* Use Primary (Mint) icon */}
+                                <MapPin
+                                  size={16}
+                                  className="mr-2 text-primary"
+                                  aria-hidden="true"
+                                />
+                                <span>{selectedImage.location}</span>
+                              </div>
+                            )}
+                          </DialogDescription>
                           {/* Action Buttons - Use pastel variants */}
                           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6">
                             <Button
                               variant="outline" // Outline button
                               size="sm"
-                              onClick={() => handleShare(selectedImage.src, selectedImage.alt)}
+                              onClick={() =>
+                                handleShare(
+                                  selectedImage.src,
+                                  selectedImage.alt
+                                )
+                              }
                               className="text-primary border-primary hover:bg-primary/10 px-4" // Mint outline
                               aria-label={`Share photo: ${selectedImage.alt}`}
                             >
-                              <Share2 size={16} className="mr-2" aria-hidden="true" /> Share
+                              <Share2
+                                size={16}
+                                className="mr-2"
+                                aria-hidden="true"
+                              />{" "}
+                              Share
                             </Button>
                             <DialogClose asChild>
-                              <Button variant="ghost" size="sm" className="px-4">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="px-4"
+                              >
                                 Close
                               </Button>
                             </DialogClose>
@@ -354,27 +403,35 @@ export default function PortfolioPage() {
                       </DialogContent>
                     )}
                   </Dialog>
-                  </li>
-                ))}
-              </ul>
+                </li>
+              ))}
+            </ul>
 
-              {filteredItems.length === 0 && (
-                <div className="text-center py-16 text-muted-foreground" role="alert">
-                  <p className="text-lg font-telugu" lang="te">
-                    క్షమించండి, "
-                    {selectedCategory === "Haldi" ? "పసుపు కొట్టడం" : selectedCategory}
-                    " వర్గంలో చిత్రాలు కనుగొనబడలేదు.
-                  </p>
-                   <p className="text-sm mt-2">Please try selecting another category.</p>
-                </div>
-              )}
-            </Tabs>
+            {filteredItems.length === 0 && (
+              <div
+                className="text-center py-16 text-muted-foreground"
+                role="alert"
+              >
+                <p className="text-lg font-telugu" lang="te">
+                  క్షమించండి, "
+                  {selectedCategory === "Haldi"
+                    ? "పసుపు కొట్టడం"
+                    : selectedCategory}
+                  " వర్గంలో చిత్రాలు కనుగొనబడలేదు.
+                </p>
+                <p className="text-sm mt-2">
+                  Please try selecting another category.
+                </p>
+              </div>
+            )}
+          </Tabs>
         </TabsContent>
 
         {/* Video Gallery Content */}
-        <TabsContent value="videos" className="mt-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md">
-          {/* Pass pastel theme props or use context if VideoGallery is complex */}
-        <TabsContent value="videos" className="mt-4">
+        <TabsContent
+          value="videos"
+          className="mt-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
+        >
           <VideoGallery />
         </TabsContent>
       </Tabs>
