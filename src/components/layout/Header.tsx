@@ -11,11 +11,11 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Lock, Sparkles, X } from 'lucide-react'; // Import Sparkles and X icons
+import { Menu, Lock, Sparkles } from 'lucide-react'; // Removed X as it's handled by SheetClose
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import logo from '../../lib/logo.png'; // Adjust the path to your logo.png
-import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { ThemeToggle } from '@/components/theme/theme-toggle'; // Re-add ThemeToggle import
 import { useState } from 'react';
 
 const navLinks = [
@@ -40,6 +40,8 @@ export function Header() {
         'sticky top-0 z-50 w-full border-b border-border/40 bg-background/85 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60',
         'transition-shadow duration-300 shadow-sm hover:shadow-md' // Keep subtle shadow
       )}
+      // Added CSS variable for header height
+      style={{ '--header-height': '4rem' } as React.CSSProperties}
     >
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link
@@ -94,12 +96,12 @@ export function Header() {
               </NavigationMenuList>
             </NavigationMenu>
           </nav>
-          <ThemeToggle />
+           <ThemeToggle /> {/* Re-added ThemeToggle for desktop */}
         </div>
 
         {/* Mobile Navigation */}
         <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
+           <ThemeToggle /> {/* Re-added ThemeToggle for mobile */}
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button
@@ -121,7 +123,7 @@ export function Header() {
                  <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm">
                     <Logo className="h-8 w-auto text-primary" /> {/* Slightly smaller logo, Mint */}
                  </Link>
-                 {/* The SheetContent component provides a default close button, so the explicit one is removed. */}
+                 {/* SheetClose is automatically provided by SheetContent */}
               </div>
 
               {/* Navigation Links */}
