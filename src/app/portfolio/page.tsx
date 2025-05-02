@@ -17,6 +17,8 @@ import { MapPin, X, Share2, PlayCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { VideoGallery } from "@/components/portfolio/VideoGallery";
 import { CameraBackground } from "@/components/portfolio/CameraBackground";
+import { FeaturedCarousel } from "@/components/portfolio/FeaturedCarousel";
+import { BeforeAfterGallery } from "@/components/portfolio/BeforeAfterGallery";
 
 // Placeholder data remains the same
 const allPortfolioItems = [
@@ -186,6 +188,9 @@ export default function PortfolioPage() {
           క్షణాలను కళాఖండాలుగా మార్చడం
         </p>
       </header>
+
+      {/* Featured Work Carousel */}
+      <FeaturedCarousel />
       {/* Gallery Type Selector - Main Tabs - Pastel Theme */}
       <Tabs
         defaultValue="photos"
@@ -216,6 +221,8 @@ export default function PortfolioPage() {
           value="photos"
           className="w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
         >
+          {/* Before & After Gallery */}
+          <BeforeAfterGallery />
           {/* Photo Category Filter Tabs - Pastel Theme */}
           <Tabs
             defaultValue="All"
