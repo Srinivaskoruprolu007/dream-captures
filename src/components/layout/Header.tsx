@@ -11,7 +11,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Lock, X, Sparkles } from 'lucide-react'; // Import X and Sparkles icons
+import { Menu, Lock,  Sparkles } from 'lucide-react'; // Import  Sparkles icons
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import logo from '../../lib/logo.png'; // Adjust the path to your logo.png
@@ -123,7 +123,6 @@ export function Header() {
                  </Link>
                  <SheetClose asChild>
                    <Button variant="ghost" size="icon" className="text-foreground hover:text-primary" aria-label="Close Menu"> {/* Mint hover */}
-                     <X className="h-5 w-5" />
                    </Button>
                  </SheetClose>
               </div>
