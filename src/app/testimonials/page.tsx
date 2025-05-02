@@ -1,15 +1,26 @@
 'use client';
 
+import type { Metadata } from 'next'; // Import Metadata type
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Star } from 'lucide-react';
-import Autoplay from "embla-carousel-autoplay"
-import * as React from "react";
+import { Star } from 'lucide-react'; // Keep Star for rating
+import Autoplay from "embla-carousel-autoplay"; // Import Autoplay plugin
+import * as React from "react"; // Import React for plugin ref
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
-// Placeholder data remains the same
+// NOTE: Metadata cannot be defined directly in a "use client" component.
+// If needed, this should be moved to a parent server component or handled differently.
+// For now, this is commented out.
+/*
+export const metadata: Metadata = {
+  title: 'Client Testimonials - Dream Captures',
+  description: 'Read what our clients say about their experience with Dream Captures photography services in Andhra Pradesh.',
+};
+*/
+
+// Placeholder data with Telugu names/context
 const testimonials = [
    { id: 6, name: 'పల్లవి, విజయవాడ', quote: 'మన పెళ్లిని ఇలా అందంగా క్యాప్చర్ చేస్తారని అనుకోలేదు! డ్రీమ్ క్యాప్చర్స్ టీమ్ చాల బాగుంది.', avatar: 'https://picsum.photos/seed/avatar-telugu4/100/100', rating: 5, service: 'Wedding Photography', dataAiHint: 'woman portrait smiling' },
   { id: 1, name: 'శ్రీనివాస్ & లక్ష్మి', quote: 'మా పెళ్లి ఫోటోలు అద్భుతం! డ్రీమ్ క్యాప్చర్స్ ప్రతి క్షణాన్ని ఎంతో అందంగా బంధించారు. చాలా ప్రొఫెషనల్ గా, సృజనాత్మకంగా పనిచేశారు.', avatar: 'https://picsum.photos/seed/avatar-telugu1/100/100', rating: 5, service: 'Wedding Photography', dataAiHint: 'couple portrait wedding' },
@@ -51,7 +62,7 @@ const renderStars = (rating: number) => {
 export default function TestimonialsPage() {
    const plugin = React.useRef(
      Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })
-   )
+   ); // Keep Autoplay plugin
 
   return (
     // Subtle pastel gradient background
@@ -65,7 +76,7 @@ export default function TestimonialsPage() {
         </header>
 
         <Carousel
-          plugins={[plugin.current]}
+          plugins={[plugin.current]} // Use the plugin ref
           opts={{ align: "start", loop: true }}
           className="w-full max-w-5xl mx-auto relative"
           role="region"

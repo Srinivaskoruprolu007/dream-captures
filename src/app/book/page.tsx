@@ -1,9 +1,21 @@
 "use client";
 
+import type { Metadata } from 'next'; // Import Metadata type
 import { ShootScheduler } from "@/components/booking/ShootScheduler";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, MapPin, Phone } from "lucide-react";
+
+// NOTE: Metadata cannot be defined directly in a "use client" component.
+// If needed, this should be moved to a parent server component or handled differently.
+// For now, this is commented out.
+/*
+export const metadata: Metadata = {
+  title: 'Book Your Photography Session',
+  description: 'Schedule your wedding, pre-wedding, party, or portrait session with Dream Captures in Andhra Pradesh.',
+};
+*/
+
 
 // Placeholder data for booking information
 const bookingInfo = [

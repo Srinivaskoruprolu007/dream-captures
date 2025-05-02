@@ -38,11 +38,41 @@ const balooTamma2 = Baloo_Tamma_2({
 
 
 export const metadata: Metadata = {
-  title: 'Dream Captures | Young Photographers in Andhra Pradesh',
-  description: 'Team of passionate young photographers in Andhra Pradesh specializing in weddings, parties, model shoots, and outdoor photography.',
-  icons: { // Added basic favicon reference
-    icon: '/favicon.ico',
-  }
+  metadataBase: new URL('http://localhost:9002'), // Replace with your actual domain
+  title: {
+    default: 'Dream Captures | Telugu Wedding Photography, Andhra Pradesh',
+    template: '%s | Dream Captures',
+  },
+  description: 'Dream Captures: Passionate young photographers in Andhra Pradesh specializing in Telugu weddings, parties, model shoots, and outdoor photography. Capturing moments, creating memories.',
+  icons: { // Added favicon link pointing to public/logo.png
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
+  openGraph: {
+      title: 'Dream Captures | Telugu Wedding Photography, Andhra Pradesh',
+      description: 'Capturing the vibrant moments of Telugu weddings and events across Andhra Pradesh.',
+      // url: 'https://your-domain.com', // Add your deployed URL
+      siteName: 'Dream Captures',
+      // images: [ // Add a specific OG image if available
+      //   {
+      //     url: 'https://your-domain.com/og-image.jpg',
+      //     width: 1200,
+      //     height: 630,
+      //   },
+      // ],
+      locale: 'en_IN',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Dream Captures | Telugu Wedding Photography',
+      description: 'Specializing in Telugu weddings, parties, and photoshoots in Andhra Pradesh.',
+      // siteId: 'Your Twitter Site ID',
+      // creator: '@YourTwitterHandle',
+      // creatorId: 'Your Twitter Creator ID',
+      // images: ['https://your-domain.com/twitter-image.jpg'], // Add a specific Twitter image
+    },
 };
 
 export default function RootLayout({
@@ -64,15 +94,15 @@ export default function RootLayout({
         {/* Wrap with ThemeProvider */}
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light" // Default to light theme as requested
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-dvh flex-col"> {/* Removed bg-background, handled by body */}
+          <div className="relative flex min-h-dvh flex-col">
             <Header />
             {/* Ensure main content area is focusable for keyboard navigation */}
             {/* Use flex-1 to push footer down */}
-            <main className="flex-1 focus:outline-none" tabIndex={-1}>
+            <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
               {children}
             </main>
             <Footer />

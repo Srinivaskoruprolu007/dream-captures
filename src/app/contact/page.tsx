@@ -1,5 +1,6 @@
 'use client';
 
+import type { Metadata } from 'next'; // Import Metadata type
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,6 +11,16 @@ import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Send } from 'lucide-
 import { useToast } from "@/hooks/use-toast";
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+
+// NOTE: Metadata cannot be defined directly in a "use client" component.
+// If needed, this should be moved to a parent server component or handled differently.
+// For now, this is commented out.
+/*
+export const metadata: Metadata = {
+  title: 'Contact Dream Captures',
+  description: 'Get in touch with the Dream Captures team. Send us a message, find our location, or connect on social media.',
+};
+*/
 
 // Placeholder for Map Component - Pastel Theme
 const MapPlaceholder = () => (
@@ -42,6 +53,7 @@ export default function ContactPage() {
     setIsSubmitting(true);
 
     console.log('Form submitted:', formData);
+    // Replace with actual API call
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     setFormData({ name: '', email: '', message: '', phone: '', eventType: '', eventDate: '' });
@@ -265,9 +277,9 @@ export default function ContactPage() {
             <h2 id="consultation-heading" className="text-2xl font-serif font-semibold mb-3 text-foreground">Ready to Book or Discuss?</h2>
             <p className="text-muted-foreground mb-6 max-w-lg mx-auto">Schedule a quick call with our team to discuss your photography needs and get a personalized quote.</p>
             {/* Updated Bilingual CTA Button - Use Primary (Mint) */}
-            <Button asChild size="lg" variant="default" className="rounded-full shadow-md px-8">
-                <Link href="/booking">మమ్మల్ని బుక్ చేయండి / Book Now</Link>
-            </Button>
+             <Button size="lg" variant="default" className="rounded-full shadow-md px-8" asChild>
+              <Link href="/booking">మమ్మల్ని బుక్ చేయండి / Book Now</Link>
+             </Button>
         </section>
     </div>
   );

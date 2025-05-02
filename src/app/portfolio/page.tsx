@@ -1,12 +1,10 @@
 "use client";
 
+import type { Metadata } from 'next'; // Import Metadata type
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogTrigger,
-} from "@/components/ui/dialog"; // Keep DialogTrigger
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Share2, PlayCircle } from "lucide-react"; // Removed X
@@ -16,6 +14,18 @@ import { CameraBackground } from "@/components/portfolio/CameraBackground";
 import { FeaturedCarousel } from "@/components/portfolio/FeaturedCarousel";
 import { BeforeAfterGallery } from "@/components/portfolio/BeforeAfterGallery";
 import { ImageLightbox } from "@/components/portfolio/ImageLightbox"; // Import the new Lightbox component
+import { FavoritesGallery } from "@/components/portfolio/FavoritesGallery"; // Import FavoritesGallery
+
+
+// NOTE: Metadata cannot be defined directly in a "use client" component.
+// If needed, this should be moved to a parent server component or handled differently.
+// For now, this is commented out.
+/*
+export const metadata: Metadata = {
+  title: 'Portfolio - Dream Captures',
+  description: 'Explore our portfolio of Telugu weddings, pre-wedding shoots, engagements, Haldi ceremonies, and baby showers captured by Dream Captures.',
+};
+*/
 
 // Placeholder data structure for portfolio items
 interface PortfolioItem {
@@ -145,7 +155,9 @@ const categories = [
 export default function PortfolioPage() {
   const [galleryType, setGalleryType] = useState("photos");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedImage, setSelectedImage] = useState<PortfolioItem | null>(null);
+  const [selectedImage, setSelectedImage] = useState<PortfolioItem | null>(
+    null
+  );
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const filteredItems =
@@ -211,6 +223,8 @@ export default function PortfolioPage() {
         >
           {/* Before & After Gallery */}
           <BeforeAfterGallery />
+          {/* Favorites Gallery */}
+          <FavoritesGallery />
           {/* Photo Category Filter Tabs - Pastel Theme */}
           <Tabs
             defaultValue="All"

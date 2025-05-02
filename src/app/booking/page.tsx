@@ -1,5 +1,6 @@
 'use client';
 
+import type { Metadata } from 'next'; // Import Metadata type
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +13,16 @@ import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 import { CalendarCheck, Send } from 'lucide-react';
 import { cn } from '@/lib/utils'; // Import cn
+
+// NOTE: Metadata cannot be defined directly in a "use client" component.
+// If needed, this should be moved to a parent server component or handled differently.
+// For now, this is commented out.
+/*
+export const metadata: Metadata = {
+  title: 'Inquire About Your Photography Session',
+  description: 'Send an inquiry to Dream Captures for your wedding, party, or photoshoot. Check availability and get a quote.',
+};
+*/
 
 export default function BookingPage() {
   const { toast } = useToast();
@@ -58,6 +69,7 @@ export default function BookingPage() {
     const submissionData = { ...formData, eventDate: selectedDate ? format(selectedDate, "PPP") : '' };
 
     console.log('Booking inquiry submitted:', submissionData);
+    // Replace with actual API call
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     const today = new Date();

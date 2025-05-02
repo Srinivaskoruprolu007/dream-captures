@@ -1,7 +1,14 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Award, Camera, MapPin, Users, Heart, Sparkles } from 'lucide-react'; // Added Sparkles
 import { cn } from '@/lib/utils';
+
+export const metadata: Metadata = {
+  title: 'About Dream Captures',
+  description: 'Meet the passionate team behind Dream Captures, young photographers from Andhra Pradesh dedicated to capturing your special moments.',
+};
+
 
 // Placeholder Icons - Use pastel colors
 const MemberIcon1 = () => <Users aria-hidden="true" className="text-primary" />; // Mint

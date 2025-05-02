@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import { ImageDescriptionGenerator } from '@/components/ai/ImageDescriptionGenerator';
+
+export const metadata: Metadata = {
+  title: 'AI Image Describer Tool',
+  description: 'Generate descriptive alt text and social media captions for your images using AI. Perfect for photographers and content creators.',
+};
 
 export default function ImageDescriberPage() {
   return (

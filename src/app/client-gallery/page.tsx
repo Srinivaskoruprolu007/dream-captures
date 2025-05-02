@@ -1,5 +1,6 @@
 "use client";
 
+import type { Metadata } from 'next'; // Import Metadata type
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,6 +18,17 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { auth } from "@/services/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+
+// NOTE: Metadata cannot be defined directly in a "use client" component.
+// If needed, this should be moved to a parent server component or handled differently.
+// For now, this is commented out.
+/*
+export const metadata: Metadata = {
+  title: 'Client Gallery Access',
+  description: 'Log in to access your private photo gallery from Dream Captures.',
+  robots: { index: false, follow: false }, // Discourage search engines from indexing login page
+};
+*/
 
 // NOTE: Placeholder page. Requires backend integration (Firebase Auth, etc.).
 

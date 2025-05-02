@@ -1,9 +1,15 @@
+import type { Metadata } from 'next'; // Import Metadata type
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { CheckCircle, Package, Sparkles, Camera, Users, PartyPopper, Mountain, Video, Gem, Bell, Flower } from 'lucide-react'; // Replaced Rings with Gem, imported Camera
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+
+export const metadata: Metadata = {
+  title: 'Our Photography & Videography Services',
+  description: 'Explore Dream Captures\' photography and videography packages for weddings, parties, events, and outdoor shoots in Andhra Pradesh. Custom quotes available.',
+};
 
 // Updated service packages with cultural names and themes
 const servicePackages = [
@@ -31,8 +37,8 @@ const servicePackages = [
     category: 'Outdoor',
     price: '₹40,000+',
     features: ['4-6 Hour Session', '1 Photographer', 'Scenic Location Shoot (e.g., Araku)', 'Online Gallery', 'Outfit Changes'],
-    icon: Camera, // Represents photography focus
-    themeColor: 'accent' // Gold theme
+    icon: Mountain, // Represents nature/outdoor
+    themeColor: 'lavender' // Lavender theme
   },
   {
     id: 'veduka-special',
@@ -41,7 +47,7 @@ const servicePackages = [
     price: '₹35,000+',
     features: ['3-4 Hours Coverage', '1 Photographer', 'Birthdays, Anniversaries, Small Events', 'Candid & Group Shots', 'Online Gallery'],
     icon: PartyPopper,
-    themeColor: 'primary' // Muted Sand/Beige theme
+    themeColor: 'primary' // Muted Sand/Beige theme -> Changed to Mint
   },
    {
     id: 'fashion-focus',
@@ -59,7 +65,7 @@ const servicePackages = [
     price: 'Starting ₹15,000',
     features: ['Instagram Reel Creation', 'Cinematic Highlights Video', 'Short Films for Events', 'Advanced Editing & Color Grading', 'Music Licensing'],
     icon: Video,
-    themeColor: 'accent' // Teal theme again
+    themeColor: 'accent' // Teal theme -> Changed to Powder Pink
   },
 ];
 
@@ -85,44 +91,34 @@ const faqs = [
 export default function ServicesPage() {
   // Helper function to get theme classes based on the new palette
   const getThemeClasses = (themeColor: string) => {
-     const baseColors = ['primary', 'secondary', 'accent', 'muted', 'gold']; // Added gold
-     if (baseColors.includes(themeColor)) {
-        const hoverOpacity = ['primary', 'secondary', 'accent', 'gold'].includes(themeColor) ? 'hover:opacity-90' : 'hover:bg-muted/80';
-        return {
-           border: `border-${themeColor}/30`,
-           headerBg: `bg-${themeColor}/10`,
-           iconBg: `bg-${themeColor}`,
-           iconText: `text-${themeColor}-foreground`,
-           priceText: `text-${themeColor}`,
-           checkColor: `text-${themeColor}`,
-           buttonBg: `bg-${themeColor}`,
-           buttonHover: hoverOpacity,
-           buttonText: `text-${themeColor}-foreground`,
-           titleText: `text-${themeColor}`,
-           // Add gradient support
-           gradientFrom: `from-${themeColor}/10`,
-           gradientTo: themeColor === 'primary' ? 'to-yellow-100' : `to-accent/10`, // Example gradient logic
-           iconGradientFrom: `from-${themeColor}`,
-           iconGradientTo: themeColor === 'secondary' ? 'to-yellow-600' : `to-teal-600`, // Example icon gradient
-        };
-     }
-     // Fallback
-     return {
-       border: 'border-border/30',
-       headerBg: 'bg-muted/10',
-       iconBg: 'bg-muted',
-       iconText: 'text-muted-foreground',
-       priceText: 'text-muted-foreground',
-       checkColor: 'text-primary',
-       buttonBg: 'bg-primary',
-       buttonHover: 'hover:opacity-90',
-       buttonText: 'text-primary-foreground',
-       titleText: 'text-foreground',
-       gradientFrom: 'from-transparent',
-       gradientTo: 'to-transparent',
-       iconGradientFrom: 'from-muted',
-       iconGradientTo: 'to-muted',
+     // Define base colors mapping to Tailwind config keys
+     const colorMap: { [key: string]: string } = {
+        primary: 'primary', // Mint
+        secondary: 'secondary', // Ice Blue
+        accent: 'accent', // Pink
+        muted: 'muted', // Light Grey
+        lavender: 'lavender', // Lavender
      };
+
+     const mappedColor = colorMap[themeColor] || 'primary'; // Default to primary (Mint)
+
+        return {
+           border: `border-${mappedColor}/30`,
+           headerBg: `bg-${mappedColor}/10`,
+           iconBg: `bg-${mappedColor}`,
+           iconText: `text-${mappedColor}-foreground`,
+           priceText: `text-${mappedColor}`,
+           checkColor: `text-${mappedColor}`,
+           buttonBg: `bg-${mappedColor}`,
+           buttonHover: `hover:opacity-90`, // Simplified hover
+           buttonText: `text-${mappedColor}-foreground`,
+           titleText: `text-${mappedColor}`, // Use theme color for title
+           // Add gradient support - Example using primary/secondary/accent tints
+           gradientFrom: `from-${mappedColor}/10`,
+           gradientTo: `to-${mappedColor === 'primary' ? 'secondary' : (mappedColor === 'secondary' ? 'accent' : 'primary')}/5`, // Mix with another pastel tint
+           iconGradientFrom: `from-${mappedColor}`,
+           iconGradientTo: `to-${mappedColor === 'primary' ? 'secondary' : (mappedColor === 'secondary' ? 'accent' : 'primary')}`, // Mix icon gradients
+        };
    };
 
 
@@ -149,7 +145,7 @@ export default function ServicesPage() {
                         <div className={cn(`mx-auto h-16 w-16 flex items-center justify-center rounded-full mb-4 shadow-md shrink-0 bg-gradient-to-br`, theme.iconGradientFrom, theme.iconGradientTo, theme.iconText)} aria-hidden="true">
                             <pkg.icon className="h-8 w-8" />
                         </div>
-                        <CardTitle as="h3" className={cn(`text-xl font-serif font-noto`, theme.titleText || 'text-foreground')} lang="te">{pkg.title}</CardTitle>
+                        <CardTitle as="h3" className={cn(`text-xl font-serif font-noto`, theme.titleText)} lang="te">{pkg.title}</CardTitle>
                         <CardDescription className={cn(`font-semibold text-lg`, theme.priceText)}>{pkg.price}</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow p-6">
@@ -183,7 +179,7 @@ export default function ServicesPage() {
           })}
         </ul>
          <p className="text-center text-sm text-muted-foreground mt-10">
-            {/* Link uses accent color (Teal) */}
+            {/* Link uses accent color (Pink) */}
             Looking for something specific? <Link href="/contact?custom=true" className="text-accent hover:opacity-80 font-semibold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Request a Custom Quote!</Link>
           </p>
       </section>
@@ -196,7 +192,7 @@ export default function ServicesPage() {
           {addOns.map((addOn) => (
             <li key={addOn.title}>
                 <div className="flex items-start h-full p-4 bg-card rounded-lg shadow border border-border/50 transition-transform duration-300 hover:scale-105">
-                 {/* Use accent color (Teal) for Sparkles */}
+                 {/* Use accent color (Pink) for Sparkles */}
                 <Sparkles size={24} className="text-accent mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
                 <div>
                     <h4 className="font-semibold text-foreground mb-1 font-noto" lang="te">{addOn.title}</h4>
@@ -207,7 +203,7 @@ export default function ServicesPage() {
           ))}
         </ul>
          <div className="text-center mt-8">
-             {/* Link uses primary color (Maroon) */}
+             {/* Link uses primary color (Mint) */}
             <Link href="/contact?addons=true" className="text-primary hover:text-accent text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">See All Add-on Details &rarr;</Link>
           </div>
       </section>
@@ -219,7 +215,7 @@ export default function ServicesPage() {
         <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto bg-card p-4 rounded-lg shadow border border-border/50">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`} className="border-b last:border-b-0 border-border/50">
-              {/* Hover uses secondary color (Maroon) */}
+              {/* Hover uses secondary color (Ice Blue) */}
               <AccordionTrigger className="text-left font-semibold text-base hover:text-secondary py-4 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">
                 <h3>{faq.question}</h3>
               </AccordionTrigger>
@@ -235,7 +231,7 @@ export default function ServicesPage() {
         <section className="text-center mt-16 md:mt-20" aria-labelledby="final-cta-services-heading">
            <h2 id="final-cta-services-heading" className="text-2xl font-serif font-semibold mb-4 text-foreground">Let's Capture Your Story</h2>
            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">Connect with our team to discuss your event and how we can bring your vision to life.</p>
-           {/* Button uses Accent (Teal) */}
+           {/* Button uses Accent (Pink) */}
             <Button asChild size="lg" variant="accent" className="rounded-full px-10 py-3 shadow-lg transition-transform duration-300 hover:scale-105">
              <Link href="/booking">మమ్మల్ని బుక్ చేయండి / Book Now</Link>
            </Button>

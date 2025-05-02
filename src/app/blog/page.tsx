@@ -1,8 +1,14 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, User, ArrowRight, Tag } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Dream Captures Blog',
+  description: 'Explore insights into Telugu wedding traditions, photography tips, location guides, and beautiful moments captured by Dream Captures.',
+};
 
 // Placeholder blog posts with cultural context
 const blogPosts = [
