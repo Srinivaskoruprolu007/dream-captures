@@ -15,7 +15,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, X, Share2, PlayCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { VideoGallery } from "@/components/portfolio/VideoGallery"; // Keep VideoGallery import
+import { VideoGallery } from "@/components/portfolio/VideoGallery";
+import { CameraBackground } from "@/components/portfolio/CameraBackground";
 
 // Placeholder data remains the same
 const allPortfolioItems = [
@@ -173,9 +174,10 @@ export default function PortfolioPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 bg-background">
-      {" "}
-      {/* Use theme background */}
+    <div className="container relative mx-auto px-4 md:px-6 py-16 md:py-24 bg-background">
+      {/* Camera-themed Background Pattern */}
+      <CameraBackground />
+      {/* Main Content */}
       <header className="text-center mb-8 md:mb-12">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">
           Our Portfolio
