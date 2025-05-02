@@ -1,32 +1,33 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { Logo } from "./Logo";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+import { Logo } from './Logo';
+import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { Menu, Lock, X } from "lucide-react"; // Import X icon
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import logo from "../../lib/logo.png"; // Adjust the path to your logo.png
-import { ThemeToggle } from "@/components/theme/theme-toggle";
-import { useState } from "react";
+} from '@/components/ui/navigation-menu';
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Menu, Lock, X, Sparkles } from 'lucide-react'; // Import X and Sparkles icons
+import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import logo from '../../lib/logo.png'; // Adjust the path to your logo.png
+import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { useState } from 'react';
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/services", label: "Services" },
-  { href: "/testimonials", label: "Testimonials" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
-  { href: "/booking", label: "Booking" },
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/services', label: 'Services' },
+  { href: '/testimonials', label: 'Testimonials' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/ai-tools/image-describer', label: 'AI Describer', icon: Sparkles }, // Added AI Tool link with icon
+  { href: '/contact', label: 'Contact' },
+  { href: '/booking', label: 'Booking' },
 ];
 
 export function Header() {
@@ -36,8 +37,8 @@ export function Header() {
     <header
       className={cn(
         // Updated header style: Pastel background with blur, softer border
-        "sticky top-0 z-50 w-full border-b border-border/40 bg-background/85 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60",
-        "transition-shadow duration-300 shadow-sm hover:shadow-md" // Keep subtle shadow
+        'sticky top-0 z-50 w-full border-b border-border/40 bg-background/85 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60',
+        'transition-shadow duration-300 shadow-sm hover:shadow-md' // Keep subtle shadow
       )}
     >
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
@@ -45,6 +46,7 @@ export function Header() {
           href="/"
           className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
           aria-label="Dream Captures Home"
+          onClick={() => setIsMobileMenuOpen(false)} // Close menu on logo click
         >
           <Image
             src={logo}
@@ -68,9 +70,10 @@ export function Header() {
                       <NavigationMenuLink
                         className={cn(
                           navigationMenuTriggerStyle(),
-                          "text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/10 transition-colors duration-200 px-3 py-2" // Use primary (Mint) for hover text
+                          'text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/10 transition-colors duration-200 px-3 py-2 flex items-center gap-1.5' // Use primary (Mint) for hover text, added flex/gap
                         )}
                       >
+                         {link.icon && <link.icon className="h-4 w-4" />} {/* Render icon if exists */}
                         {link.label}
                       </NavigationMenuLink>
                     </Link>
@@ -81,7 +84,7 @@ export function Header() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/10 transition-colors duration-200 px-3 py-2" // Use primary (Mint) for hover text
+                        'flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/10 transition-colors duration-200 px-3 py-2' // Use primary (Mint) for hover text
                       )}
                     >
                       <Lock size={14} /> Client Access
@@ -110,29 +113,30 @@ export function Header() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[300px] sm:w-[350px] bg-background p-6 shadow-xl border-l border-border/50 flex flex-col"
+              className="w-[300px] sm:w-[350px] bg-background p-0 shadow-xl border-l border-border/50 flex flex-col" // Removed p-6
               aria-label="Mobile Navigation Menu"
             >
               {/* Header for Mobile Menu with Logo and Close Button */}
-              <div className="flex justify-between items-center mb-6 border-b pb-4 border-border/50">
+              <div className="flex justify-between items-center p-4 border-b border-border/50">
                  <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm">
-                    <Logo className="h-10 w-auto text-primary" /> {/* Use primary (Mint) for logo */}
+                    <Logo className="h-8 w-auto text-primary" /> {/* Slightly smaller logo, Mint */}
                  </Link>
                  <SheetClose asChild>
-                   <Button variant="ghost" size="icon" className="text-foreground hover:text-primary" aria-label="Close Menu"> {/* Use primary (Mint) for hover */}
+                   <Button variant="ghost" size="icon" className="text-foreground hover:text-primary" aria-label="Close Menu"> {/* Mint hover */}
                      <X className="h-5 w-5" />
                    </Button>
                  </SheetClose>
               </div>
 
               {/* Navigation Links */}
-              <nav className="flex flex-col gap-4 flex-grow overflow-y-auto">
+              <nav className="flex flex-col gap-1 p-4 flex-grow overflow-y-auto"> {/* Reduced gap, added padding */}
                 {navLinks.map((link) => (
                   <SheetClose key={link.href} asChild>
                     <Link
                       href={link.href}
-                      className="block px-3 py-2 text-base font-medium text-foreground hover:bg-primary/10 hover:text-primary rounded-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background" // Use primary (Mint) for hover
+                      className="flex items-center gap-2 px-3 py-2 text-base font-medium text-foreground hover:bg-primary/10 hover:text-primary rounded-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background" // Mint hover
                     >
+                       {link.icon && <link.icon className="h-4 w-4" />}
                       {link.label}
                     </Link>
                   </SheetClose>
@@ -140,9 +144,9 @@ export function Header() {
                  <SheetClose asChild>
                     <Link
                     href="/client-gallery"
-                    className="block px-3 py-2 text-base font-medium text-foreground hover:bg-primary/10 hover:text-primary rounded-md transition-colors duration-200 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background" // Use primary (Mint) for hover
+                    className="flex items-center gap-2 px-3 py-2 text-base font-medium text-foreground hover:bg-primary/10 hover:text-primary rounded-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background" // Mint hover
                     >
-                    <Lock size={18} /> Client Access
+                    <Lock size={16} /> Client Access
                     </Link>
                  </SheetClose>
               </nav>

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Facebook, Instagram, Youtube, Mail } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Mail, Sparkles } from 'lucide-react'; // Added Sparkles
 import { Logo } from './Logo';
 import { Separator } from '@/components/ui/separator';
 
@@ -48,6 +48,11 @@ export function Footer() {
               <li><Link href="/services" className="hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Services</Link></li>
               <li><Link href="/blog" className="hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Blog</Link></li>
               <li><Link href="/testimonials" className="hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Testimonials</Link></li>
+               <li>
+                  <Link href="/ai-tools/image-describer" className="flex items-center gap-1.5 hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">
+                    <Sparkles size={14} /> AI Describer
+                  </Link>
+                </li>
               <li><Link href="/contact" className="hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Contact</Link></li>
               <li><Link href="/booking" className="hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Booking Inquiry</Link></li>
               <li><Link href="/client-gallery" className="hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded">Client Access</Link></li>
