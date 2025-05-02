@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { cn } from '@/lib/utils';
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme/theme-provider"; // Import ThemeProvider
-
+import { AiChatBot } from '@/components/ai/AiChatBot'; // Import the AI Chatbot component
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
@@ -40,6 +40,9 @@ const balooTamma2 = Baloo_Tamma_2({
 export const metadata: Metadata = {
   title: 'Dream Captures | Young Photographers in Andhra Pradesh',
   description: 'Team of passionate young photographers in Andhra Pradesh specializing in weddings, parties, model shoots, and outdoor photography.',
+  icons: { // Added basic favicon reference
+    icon: '/favicon.ico',
+  }
 };
 
 export default function RootLayout({
@@ -48,7 +51,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Add lang="en" for accessibility
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
@@ -66,7 +68,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-dvh flex-col bg-background"> {/* Use min-h-dvh and bg-background */}
+          <div className="relative flex min-h-dvh flex-col"> {/* Removed bg-background, handled by body */}
             <Header />
             {/* Ensure main content area is focusable for keyboard navigation */}
             {/* Use flex-1 to push footer down */}
@@ -76,6 +78,7 @@ export default function RootLayout({
             <Footer />
           </div>
            <Toaster />
+           <AiChatBot /> {/* Add the AI Chatbot component here */}
          </ThemeProvider>
       </body>
     </html>
