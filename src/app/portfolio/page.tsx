@@ -253,7 +253,7 @@ export default function PortfolioPage() {
             {/* Gallery Grid */}
             <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {filteredItems.map((item) => (
-                <li key={item.id}>
+                <Dialog key={item.id}>
                    {/* Use DialogTrigger to open the lightbox */}
                   <DialogTrigger asChild>
                       <button
@@ -322,7 +322,7 @@ export default function PortfolioPage() {
                         </CardContent>
                       </button>
                   </DialogTrigger>
-                </li>
+                </Dialog>
               ))}
             </ul>
 
